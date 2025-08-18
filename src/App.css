@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
     margin: 0;
@@ -7,8 +6,10 @@
     font-family: "Poppins", sans-serif;
 }
 
-body{
+html, body{
     overflow-x: hidden;
+	width: 100%;
+	height: 100%;
 }
 
 :root{
@@ -25,16 +26,32 @@ body{
     --mint_cream : #EAF2EF;
 }
 
-.bg-container{
-	/* background-color: var(--indigo-dye); */
-	/* background-color: var(--pakistan-green); */
-	/* background-color: var(--russian-violet); */
-	background-color: var(--mint_cream);
+.bg-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-image: 
+	  linear-gradient(to right, rgba(22, 22, 25, 0.95), rgba(22, 22, 25, 0.95)),
+	  url(./assets/bg.jpeg);
+	background-position: 0 0, 0 0;
+	background-size: auto, 1000px;
+	background-blend-mode: multiply;
+  }
+
+.bg-box {
+	position: relative;
+	background-image: 
+	  linear-gradient(to right, rgba(66, 49, 44, 0.95), rgba(69, 34, 37, 0.95)), 
+	  url(./assets/bg.jpeg);
+	background-position: 0 0, 0 0;
+	background-size: auto, 900px;
+	background-blend-mode: multiply;
 }
 
-.bg-box{
-	/* background-color: var(--parsian-red); */
-	/* background-color: var(--sage); */
-	/* background-color: var(--sagee); */
-	background-color: var(--dim-gray);
+.background{
+	background-image: 
+		linear-gradient(to right, #42312c, #452225), 
+		url(./assets/bg.jpeg);
+	background-size: cover;
+	background-position: center;
 }
