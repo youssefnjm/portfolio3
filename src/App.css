@@ -1,57 +1,47 @@
+@import "tailwindcss";
+/* #9D00FF */
+body {
+    background-color: #0D0D0D;
+    color: white;
+}
 
-*{
-    margin: 0;
-    padding: 0;
+* {
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 }
 
-html, body{
-    overflow-x: hidden;
-	width: 100%;
-	height: 100%;
+.scroll-down {
+    width: 34px;
+    height: 55px;
 }
 
-:root{
-    --indigo-dye: #08415C;
-    --parsian-red : #CC3333;
-	/* -------------- */
-    --pakistan-green: #143109;
-    --sage : #ABAF83;
-	/* -------------- */
-    --russian-violet: #482358;
-    --sagee : #CDC392;
-	/* -------------- */
-    --dim-gray: #707070;
-    --mint_cream : #EAF2EF;
+.scroll-down  .mousey {
+    width: 3px;
+    height: 35px;
+    padding: 10px 15px;
+    box-sizing: content-box;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    opacity: 0.75;
 }
 
-.bg-container {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background-image: 
-	  linear-gradient(to right, rgba(22, 22, 25, 0.95), rgba(22, 22, 25, 0.95)),
-	  url(./assets/bg.jpeg);
-	background-position: 0 0, 0 0;
-	background-size: auto, 1000px;
-	background-blend-mode: multiply;
-  }
-
-.bg-box {
-	position: relative;
-	background-image: 
-	  linear-gradient(to right, rgba(66, 49, 44, 0.95), rgba(69, 34, 37, 0.95)), 
-	  url(./assets/bg.jpeg);
-	background-position: 0 0, 0 0;
-	background-size: auto, 900px;
-	background-blend-mode: multiply;
+.scroll-down  .mousey .scroller {
+  width: 3px;
+  height: 10px;
+  border-radius: 25%;
+  background-color: #fff;
+  animation: scroll 2.2s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
 }
-
-.background{
-	background-image: 
-		linear-gradient(to right, #42312c, #452225), 
-		url(./assets/bg.jpeg);
-	background-size: cover;
-	background-position: center;
+  
+@keyframes scroll {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(15px);
+      opacity: 0;
+    }
 }

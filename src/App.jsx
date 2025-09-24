@@ -1,76 +1,91 @@
-import './App.css';
-import { useEffect, useState } from 'react';
-import { motion, useMotionValue } from "motion/react";
-import MainModel from './modals/MainModel';
+import './App.css'
+import RotatingText from './Components/RotatingText.jsx'
+import CardNav from './Components/NavComponent.jsx';
+import { Code } from 'lucide-react';
+import ScrollDown from './Components/ScrollDown.jsx';
+import ClickSpark from './Components/ClickSpark.jsx';
 
-function App() {
-
-	const [main, setMain ] = useState(false);
-
-	const x = useMotionValue(0)
-
-	useEffect(() => {
-	// Won't trigger a re-render!
-	const timeout = setTimeout(() => x.set(100), 1000)
-
-	return () => clearTimeout(timeout)
-	}, [])
-
+const Landing = () => {
 	return (<>
-		<div className='p-8 w-full h-screen bg-container'>
-			<div class="grid grid-cols-[repeat(7,1fr)] grid-rows-[repeat(7,1fr)] gap-y-[25px] gap-x-[25px] w-full h-full text-white">
-				<div class="row-start-1 row-end-3 col-start-1 col-end-6 bg-box rounded-xl p-2 cursor-pointer">
-					<h1>interduce my education</h1>
-				</div>
-				<div class="row-start-1 row-end-7 col-start-6 col-end-8 bg-box rounded-xl p-2 cursor-pointer">
-					<h1>interduce my project</h1>
-				</div>
-				<div class="row-start-3 row-end-7 col-start-2 col-end-6 bg-box rounded-xl p-2 cursor-pointer" onClick={() => setMain(true)}>
-					<h1>interduce my self</h1>
-				</div>
-				<div class="row-start-3 row-end-5 col-start-1 col-end-2 bg-box rounded-xl p-2 cursor-pointer">
-					<h1>put my picture</h1>
-				</div>
-				<div class="row-start-5 row-end-8 col-start-1 col-end-2 bg-box rounded-xl p-2 cursor-pointer">
-					<h1>interduce my experience</h1>
-				</div>
-				<div class="row-start-7 row-end-8 col-start-2 col-end-8 bg-box rounded-xl p-2 cursor-pointer">
-					<h1>interduce my siciale media</h1>
-				</div>
-
-				<MainModel open={main} onClose={() => setMain(false)} /> 
+		<div className='w-full h-screen flex items-center md:justify-start justify-center gap-5'>
+			<div className='text-2xl md:text-4xl mt-9 md:w-[50%]'>
+				<p >
+					Hi 👋, I’m Youssef Noujoum 
+					<br className='block m-10'/>
+					<span className='flex items-center gap-5'>
+						and i am a 
+						<RotatingText 
+							texts={['Front-End Developer', 'Back-End Developer', 'Full-Stack Developer', 'DevOps Enthusiast']}
+							mainClassName="px-2 sm:px-2 md:px-3 bg-purple-600 text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+							staggerFrom={"last"}
+							initial={{ y: "100%" }}
+							animate={{ y: 0 }}
+							exit={{ y: "-120%" }}
+							staggerDuration={0.025}
+							splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+							transition={{ type: "spring", damping: 30, stiffness: 400 }}
+							rotationInterval={2000}
+						/>	
+					</span>
+				</p>
+				<ScrollDown />
 			</div>
 		</div>
 	</>)
+}
+function App() {
+
+	const items = [
+		{
+		  label: "About",
+		  bgColor: "#0D0716",
+		  textColor: "#fff",
+		  links: [
+			{ label: "Company", ariaLabel: "About Company" },
+			{ label: "Careers", ariaLabel: "About Careers" }
+		  ]
+		},
+		{
+		  label: "Projects", 
+		  bgColor: "#170D27",
+		  textColor: "#fff",
+		  links: [
+			{ label: "Featured", ariaLabel: "Featured Projects" },
+			{ label: "Case Studies", ariaLabel: "Project Case Studies" }
+		  ]
+		},
+		{
+		  label: "Contact",
+		  bgColor: "#271E37", 
+		  textColor: "#fff",
+		  links: [
+			{ label: "Email", ariaLabel: "Email us" },
+			{ label: "Twitter", ariaLabel: "Twitter" },
+			{ label: "LinkedIn", ariaLabel: "LinkedIn" }
+		  ]
+		}
+	];
+
 	
-	return (<>
-		<motion.div className='p-8 w-full h-screen bg-container'>
-			<motion.div className="grid grid-cols-[repeat(5,1fr)] grid-rows-[repeat(4,1fr)] gap-y-[25px] gap-x-[25px] w-full h-full">
-				<motion.div className="row-start-1 row-end-2 col-start-1 col-end-4 bg-box rounded p-2 cursor-pointer" initial={{ scale: 0.5 }} animate={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.5 }}>
-					
-				</motion.div>
-				<motion.div className="row-start-2 row-end-5 col-start-2 col-end-5 bg-box rounded p-2 cursor-pointer" initial={{ scale: 0.5 }} animate={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-					
-				</motion.div>
-				<motion.div className="row-start-1 row-end-2 col-start-4 col-end-5 bg-box rounded p-2 cursor-pointer" initial={{ scale: 0.5 }} animate={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-					
-				</motion.div>
-				<motion.div className="row-start-1 row-end-4 col-start-5 col-end-6 bg-box rounded p-2 cursor-pointer" initial={{ scale: 0.5 }} animate={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-					
-				</motion.div>
-				<motion.div className="row-start-4 row-end-5 col-start-5 col-end-6 bg-box rounded p-2 cursor-pointer" initial={{ scale: 0.5 }} animate={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-					
-				</motion.div>
-				<motion.div className="row-start-4 row-end-5 col-start-1 col-end-2 bg-box rounded p-2 cursor-pointer" initial={{ scale: 0.5 }} animate={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-					
-				</motion.div>
-				<motion.div className="row-start-2 row-end-4 col-start-1 col-end-2 bg-box rounded p-2 cursor-pointer" initial={{ scale: 0.5 }} animate={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-					
-				</motion.div>
-			</motion.div>	
-		</motion.div>
+	return (
+		<>
+		<ClickSpark>
+			<main className='container w-screen m-auto'>
+				<CardNav
+					logo={<Code className="logo h-[28px]"/>}
+					logoAlt="Logo"
+					items={items}
+					baseColor="#fff"
+					menuColor="#000"
+					buttonBgColor="#111"
+					buttonTextColor="#fff"
+					ease="power3.out"
+					/>
+				<Landing />
+			</main>
+		</ClickSpark>
 		</>
 	)
 }
 
-export default App
+export default App;

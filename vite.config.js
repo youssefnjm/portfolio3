@@ -1,32 +1,8 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { keyframes, scale } from 'motion'
+import tailwindcss from '@tailwindcss/vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-	theme: {
-		extend: {
-			nimation: {
-				scale: "scale 1s ease-in-out infinite"
-			},
-			keyframes: {
-				scale: {
-					"0%": {
-						scale: 1,
-					},
-					"100%": {
-						scale: 1.3,
-					},
-				}	
-			}
-		}
-	},
-	plugins: [react()],
+  plugins: [
+    tailwindcss(),
+  ],
 })
-
-// import tailwindcss from '@tailwindcss/vite'
-// export default defineConfig({
-//   plugins: [
-//     tailwindcss(),
-//   ],
-// })
