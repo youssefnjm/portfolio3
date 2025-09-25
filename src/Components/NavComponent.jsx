@@ -167,7 +167,7 @@ const CardNav = ({
 
           <button
             type="button"
-            className="card-nav-cta-button hidden rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-pointer md:flex md:items-center md:w-fit md:flex-row bg-purple-600"
+            className="card-nav-cta-button hidden rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-pointer md:flex md:items-center md:w-fit md:flex-ro"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
             >
             <a
