@@ -142,3 +142,109 @@ body {
   color: transparent;
   animation: gradient linear infinite;
 }
+
+/* // ================================== */
+
+.project ul li:hover {
+  background-image: linear-gradient(to right, #C20A0A, #FF6B6B, #FFD93D, #FF6B6B, #C20A0A);
+  -moz-transition: all 1s ease-in;
+  -webkit-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
+}
+
+.project li {
+  &:hover {
+    & div {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.project li .img-cont {
+  position: absolute;
+  width: 700px;
+  left: 40%;
+  transform:  rotate(-6deg) scale(0.8);
+  opacity: 0;
+  transition: 0.6s;
+  z-index: 1000;
+
+  img {
+    border: 1px solid var(--thirdcolore);
+    width: 100%;
+    border-radius: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .project li .img-cont {
+    position: absolute;
+    width: 250px;
+    left: 40%;
+    transform:  rotate(-6deg) scale(0.8);
+    opacity: 0;
+    transition: 0.6s;
+    z-index: 1000;
+  
+    img {
+      border: 1px solid var(--thirdcolore);
+      width: 100%;
+      border-radius: 15px;
+    }
+  }
+}
+
+/* form */
+
+.group 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  /* width:300px; */
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus 		{ outline:none; }
+
+textarea 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  /* width:300px; */
+  border:none;
+  border-bottom:1px solid #757575;
+}
+textarea:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#C20A0A;
+}
+
+textarea:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#C20A0A;
+}

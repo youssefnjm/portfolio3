@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { Send, CornerUpRight } from 'lucide-react';
+import { LuSend, LuCornerUpRight } from 'react-icons/lu';
 
 const CardNav = ({
   logo,
@@ -174,7 +174,7 @@ const CardNav = ({
                 href="#"
                 className="flex items-center gap-2"
             >
-                say hay <Send size={18} />
+                say hay <LuSend size={18} />
             </a>
         </button>
 
@@ -204,7 +204,7 @@ const CardNav = ({
                     href={lnk.href}
                     aria-label={lnk.ariaLabel}
                   >
-                    <CornerUpRight className="nav-card-link-icon shrink-0" aria-hidden="true" />
+                    <LuCornerUpRight className="nav-card-link-icon shrink-0" aria-hidden="true" />
                     {lnk.label}
                   </a>
                 ))}
