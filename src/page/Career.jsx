@@ -62,7 +62,7 @@ export default function Career() {
             }}
           >
             <div className="container m-auto">
-              <div className="relative flex items-center gap-12 flex-col md:flex-row"> { /*  flex-col md:flex-row */ }
+              <div className="relative flex items-center gap-12 flex-col lg:flex-row">
                 <p className='w-fit text-center items-start'>
                     <GradientText
                         colors={[
@@ -80,9 +80,9 @@ export default function Career() {
                     </GradientText>
                   <span className=" block opacity-80 text-l sm:text-2xl">Highlights of my learning and development journey.</span>
                 </p>
+      
                 <div className='flex items-center gap-12'>
-
-                  <div className="relative w-1 h-96 sm:h-[1000px] bg-gray-700 rounded-full overflow-hidden">
+                  <div className="relative w-1 h-96 xl:h-[1000px] md:h-[800px] bg-gray-700 rounded-full overflow-hidden">
                     <div
                       className="absolute top-0 w-full bg-gradient-to-t from-red-600 via-yellow-500 to-red-600 transition-all duration-100 ease-out"
                       style={{ 
@@ -104,7 +104,7 @@ export default function Career() {
                   </div>
 
                   <div className="text-white max-w-md">
-                    <div className="space-y-16 sm:space-y-48">
+                    <div className="space-y-16 xl:space-y-48 md:space-y-36">
                       <div className={`transition-opacity duration-500 ${scrollProgress > 0.2 ? 'opacity-100' : 'opacity-20'}`}>
                         <h3 className="text-2xl font-semibold mb-2">2021 - 2022</h3>
                         <p className="opacity-80 text-l sm:text-2xl">Bachelor's Degree</p>

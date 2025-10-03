@@ -22,28 +22,28 @@ import ProjectList from './data/ProjectList.js';
 const Landing = () => {
 	return (<>
 		<div className='container m-auto'>
-			<div className='w-full h-screen flex sm:flex-row-reverse items-center sm:gap-5'>
-				<div className='mt-9 w-[30%] md:w-[50%] items-center hidden sm:block'>
+			<div className='w-full h-screen flex sm:flex-row-reverse items-center justify-center sm:gap-5'>
+				<div className='mt-9 w-[30%] md:w-[50%] items-center hidden lg:block'>
 					<div className='img-buffer xl:w-[400px] md:h-[400px] w-[250px] h-[250px]'></div>
 				</div>
-				<div className='text-md md:text-4xl h-full flex items-center md:w-[50%]'>
-					<div className="flex gap-10 h-full  sm:w-[100%] items-center">
+				<div className='text-md md:text-4xl h-full w-[90%] lg:w-[50%] flex gap-2 sm:gap-10 items-center'>
+					{/* <div className="flex gap-2 sm:gap-10 h-full items-center"> */}
 						<div className='flex flex-col w-fit'>
-							<a href="" target='_blank' ><LuGithub color='#fff' size={30}/></a>						
+							<a href="" target='_blank' ><LuGithub color='#fff' className='text-xl sm:text-3xl'/></a>						
 							<span className='block w-1 h-20 bg-red-600' style={{margin: "15px auto"}}></span>
-							<a href="" target='_blank' ><LuLinkedin color='#fff' size={30}/></a>
+							<a href="" target='_blank' ><LuLinkedin color='#fff' className='text-xl sm:text-3xl'/></a>
 							<span className='block w-1 h-20 bg-red-600' style={{margin: "15px auto"}}></span>
-							<a href="" target='_blank' ><LuInstagram color='#fff' size={30}/></a>
+							<a href="" target='_blank' ><LuInstagram color='#fff' className='text-xl sm:text-3xl'/></a>
 						</div>
 						<div className='items-center w-full'>
-							<p className='flex flex-col items-start'>
+							<p className='flex flex-col items-start text-xl sm:text-3xl'>
 								Hi 👋, I’m Youssef Noujoum 
 								<br className='block m-10'/>
 								<span className='flex items-center gap-5'>
 									and i am a 
 									<RotatingText 
 										texts={['Front-End Developer', 'Back-End Developer', 'Full-Stack Developer', 'DevOps Enthusiast']}
-										mainClassName="px-2 sm:px-2 md:px-3 bg-red-600 text-white text-sm md:text-4xl overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+										mainClassName="px-2 sm:px-2 md:px-3 bg-red-600 text-white text-xl sm:text-3xl overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
 										staggerFrom={"last"}
 										initial={{ y: "100%" }}
 										animate={{ y: 0 }}
@@ -57,7 +57,7 @@ const Landing = () => {
 							</p>
 							<ScrollDown />
 						</div>
-					</div>
+					{/* </div> */}
 				</div>
 			</div>
 		</div>
