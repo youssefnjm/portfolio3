@@ -63,7 +63,7 @@ export default function Career() {
           >
             <div className="container m-auto">
               <div className="relative flex items-center gap-12 flex-col lg:flex-row">
-                <p className='w-fit text-center items-start'>
+                <div className='w-fit text-center items-start'>
                     <GradientText
                         colors={[
                             "#C20A0A", // main red
@@ -79,7 +79,7 @@ export default function Career() {
                         My Education
                     </GradientText>
                   <span className=" block opacity-80 text-l sm:text-2xl">Highlights of my learning and development journey.</span>
-                </p>
+                </div>
       
                 <div className='flex items-center gap-12'>
                   <div className="relative w-1 h-96 xl:h-[1000px] md:h-[800px] bg-gray-700 rounded-full overflow-hidden">

@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "Boldonse";
+    src: url("/Fonts/Boldonse,Funnel_Display/Boldonse/Boldonse-Regular.ttf")
+         format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}

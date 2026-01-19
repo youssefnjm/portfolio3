@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import RotatingText from './Components/RotatingText.jsx'
 import CardNav from './Components/NavComponent.jsx';
@@ -12,57 +12,8 @@ import CertificationC from './assets/Certifes/Certification C.jpg';
 import CertificationJs from './assets/Certifes/Certification js.jpg';
 import CertificationPhp from './assets/Certifes/Certification php.jpg';
 import Career from './page/Career.jsx';
-import pic1 from "./assets/Project/prf-v1.PNG";
-import pic2 from "./assets/Project/brg.PNG";
-import pic3 from "./assets/Project/Clockasion.PNG"
-import pic4 from "./assets/Project/ideaPulse.png"
-import pic5 from "./assets/Project/tourisme.PNG";
 import ProjectList from './data/ProjectList.js';
-
-const Landing = () => {
-	return (<>
-		<div className='container m-auto'>
-			<div className='w-full h-screen flex sm:flex-row-reverse items-center justify-center sm:gap-5'>
-				<div className='mt-9 w-[30%] md:w-[50%] items-center hidden lg:block'>
-					<div className='img-buffer xl:w-[400px] md:h-[400px] w-[250px] h-[250px]'></div>
-				</div>
-				<div className='text-md md:text-4xl h-full w-[90%] lg:w-[50%] flex gap-2 sm:gap-10 items-center'>
-					{/* <div className="flex gap-2 sm:gap-10 h-full items-center"> */}
-						<div className='flex flex-col w-fit'>
-							<a href="" target='_blank' ><LuGithub color='#fff' className='text-xl sm:text-3xl'/></a>						
-							<span className='block w-1 h-20 bg-red-600' style={{margin: "15px auto"}}></span>
-							<a href="" target='_blank' ><LuLinkedin color='#fff' className='text-xl sm:text-3xl'/></a>
-							<span className='block w-1 h-20 bg-red-600' style={{margin: "15px auto"}}></span>
-							<a href="" target='_blank' ><LuInstagram color='#fff' className='text-xl sm:text-3xl'/></a>
-						</div>
-						<div className='items-center w-full'>
-							<p className='flex flex-col items-start text-xl sm:text-3xl'>
-								Hi 👋, I’m Youssef Noujoum 
-								<br className='block m-10'/>
-								<span className='flex items-center gap-5'>
-									and i am a 
-									<RotatingText 
-										texts={['Front-End Developer', 'Back-End Developer', 'Full-Stack Developer', 'DevOps Enthusiast']}
-										mainClassName="px-2 sm:px-2 md:px-3 bg-red-600 text-white text-xl sm:text-3xl overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-										staggerFrom={"last"}
-										initial={{ y: "100%" }}
-										animate={{ y: 0 }}
-										exit={{ y: "-120%" }}
-										staggerDuration={0.025}
-										splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-										transition={{ type: "spring", damping: 30, stiffness: 400 }}
-										rotationInterval={2000}
-									/>	
-								</span>
-							</p>
-							<ScrollDown />
-						</div>
-					{/* </div> */}
-				</div>
-			</div>
-		</div>
-	</>)
-}
+import LandingPage from './page/LandingPage.jsx';
 
 const InfiniteLoop = () => {
 	const techLogos = [
@@ -100,7 +51,7 @@ const Certifce = () => {
 	return (<>
 		<div>
 			<div className='container m-auto w-full h-full mb-24'>
-				<p className='pl-1.5- w-full text-center items-start mb-10'>
+				<div className='pl-1.5- w-full text-center items-start mb-10'>
 					<GradientText
 					colors={[
 						"#C20A0A", // main red
@@ -111,11 +62,11 @@ const Certifce = () => {
 					]}
 					animationSpeed={5}
 					showBorder={false}
-					className="text-xl md:text-4xl m-10 p-0"
+					className="text-xl md:text-4xl m-10 p-5"
 					>
 						My Certifce
 					</GradientText>
-				</p>
+				</div>
 				<div className='flex justify-center items-center flex-wrap gap-25'>
 					<div className="max-w-sm bg-white border rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-700">
 						<img className="rounded-t-lg w-full h-fit" src={CertificationC} alt="" />
@@ -143,11 +94,9 @@ const Certifce = () => {
 }
 
 const Project = () => {
-	const [picsList] = useState([pic1, pic2, pic3, pic4, pic5]);
-
 	return (<>
 		<div className="container m-auto w-full h-full mb-28">
-			<p className='pl-1.5- w-full text-center items-start'>
+			<div className='pl-1.5- w-full text-center items-start'>
 				<GradientText
 				colors={[
 					"#C20A0A", // main red
@@ -162,14 +111,17 @@ const Project = () => {
 				>
 					My Project
 				</GradientText>
-			</p>
+			</div>
 			<div className="project">
 				<ul className='mt-2.5 mb-2.5'>
-					{ProjectList.map((ele) => (
-						<li className='flex items-center justify-between h-24 border-b-1 border-gray-600 p-7' key={ele.id}>
-							<span className='text-sm md:text-2xl'>{ele.name}</span>
+					{ProjectList.map((ele, index) => (
+						<li key={index} className='flex items-center justify-between h-24 border-b border-gray-600 p-7'>
+							<div className='flex flex-col justify-center items-start gap-2'>
+								<span className='text-sm md:text-2xl'>{ele.name}</span>
+								<span className='text-sm opacity-70'>{ele.desc}</span>
+							</div>
 							<div className="img-cont">
-								<img src={picsList[ele.index]} alt={ele.name} />
+								<img src={ele.img} alt={ele.name} />
 							</div>
 							<span className='text-sm md:text-xl opacity-80'>
 								<a href={ele.link}>link to project</a>
@@ -184,57 +136,57 @@ const Project = () => {
 
 const Contact = () => {
 	return (<>
-		<div className="container m-auto w-full h-full mb-10">
-			<p className='pl-1.5- w-full text-center items-start mb-10'>
+		<div className="container m-auto w-full mb-10">
+			<div className='pl-1.5- w-full text-center items-start mb-10'>
 				<GradientText
-				colors={[
-					"#C20A0A", // main red
-					"#FF6B6B", // lighter red/pink accent
-					"#FFD93D", // golden yellow for contrast
-					"#FF6B6B", // lighter red/pink accent
-					"#C20A0A", // main red
-				]}
-				animationSpeed={5}
-				showBorder={false}
-				className="text-xl md:text-4xl m-10 p-0"
+					colors={[
+						"#C20A0A", // main red
+						"#FF6B6B", // lighter red/pink accent
+						"#FFD93D", // golden yellow for contrast
+						"#FF6B6B", // lighter red/pink accent
+						"#C20A0A", // main red
+					]}
+					animationSpeed={5}
+					showBorder={false}
+					className="text-xl md:text-4xl m-10 p-2 z-50"
 				>
 					Contact
 				</GradientText>
-			</p>
+			</div>
 			<div className='w-fit md:w-2xl m-auto'>
 				<form className='flex flex-col sm:gap-10'>
 					<div className='flex flex-col sm:flex-row items-center justify-between'>
-						<div class="group">      
+						<div className="group">      
 							<input type="text" required className='w-full' />
-							<span class="highlight"></span>
-							<span class="bar"></span>
+							<span className="highlight"></span>
+							<span className="bar"></span>
 							<label>Name</label>
 						</div>
-						<div class="group">      
+						<div className="group">      
 							<input type="text" required className='w-full' />
-							<span class="highlight"></span>
-							<span class="bar"></span>
+							<span className="highlight"></span>
+							<span className="bar"></span>
 							<label>Email</label>
 						</div>
 					</div>
 					<div>
-						<div class="group">      
+						<div className="group">      
 							<textarea type="text" required className='w-full' />
-							<span class="highlight"></span>
-							<span class="bar"></span>
+							<span className="highlight"></span>
+							<span className="bar"></span>
 							<label>Message</label>
 						</div>
 					</div>
-					<div class="relative group w-fit m-auto">
+					<div className="relative group w-fit m-auto">
 						<button
-							class="relative inline-block p-px font-semibold leading-6 text-white dark:bg-gray-900 shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+							className="relative inline-block p-px font-semibold leading-6 text-white dark:bg-gray-900 shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
 						>
 							<span
-								class="absolute inset-0 rounded-xl bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+								className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
 							></span>
-							<span class="relative z-10 block px-6 py-3 rounded-xl bg-gray-950">
-								<div class="relative z-10 flex items-center space-x-2">
-									<span class="transition-all duration-500 group-hover:translate-x-1">Send Message</span>
+							<span className="relative z-10 block px-6 py-3 rounded-xl bg-gray-950">
+								<div className="relative z-10 flex items-center space-x-2">
+									<span className="transition-all duration-500 group-hover:translate-x-1">Send Message</span>
 									<LuSend />
 								</div>
 							</span>
@@ -283,22 +235,29 @@ function App() {
 	return (
 		<>
 		<ClickSpark>
-			<main className='m-auto'>
-				<CardNav
-					logo={<LuCode className="logo h-[28px]"/>}
-					logoAlt="Logo"
-					items={items}
-					baseColor="#fff"
-					menuColor="#000"
-					buttonBgColor="#B91C1C"
-					buttonTextColor="#fff"
-					ease="power3.out"
+			<main className='m-auto relative'>
+				{/* <div className=''  style={{zIndex: 100000000}}> */}
+					<CardNav
+						logo={<LuCode className="logo h-7"/>}
+						logoAlt="Logo"
+						items={items}
+						baseColor="#fff"
+						menuColor="#000"
+						buttonBgColor="#B91C1C"
+						buttonTextColor="#fff"
+						ease="power3.out"
 					/>
-				<Landing />
+				{/* </div> */}
+				<LandingPage />
+				<div className='my-10'></div>
 				<Career />
+				<div className='my-10'></div>
 				<InfiniteLoop />
+				<div className='my-10'></div>
 				<Certifce />
+				<div className='my-10'></div>
 				<Project />
+				<div className='my-10'></div>
 				<Contact />
 			</main>
 		</ClickSpark>

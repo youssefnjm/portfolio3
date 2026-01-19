@@ -2,7 +2,7 @@
 /* #9D00FF */
 /* C20A0A */
 body {
-    background-color: #0D0D0D;
+    background-color: #0D0D0D; /* 3f3f46 */
     color: white;
 }
 
@@ -282,3 +282,118 @@ textarea:focus ~ label, input:valid ~ label 		{
   font-size:14px;
   color:#C20A0A;
 }
+
+
+/* ghost */
+.ss1{
+  /* background: linear-gradient(
+    to left,
+    #3f3f46,
+    transparent 100%
+  ); */
+}
+
+.ghost-loader {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ghost-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible !important;
+  filter: drop-shadow(0 0 50px rgba(194, 10, 10, 1));
+  animation: ghostFloat 3s ease-in-out infinite;
+}
+
+.ghost-body {
+  fill: #C20A0A;
+  opacity: 0.9;
+}
+
+.ghost-eye {
+  fill: black;
+  animation: eyePulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.left-eye {
+  animation-delay: 0s;
+}
+
+.right-eye {
+  animation-delay: 0.1s;
+}
+
+@keyframes ghostFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes eyePulse {
+  0%,
+  100% {
+    transform: scale(1.7);
+  }
+  50% {
+    transform: scale(2);
+  }
+}
+
+/* Remove the old ghost-orb and ghost-trail styles */
+.ghost-orb,
+.ghost-trail {
+  display: none;
+}
+
+
+/* ghost */
+/* .ss1{
+  background: linear-gradient(
+    to left,
+    #3f3f46,
+    transparent 100%
+  );
+}
+.ghost-loader {
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform-origin: center;
+  margin-left: -40px;
+}
+
+.ghost-eye {
+  animation: blink 3s infinite;
+}
+
+.left-eye {
+  animation-delay: 0.1s;
+}
+
+@keyframes blink {
+  0%, 48%, 52%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.1);
+  }
+}
+
+.ghost-svg {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+} */
