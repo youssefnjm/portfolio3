@@ -2,7 +2,13 @@
 export default function GradientText({
   children,
   className = '',
-  colors = ['#40ffaa', '#4079ff', '#40ffaa', '#4079ff', '#40ffaa'],
+  colors = [
+    "#C20A0A", // main red
+    "#FF6B6B", // lighter red/pink accent
+    "#FFD93D", // golden yellow for contrast
+    "#FF6B6B", // lighter red/pink accent
+    "#C20A0A", // main red
+  ],
   animationSpeed = 8,
   showBorder = false
 }) {

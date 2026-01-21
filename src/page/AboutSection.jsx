@@ -6,7 +6,7 @@ import GradientText from "../Components/GradientText";
 
 export default function AboutSection () {
     return (<>
-		<div className='container m-auto' id="about">
+		<div className='container m-auto py-20' id="about">
             <GradientText
                 colors={[
                     "#C20A0A", // main red
@@ -24,7 +24,7 @@ export default function AboutSection () {
 				<div className='mt-9 w-[30%] md:w-[50%] items-center hidden lg:block'>
 					<div className='img-buffer xl:w-100 md:h-100 w-62.5 h-62.5'></div>
 				</div>
-				<div className='text-md md:text-4xl h-full w-[90%] lg:w-[50%] flex gap-2 sm:gap-10 items-center'>
+				<div className='text-md md:text-4xl w-[90%] lg:w-[50%] flex gap-2 sm:gap-10 items-center'>
 					<div className='flex flex-col items-start justify-between gap-10 w-full'>
 						<p className='flex flex-col items-start text-xl sm:text-3xl'>
 							Hi 👋, I’m Youssef Noujoum 

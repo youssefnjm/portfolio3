@@ -4,7 +4,7 @@ import GradientText from "../Components/GradientText.jsx";
 import { LuCode, LuGithub, LuLinkedin, LuInstagram, LuSend, LuGhost } from 'react-icons/lu';
 export default function ContactSection () {
 	return (<>
-		<div className="container m-auto w-full mb-10" id="contact">
+		<div className="container m-auto w-full py-20" id="contact">
 			<div className='pl-1.5- w-full text-center items-start mb-10'>
                 <GradientText 
                     colors={[

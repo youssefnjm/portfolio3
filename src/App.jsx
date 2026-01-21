@@ -16,8 +16,9 @@ import ProjectList from './data/ProjectList.js';
 import LandingSection from './page/LandingSection.jsx';
 import ContactSection from './page/ContactSection.jsx';
 import AboutSection from './page/AboutSection.jsx';
+import SkillsSection from './page/SkillsSection.jsx';
 
-const InfiniteLoop = () => {
+const InfiniteLoop = ({direction = "left" }) => {
 	const techLogos = [
 		{ node: <SiReact />, title: "React", href: "#" },
 		{ node: <SiNextdotjs />, title: "Next.js", href: "#" },
@@ -31,11 +32,11 @@ const InfiniteLoop = () => {
 	];
 
 	return (<>
-		<div style={{ height: '200px', position: 'relative', overflow: 'hidden'}}>
+		<div style={{ position: 'relative', overflow: 'hidden' }}>
 			<LogoLoop
 				logos={techLogos}
 				speed={120}
-				direction="left"
+				direction={direction}
 				logoHeight={48}
 				gap={40}
 				pauseOnHover
@@ -51,52 +52,49 @@ const InfiniteLoop = () => {
 const Certifce = () => {
 
 	return (<>
-		<div>
-			<div className='container m-auto w-full h-full mb-24' id="certifce">
-				<div className='pl-1.5- w-full text-center items-start mb-10'>
-					<GradientText
-						colors={[
-							"#C20A0A", // main red
-							"#FF6B6B", // lighter red/pink accent
-							"#FFD93D", // golden yellow for contrast
-							"#FF6B6B", // lighter red/pink accent
-							"#C20A0A", // main red
-						]}
-						animationSpeed={5}
-						showBorder={false}
-					>
-						My Certifce
-					</GradientText>
+		<div className='container m-auto w-full py-20' id="certifce">
+			<div className='pl-1.5- w-full text-center items-start mb-10'>
+				<GradientText
+					colors={[
+						"#C20A0A", // main red
+						"#FF6B6B", // lighter red/pink accent
+						"#FFD93D", // golden yellow for contrast
+						"#FF6B6B", // lighter red/pink accent
+						"#C20A0A", // main red
+					]}
+					animationSpeed={5}
+					showBorder={false}
+				>
+					My Certifce
+				</GradientText>
+			</div>
+			<div className='grid grid-cols-3 gap-10'>
+				<div className="relative p-2 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-zinc-600 transition-all duration-300">
+					<img className="rounded-t-lg w-full h-fit" src={CertificationC} alt="" />
+					<div className="p-5">
+						<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}> C Certification </h5>
+					</div>
 				</div>
-				<div className='flex justify-center items-center flex-wrap gap-25'>
-					<div className="max-w-sm bg-white border rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-700">
-						<img className="rounded-t-lg w-full h-fit" src={CertificationC} alt="" />
-						<div className="p-5">
-							<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}> C Certification </h5>
-						</div>
+				<div className="relative p-2 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-zinc-600 transition-all duration-300">
+					<img className="rounded-t-lg w-full h-fit" src={CertificationJs} alt="" />
+					<div className="p-5">
+						<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}> javascript Certification </h5>
 					</div>
-					<div className="max-w-sm bg-white border rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-700">
-						<img className="rounded-t-lg w-full h-fit" src={CertificationJs} alt="" />
-						<div className="p-5">
-							<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}> javascript Certification </h5>
-						</div>
-					</div>
-					<div className="max-w-sm bg-white border rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-700">
-						<img className="rounded-t-lg w-full h-fit" src={CertificationPhp} alt="" />
-						<div className="p-5">
-							<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}>php Certification </h5>
-						</div>
+				</div>
+				<div className="relative p-2 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-zinc-600 transition-all duration-300">
+					<img className="rounded-t-lg w-full h-fit" src={CertificationPhp} alt="" />
+					<div className="p-5">
+						<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}>php Certification </h5>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</>);
 }
 
 const Project = () => {
 	return (<>
-		<div className="container m-auto w-full h-full mb-28" id="project">
+		<div className="container m-auto w-full h-full py-20" id="project">
 			<div className='pl-1.5- w-full text-center items-start'>
 				<GradientText
 				colors={[
@@ -190,9 +188,14 @@ function App() {
 				<div className='my-10'></div>
 				<CareerSection />
 				<div className='my-10'></div>
-				<InfiniteLoop />
-				<div className='my-10'></div>
 				<Certifce />
+				<div className='my-10'></div>
+				<div className='py-20'>
+					<InfiniteLoop />
+					<InfiniteLoop direction={"right"}/>
+				</div>
+				<div className='my-10'></div>
+				<SkillsSection />
 				<div className='my-10'></div>
 				<Project />
 				<div className='my-10'></div>
@@ -203,7 +206,7 @@ function App() {
 							Crafted with care by <span className="text-red-500">youssef noujoum</span> 
 						</p>
 						<div>
-							<LuGhost size={24}/>
+							<LuGhost size={24} className='text-red-600'/>
 						</div>
 						<p className="text-sm text-muted-foreground font-mono">
 						© 2025 All rights reserved

@@ -4,6 +4,7 @@ import clockacsion from "../assets/Project/Clockasion.PNG"
 import ideaPluse from "../assets/Project/ideaPulse.png"
 import tourisme from "../assets/Project/tourisme.PNG";
 import darNet from "../assets/Project/DarNet.PNG";
+import TicTacToe from "../assets/Project/tic-tac-toe.png"
 import { desc } from "motion/react-client";
 
 const ProjectList = [
@@ -35,6 +36,12 @@ const ProjectList = [
         name: "Portfolio v1",
         img: portfolio1,
         desc: "My initial exploration into digital storytelling, focusing on clean UI patterns and responsive design foundations.",
+        link: "#",
+    },
+    {
+        name: "Online Tic Tac Toe",
+        img: TicTacToe,
+        desc: "A real-time competitive experience featuring instant state synchronization and a sleek, minimalist interface for seamless head-to-head gameplay.",
         link: "#",
     },
     {
