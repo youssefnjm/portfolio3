@@ -171,7 +171,7 @@ const CardNav = ({
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
             >
             <a
-                href="#"
+                href="#contact"
                 className="flex items-center gap-2"
             >
                 say hay <LuSend size={18} />

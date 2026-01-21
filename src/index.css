@@ -1,6 +1,24 @@
 @font-face {
     font-family: "Boldonse";
-    src: url("/Fonts/Boldonse,Funnel_Display/Boldonse/Boldonse-Regular.ttf")
+    src: url("/Fonts/Boldonse,Funnel_Display,Space_Mono/Boldonse/Boldonse-Regular.ttf")
+         format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Regular SpaceMono";
+    src: url("/Fonts/Boldonse,Funnel_Display,Space_Mono/Space_Mono/SpaceMono-Regular.ttf")
+         format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Bold SpaceMono";
+    src: url("/Fonts/Boldonse,Funnel_Display,Space_Mono/Space_Mono/SpaceMono-Bold.ttf")
          format("truetype");
     font-weight: 100 900;
     font-style: normal;

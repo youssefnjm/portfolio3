@@ -6,14 +6,16 @@ import GradientText from './Components/GradientText.jsx';
 import LogoLoop from './Components/LogoLoop.jsx';
 import ScrollDown from './Components/ScrollDown.jsx';
 import ClickSpark from './Components/ClickSpark.jsx';
-import { LuCode, LuGithub, LuLinkedin, LuInstagram, LuSend } from 'react-icons/lu';
+import { LuCode, LuGithub, LuLinkedin, LuInstagram, LuSend, LuGhost } from 'react-icons/lu';
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiCss3, SiJavascript, SiMongodb, SiPhp } from 'react-icons/si';
 import CertificationC from './assets/Certifes/Certification C.jpg';
 import CertificationJs from './assets/Certifes/Certification js.jpg';
 import CertificationPhp from './assets/Certifes/Certification php.jpg';
-import Career from './page/Career.jsx';
+import CareerSection from './page/CareerSection.jsx';
 import ProjectList from './data/ProjectList.js';
-import LandingPage from './page/LandingPage.jsx';
+import LandingSection from './page/LandingSection.jsx';
+import ContactSection from './page/ContactSection.jsx';
+import AboutSection from './page/AboutSection.jsx';
 
 const InfiniteLoop = () => {
 	const techLogos = [
@@ -50,19 +52,18 @@ const Certifce = () => {
 
 	return (<>
 		<div>
-			<div className='container m-auto w-full h-full mb-24'>
+			<div className='container m-auto w-full h-full mb-24' id="certifce">
 				<div className='pl-1.5- w-full text-center items-start mb-10'>
 					<GradientText
-					colors={[
-						"#C20A0A", // main red
-						"#FF6B6B", // lighter red/pink accent
-						"#FFD93D", // golden yellow for contrast
-						"#FF6B6B", // lighter red/pink accent
-						"#C20A0A", // main red
-					]}
-					animationSpeed={5}
-					showBorder={false}
-					className="text-xl md:text-4xl m-10 p-5"
+						colors={[
+							"#C20A0A", // main red
+							"#FF6B6B", // lighter red/pink accent
+							"#FFD93D", // golden yellow for contrast
+							"#FF6B6B", // lighter red/pink accent
+							"#C20A0A", // main red
+						]}
+						animationSpeed={5}
+						showBorder={false}
 					>
 						My Certifce
 					</GradientText>
@@ -71,19 +72,19 @@ const Certifce = () => {
 					<div className="max-w-sm bg-white border rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-700">
 						<img className="rounded-t-lg w-full h-fit" src={CertificationC} alt="" />
 						<div className="p-5">
-							<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> C Certification </h5>
+							<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}> C Certification </h5>
 						</div>
 					</div>
 					<div className="max-w-sm bg-white border rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-700">
 						<img className="rounded-t-lg w-full h-fit" src={CertificationJs} alt="" />
 						<div className="p-5">
-							<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> javascript Certification </h5>
+							<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}> javascript Certification </h5>
 						</div>
 					</div>
 					<div className="max-w-sm bg-white border rounded-lg shadow-sm dark:bg-gray-900 dark:border-gray-700">
 						<img className="rounded-t-lg w-full h-fit" src={CertificationPhp} alt="" />
 						<div className="p-5">
-							<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">php Certification </h5>
+							<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}>php Certification </h5>
 						</div>
 					</div>
 				</div>
@@ -95,7 +96,7 @@ const Certifce = () => {
 
 const Project = () => {
 	return (<>
-		<div className="container m-auto w-full h-full mb-28">
+		<div className="container m-auto w-full h-full mb-28" id="project">
 			<div className='pl-1.5- w-full text-center items-start'>
 				<GradientText
 				colors={[
@@ -107,7 +108,6 @@ const Project = () => {
 				]}
 				animationSpeed={5}
 				showBorder={false}
-				className="text-xl md:text-4xl m-10 p-0"
 				>
 					My Project
 				</GradientText>
@@ -118,7 +118,7 @@ const Project = () => {
 						<li key={index} className='flex items-center justify-between h-24 border-b border-gray-600 p-7'>
 							<div className='flex flex-col justify-center items-start gap-2'>
 								<span className='text-sm md:text-2xl'>{ele.name}</span>
-								<span className='text-sm opacity-70'>{ele.desc}</span>
+								<span className='text-sm opacity-70' style={{lineHeight: "1.3", letterSpacing: "-0.03em"}}>{ele.desc}</span>
 							</div>
 							<div className="img-cont">
 								<img src={ele.img} alt={ele.name} />
@@ -134,100 +134,38 @@ const Project = () => {
 	</>);
 }
 
-const Contact = () => {
-	return (<>
-		<div className="container m-auto w-full mb-10">
-			<div className='pl-1.5- w-full text-center items-start mb-10'>
-				<GradientText
-					colors={[
-						"#C20A0A", // main red
-						"#FF6B6B", // lighter red/pink accent
-						"#FFD93D", // golden yellow for contrast
-						"#FF6B6B", // lighter red/pink accent
-						"#C20A0A", // main red
-					]}
-					animationSpeed={5}
-					showBorder={false}
-					className="text-xl md:text-4xl m-10 p-2 z-50"
-				>
-					Contact
-				</GradientText>
-			</div>
-			<div className='w-fit md:w-2xl m-auto'>
-				<form className='flex flex-col sm:gap-10'>
-					<div className='flex flex-col sm:flex-row items-center justify-between'>
-						<div className="group">      
-							<input type="text" required className='w-full' />
-							<span className="highlight"></span>
-							<span className="bar"></span>
-							<label>Name</label>
-						</div>
-						<div className="group">      
-							<input type="text" required className='w-full' />
-							<span className="highlight"></span>
-							<span className="bar"></span>
-							<label>Email</label>
-						</div>
-					</div>
-					<div>
-						<div className="group">      
-							<textarea type="text" required className='w-full' />
-							<span className="highlight"></span>
-							<span className="bar"></span>
-							<label>Message</label>
-						</div>
-					</div>
-					<div className="relative group w-fit m-auto">
-						<button
-							className="relative inline-block p-px font-semibold leading-6 text-white dark:bg-gray-900 shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
-						>
-							<span
-								className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-							></span>
-							<span className="relative z-10 block px-6 py-3 rounded-xl bg-gray-950">
-								<div className="relative z-10 flex items-center space-x-2">
-									<span className="transition-all duration-500 group-hover:translate-x-1">Send Message</span>
-									<LuSend />
-								</div>
-							</span>
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</>);
-}
-
 function App() {
 
 	const items = [
 		{
-		  label: "About",
-		  bgColor: "#270202",
-		  textColor: "#fff",
-		  links: [
-			{ label: "Company", ariaLabel: "About Company" },
-			{ label: "Careers", ariaLabel: "About Careers" }
-		  ]
+			label: "About",
+			bgColor: "#270202",
+			textColor: "#fff",
+			links: [
+				{ label: "About Me", ariaLabel: "About Me", href: "#about" },
+				{ label: "Education", ariaLabel: "About Education", href: "#career" },
+				{ label: "Certifce", ariaLabel: "About Certifce", href: "#certifce" }
+			]
 		},
 		{
-		  label: "Projects", 
-		  bgColor: "#3C0204",
-		  textColor: "#fff",
-		  links: [
-			{ label: "Featured", ariaLabel: "Featured Projects" },
-			{ label: "Case Studies", ariaLabel: "Project Case Studies" }
-		  ]
+			label: "Projects", 
+			bgColor: "#3C0204",
+			textColor: "#fff",
+			links: [
+				{ label: "Skills", ariaLabel: "Skills i learn", href: "#skills" },
+				{ label: "Projects", ariaLabel: "Projects i have done", href: "#project" },
+			]
 		},
 		{
-		  label: "Contact",
-		  bgColor: "#610505", 
-		  textColor: "#fff",
-		  links: [
-			{ label: "Email", ariaLabel: "Email us" },
-			{ label: "Twitter", ariaLabel: "Twitter" },
-			{ label: "LinkedIn", ariaLabel: "LinkedIn" }
-		  ]
+			label: "Contact",
+			bgColor: "#610505", 
+			textColor: "#fff",
+			links: [
+				{ label: "Contact", ariaLabel: "Contact us", href: "#contact" },
+				{ label: "Email", ariaLabel: "Email us", href: "" },
+				{ label: "LinkedIn", ariaLabel: "LinkedIn", href: "" },
+				{ label: "Instagrame", ariaLabel: "Instagrame", href: "" },
+			]
 		}
 	];
 
@@ -235,22 +173,22 @@ function App() {
 	return (
 		<>
 		<ClickSpark>
-			<main className='m-auto relative'>
-				{/* <div className=''  style={{zIndex: 100000000}}> */}
-					<CardNav
-						logo={<LuCode className="logo h-7"/>}
-						logoAlt="Logo"
-						items={items}
-						baseColor="#fff"
-						menuColor="#000"
-						buttonBgColor="#B91C1C"
-						buttonTextColor="#fff"
-						ease="power3.out"
-					/>
-				{/* </div> */}
-				<LandingPage />
+			<main className='m-auto relative overflow-hidden'>
+				<CardNav
+					logo={<LuGhost className="logo h-8 w-8"/>}
+					logoAlt="Logo"
+					items={items}
+					baseColor="#fff"
+					menuColor="#000"
+					buttonBgColor="#B91C1C"
+					buttonTextColor="#fff"
+					ease="power3.out"
+				/>
+				<LandingSection />
 				<div className='my-10'></div>
-				<Career />
+				<AboutSection />
+				<div className='my-10'></div>
+				<CareerSection />
 				<div className='my-10'></div>
 				<InfiniteLoop />
 				<div className='my-10'></div>
@@ -258,7 +196,20 @@ function App() {
 				<div className='my-10'></div>
 				<Project />
 				<div className='my-10'></div>
-				<Contact />
+				<ContactSection />
+				<footer className="py-8 px-4 ">
+					<div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+						<p className="text-sm text-muted-foreground">
+							Crafted with care by <span className="text-red-500">youssef noujoum</span> 
+						</p>
+						<div>
+							<LuGhost size={24}/>
+						</div>
+						<p className="text-sm text-muted-foreground font-mono">
+						© 2025 All rights reserved
+						</p>
+					</div>
+				</footer>
 			</main>
 		</ClickSpark>
 		</>
