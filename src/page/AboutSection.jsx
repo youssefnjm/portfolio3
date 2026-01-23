@@ -6,7 +6,7 @@ import GradientText from "../Components/GradientText";
 
 export default function AboutSection () {
     return (<>
-		<div className='container m-auto py-20' id="about">
+		<div className='container m-auto py-10 md:py-20' id="about">
             <GradientText
                 colors={[
                     "#C20A0A", // main red
@@ -20,20 +20,20 @@ export default function AboutSection () {
             >
                 About Me
             </GradientText>
-			<div className='w-full flex sm:flex-row items-center justify-center sm:gap-5 py-24'>
-				<div className='mt-9 w-[30%] md:w-[50%] items-center hidden lg:block'>
+			<div className='w-full flex flex-col md:flex-row items-center justify-center sm:gap-5 py-24'>
+				<div className='m-auto mt-9 md:w-[50%] flex justify-center items-center'>
 					<div className='img-buffer xl:w-100 md:h-100 w-62.5 h-62.5'></div>
 				</div>
-				<div className='text-md md:text-4xl w-[90%] lg:w-[50%] flex gap-2 sm:gap-10 items-center'>
+				<div className='w-[90%] lg:w-[50%] flex gap-2 sm:gap-10 items-center'>
 					<div className='flex flex-col items-start justify-between gap-10 w-full'>
-						<p className='flex flex-col items-start text-xl sm:text-3xl'>
+						<p className='flex flex-col items-start text-Base md:text-2xl'>
 							Hi 👋, I’m Youssef Noujoum 
 							<br className='block m-10'/>
 							<span className='flex items-center gap-5'>
 								and i am a 
 								<RotatingText
 									texts={['Front-End Developer', 'Back-End Developer', 'Full-Stack Developer', 'DevOps Enthusiast']}
-									mainClassName="px-2 sm:px-2 md:px-3 bg-red-600 text-white text-xl sm:text-3xl overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+									mainClassName="px-2 sm:px-2 md:px-3 bg-red-600 text-white text-Base md:text-2xl overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
 									staggerFrom={"last"}
 									initial={{ y: "100%" }}
 									animate={{ y: 0 }}
@@ -45,7 +45,7 @@ export default function AboutSection () {
 								/>	
 							</span>
 						</p>
-                        <p className="text-base opacity-70">
+                        <p className="opacity-70 text-xs sm:text-base md:text-lg">
                             I hold a diploma in digital development as a specialized technician, where I built a solid foundation in programming, web development, and problem solving through hands-on projects.
                             I have now started my journey at 1337 Coding School, where I am deepening my software engineering skills with a focus on systems, low-level programming, and real-world problem solving. I’m driven by continuous learning, curiosity, and the goal of becoming a strong and versatile developer.
                         </p>

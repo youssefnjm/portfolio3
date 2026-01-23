@@ -2,7 +2,7 @@ import { LuPencil, LuDatabase, LuAppWindow, LuTerminal, LuCpu, LuGlobe } from 'r
 import GradientText from '../Components/GradientText';
 
 const SkillBadge = ({ name }) => (
-  <span className="px-3 py-1 bg-zinc-800/50 border border-zinc-700 text-zinc-300 rounded-md text-xs font-mono">
+  <span className="px-3 py-1 bg-zinc-800/50 border border-zinc-700 text-zinc-300 rounded-md text-xs md:text-xs  font-mono">
     {name}
   </span>
 );
@@ -15,7 +15,7 @@ const SkillCard = ({ title, icon: Icon, skills, color }) => (
       <div className={`p-2 rounded-lg bg-zinc-800 text-zinc-100 group-hover:scale-110 transition-transform`}>
         <Icon size={20} />
       </div>
-      <h3 className="text-lg font-bold text-white tracking-tight">{title}</h3>
+      <h3 className="text-base md:text-lg font-bold text-white tracking-tight">{title}</h3>
     </div>
 
     <div className="flex flex-wrap gap-2">
@@ -28,7 +28,7 @@ const SkillCard = ({ title, icon: Icon, skills, color }) => (
 
 export default function SkillsSection() {
   return (
-    <section className="container m-auto py-20" id="skills">
+    <section className="container m-auto py-10 md:py-20" id="skills">
       <div className="w-full">
         <div className="mb-12">
             <GradientText
