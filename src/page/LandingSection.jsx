@@ -24,20 +24,19 @@ function LandingSection() {
 
 	useEffect(() => {
 		const section = document.getElementById('landing');
+
+		const windowsWidth = window.innerWidth;
 	
 		const sectionWidth = section.offsetWidth;
 		const sectionHeight = section.offsetHeight;
 
-		if (sectionWidth < 640)
-			setGhostSize(100);
-		else if (sectionWidth < 768)
-			setGhostSize(130);
-		else if (sectionWidth < 1024)
-			setGhostSize(170);
-		else  if (sectionWidth < 1536)
-			setGhostSize(200);
-		else
-			setGhostSize(300);
+		console.log(windowsWidth);
+
+		if (sectionWidth < 640) setGhostSize(100);
+		else if (sectionWidth < 768) setGhostSize(130);
+		else if (sectionWidth < 1024) setGhostSize(170);
+		else if (sectionWidth < 1536) setGhostSize(100);
+		else setGhostSize(300);
 	
 		const maxOffsetX = (sectionWidth - (ghostSize + 100));
 		const maxOffsetY = (sectionHeight - (ghostSize + 100));

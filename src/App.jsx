@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
 import './App.css'
-import RotatingText from './Components/RotatingText.jsx'
 import CardNav from './Components/NavComponent.jsx';
 import GradientText from './Components/GradientText.jsx';
 import LogoLoop from './Components/LogoLoop.jsx';
-import ScrollDown from './Components/ScrollDown.jsx';
 import ClickSpark from './Components/ClickSpark.jsx';
-import { LuCode, LuGithub, LuLinkedin, LuInstagram, LuSend, LuGhost } from 'react-icons/lu';
+import { LuGhost } from 'react-icons/lu';
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiCss3, SiJavascript, SiMongodb, SiPhp } from 'react-icons/si';
+import { Bounce, ToastContainer } from 'react-toastify';
 import CertificationC from './assets/Certifes/Certification C.jpg';
 import CertificationJs from './assets/Certifes/Certification js.jpg';
 import CertificationPhp from './assets/Certifes/Certification php.jpg';
@@ -130,6 +128,19 @@ function App() {
 	
 	return (
 		<>
+		<ToastContainer
+			position="top-right"
+			autoClose={5000}
+			hideProgressBar={false}
+			newestOnTop={false}
+			closeOnClick={false}
+			rtl={false}
+			pauseOnFocusLoss
+			draggable
+			pauseOnHover
+			theme="light"
+			transition={Bounce}
+		/>
 		<ClickSpark>
 			<main className='m-auto relative overflow-hidden'>
 				<CardNav

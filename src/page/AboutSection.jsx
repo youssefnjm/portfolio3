@@ -1,7 +1,7 @@
 import React from "react";
 import RotatingText from "../Components/RotatingText";
 import ScrollDown from "../Components/ScrollDown";
-import { LuDownload, LuInstagram, LuLinkedin } from "react-icons/lu";
+import { LuDownload, LuHardDriveDownload, LuInstagram, LuLinkedin, LuSend } from "react-icons/lu";
 import GradientText from "../Components/GradientText";
 
 export default function AboutSection () {
@@ -52,11 +52,12 @@ export default function AboutSection () {
                         <div className="w-fit m-auto">
                             <a href="" download="" >
                                 <button className="button m-auto">
-                                    <span className="button_lg">
-                                        <span className="button_sl"></span>
-                                        <span className="button_text">Download Now</span>
-                                    </span>
-                                </button>
+									<span className="button_lg ">
+										<span className="button_sl"></span>
+										<span className="button_text flex gap-2 justify-center items-center ">download now <LuHardDriveDownload  size={16}/></span>
+										<span className="button_text"></span>
+									</span>
+								</button>
                             </a>
                         </div>
 						

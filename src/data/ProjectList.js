@@ -3,7 +3,7 @@ import pfe from "../assets/Project/brg.PNG";
 import clockacsion from "../assets/Project/Clockasion.PNG"
 import ideaPluse from "../assets/Project/ideaPulse.png"
 import tourisme from "../assets/Project/tourisme.PNG";
-import darNet from "../assets/Project/DarNet.PNG";
+import darNet from "../assets/Project/DarNet.png";
 import TicTacToe from "../assets/Project/tic-tac-toe.png"
 import { desc } from "motion/react-client";
 
