@@ -4,7 +4,7 @@ import GradientText from './Components/GradientText.jsx';
 import LogoLoop from './Components/LogoLoop.jsx';
 import ClickSpark from './Components/ClickSpark.jsx';
 import { LuGhost } from 'react-icons/lu';
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiCss3, SiJavascript, SiMongodb, SiPhp } from 'react-icons/si';
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiCss, SiJavascript, SiMongodb, SiPhp } from 'react-icons/si';
 import { Bounce, ToastContainer } from 'react-toastify';
 import CertificationC from './assets/Certifes/Certification C.jpg';
 import CertificationJs from './assets/Certifes/Certification js.jpg';
@@ -25,7 +25,7 @@ const InfiniteLoop = ({direction = "left" }) => {
 		{ node: <SiJavascript />, title: "Javascript", href: "#" },
 		{ node: <SiTailwindcss />, title: "Tailwind CSS", href: "#" },
 		{ node: <SiHtml5 />, title: "HTML", href: "#" },
-		{ node: <SiCss3 />, title: "CSS", href: "#" },
+		{ node: <SiCss />, title: "CSS", href: "#" },
 		{ node: <SiPhp />, title: "PHP", href: "#" },
 	];
 
