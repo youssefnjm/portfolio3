@@ -6,15 +6,14 @@ import ClickSpark from './Components/ClickSpark.jsx';
 import { LuGhost } from 'react-icons/lu';
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiCss, SiJavascript, SiMongodb, SiPhp } from 'react-icons/si';
 import { Bounce, ToastContainer } from 'react-toastify';
-import CertificationC from './assets/Certifes/Certification C.jpg';
-import CertificationJs from './assets/Certifes/Certification js.jpg';
-import CertificationPhp from './assets/Certifes/Certification php.jpg';
+
 import CareerSection from './page/CareerSection.jsx';
 import LandingSection from './page/LandingSection.jsx';
 import ContactSection from './page/ContactSection.jsx';
 import AboutSection from './page/AboutSection.jsx';
 import SkillsSection from './page/SkillsSection.jsx';
 import ProjectSection from './page/ProjectSection.jsx';
+import CertifceSection from './page/CertifceSection.jsx';
 
 const InfiniteLoop = ({direction = "left" }) => {
 	const techLogos = [
@@ -47,55 +46,12 @@ const InfiniteLoop = ({direction = "left" }) => {
 	</>);
 }
 
-const Certifce = () => {
-
-	return (<>
-		<div className='container m-auto w-full py-10 md:py-20' id="certifce">
-			<div className='pl-1.5- w-full text-center items-start mb-10'>
-				<GradientText
-					colors={[
-						"#C20A0A", // main red
-						"#FF6B6B", // lighter red/pink accent
-						"#FFD93D", // golden yellow for contrast
-						"#FF6B6B", // lighter red/pink accent
-						"#C20A0A", // main red
-					]}
-					animationSpeed={5}
-					showBorder={false}
-				>
-					My Certifce
-				</GradientText>
-			</div>
-			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
-				<div className="relative p-2 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-zinc-600 transition-all duration-300">
-					<img className="rounded-t-lg w-full h-fit" src={CertificationC} alt="" />
-					<div className="p-5">
-						<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}> C Certification </h5>
-					</div>
-				</div>
-				<div className="relative p-2 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-zinc-600 transition-all duration-300">
-					<img className="rounded-t-lg w-full h-fit" src={CertificationJs} alt="" />
-					<div className="p-5">
-						<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}> javascript Certification </h5>
-					</div>
-				</div>
-				<div className="relative p-2 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-zinc-600 transition-all duration-300">
-					<img className="rounded-t-lg w-full h-fit" src={CertificationPhp} alt="" />
-					<div className="p-5">
-						<h5 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white" style={{lineHeight: "1.3", letterSpacing: "-0.02em"}}>php Certification </h5>
-					</div>
-				</div>
-			</div>
-		</div>
-	</>);
-}
-
 function App() {
 
 	const items = [
 		{
 			label: "About",
-			bgColor: "#270202",
+			bgColor: "#220933",
 			textColor: "#fff",
 			links: [
 				{ label: "About Me", ariaLabel: "About Me", href: "#about" },
@@ -105,7 +61,7 @@ function App() {
 		},
 		{
 			label: "Projects", 
-			bgColor: "#3C0204",
+			bgColor: "#310E4A",
 			textColor: "#fff",
 			links: [
 				{ label: "Skills", ariaLabel: "Skills i learn", href: "#skills" },
@@ -114,7 +70,7 @@ function App() {
 		},
 		{
 			label: "Contact",
-			bgColor: "#610505", 
+			bgColor: "#431466", 
 			textColor: "#fff",
 			links: [
 				{ label: "Contact", ariaLabel: "Contact us", href: "#contact" },
@@ -149,7 +105,7 @@ function App() {
 					items={items}
 					baseColor="#fff"
 					menuColor="#000"
-					buttonBgColor="#B91C1C"
+					buttonBgColor="#7E22CE"
 					buttonTextColor="#fff"
 					ease="power3.out"
 				/>
@@ -159,7 +115,7 @@ function App() {
 				<div className='my-10'></div>
 				<CareerSection />
 				<div className='my-10'></div>
-				<Certifce />
+				<CertifceSection />
 				<div className='my-10'></div>
 				<div className='py-10 md:py-20'>
 					<InfiniteLoop />
@@ -171,18 +127,10 @@ function App() {
 				<ProjectSection />
 				<div className='my-10'></div>
 				<ContactSection />
-				<footer className="py-8 px-4 ">
-					<div className="max-w-6xl mx-auto flex flex-row items-center justify-between gap-4=1">
-						<p className="text-xs md:text-sm text-muted-foreground">
-							Crafted with care by <span className="text-red-500">youssef noujoum</span> 
-						</p>
-						<div>
-							<LuGhost size={24} className='text-red-600'/>
-						</div>
-						<p className="text-xs md:text-sm text-muted-foreground font-mono hidden md:block">
-						© 2025 All rights reserved
-						</p>
-					</div>
+				<footer className="py-8 px-4 border-t border-white/10 max-w-6xl mx-auto flex flex-row items-center justify-between gap-4=1">
+					<p className="text-xs text-white/50"> Crafted with care by <span className="text-purple-400">youssef noujoum</span></p>
+					<LuGhost size={24} className='text-purple-400'/>
+					<p className="text-xs text-white/50">© 2025 All rights reserved</p>
 				</footer>
 			</main>
 		</ClickSpark>

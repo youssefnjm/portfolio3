@@ -30,44 +30,60 @@ export default function SkillsSection() {
   return (
     <section className="container m-auto py-10 md:py-20" id="skills">
       <div className="w-full">
-        <div className="mb-12">
-            <GradientText
+        {/* <div className="mb-12"> */}
+            {/* <GradientText
                 animationSpeed={5}
                 showBorder={false}
             >
                 Skills
-            </GradientText>
-        </div>
+            </GradientText> */}
+            {/* ── Top label ── */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className="block w-8 h-px bg-purple-400" />
+              <span className="text-purple-400 text-xs font-semibold tracking-widest uppercase">Stack</span>
+            </div>
+
+            {/* ── Big heading ── */}
+            <div className="flex flex-col gap-8 mb-20">
+              <h2 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
+                Tool<br />
+                <span className="text-purple-400">Box.</span>
+              </h2>
+              <p className="text-white/50 text-base max-w-xl leading-relaxed">
+                The modern technologies and creative frameworks I use to bring complex ideas to life across the web.
+              </p>
+            </div>
+        {/* </div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <SkillCard 
             title="Frontend"
             icon={LuAppWindow} 
-            color="bg-red-500"
+            color="bg-purple-400"
             skills={["HTML", "CSS", "Javascript", "React.js", "Bootstrap", "Tailwind CSS", "React Bits"]} 
           />
           <SkillCard 
             title="Backend" 
             icon={LuTerminal} 
-            color="bg-amber-500"
+            color="bg-cyan-400"
             skills={["Node.js", "Express", "Socket.io", "REST APIs"]} 
           />
           <SkillCard 
             title="Database" 
             icon={LuDatabase} 
-            color="bg-red-500"
+            color="bg-purple-400"
             skills={["MongoDB", "MySql"]} 
           />
           <SkillCard 
             title="AI & Tools" 
             icon={LuCpu} 
-            color="bg-amber-500"
+            color="bg-cyan-400"
             skills={["openRouter API", "Git", "Docker", "Linux"]} 
           />
           <SkillCard 
             title="Design" 
             icon={LuPencil} 
-            color="bg-red-500"
+            color="bg-purple-400"
             skills={["Figma", "UI/UX",]} 
           />
         </div>

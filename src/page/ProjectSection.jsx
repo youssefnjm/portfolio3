@@ -6,8 +6,8 @@ import ProjectList from '../data/ProjectList.js';
 function ProjectSection () {
 	return (<>
 		<div className="container m-auto w-full h-full py-10 md:py-20" id="project">
-			<div className='pl-1.5- w-full text-center items-start'>
-				<GradientText
+			{/* <div className='pl-1.5- w-full items-start'> */}
+				{/* <GradientText
 				colors={[
 					"#C20A0A", // main red
 					"#FF6B6B", // lighter red/pink accent
@@ -19,8 +19,24 @@ function ProjectSection () {
 				showBorder={false}
 				>
 					My Project
-				</GradientText>
-			</div>
+				</GradientText> */}
+				{/* ── Top label ── */}
+				<div className="flex items-center gap-3 mb-6">
+				<span className="block w-8 h-px bg-purple-400" />
+				<span className="text-purple-400 text-xs font-semibold tracking-widest uppercase">Portfolio</span>
+				</div>
+
+				{/* ── Big heading ── */}
+				<div className="flex flex-col gap-8 mb-20">
+				<h2 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
+					Selected<br />
+					<span className="text-purple-400">Works.</span>
+				</h2>
+				<p className="text-white/50 text-base max-w-xl leading-relaxed">
+					A showcase of my favorite builds, ranging from experimental side projects to full-scale production applications.
+				</p>
+				</div>
+			{/* </div> */}
 			<div className="project">
 				<ul className='mt-2.5 mb-2.5'>
 					{ProjectList.map((ele, index) => (

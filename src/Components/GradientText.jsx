@@ -3,11 +3,11 @@ export default function GradientText({
   children,
   className = '',
   colors = [
-    "#C20A0A", // main red
-    "#FF6B6B", // lighter red/pink accent
-    "#FFD93D", // golden yellow for contrast
-    "#FF6B6B", // lighter red/pink accent
-    "#C20A0A", // main red
+    "#581C87", // main deep purple (your base)
+    "#A855F7", // vibrant amethyst accent
+    "#00D4FF", // electric cyan for high-energy contrast
+    "#A855F7", // vibrant amethyst accent
+    "#581C87", // main deep purple (your base)
   ],
   animationSpeed = 8,
   showBorder = false

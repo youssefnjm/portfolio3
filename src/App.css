@@ -69,7 +69,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow: inset 0 0 0 9px rgb(194 10 10 / 70%);
+  /* box-shadow: inset 0 0 0 9px rgb(194 10 10 / 70%);
   order: 1;
   justify-self: center;
   animation: animationProfile 4s ease-in-out infinite 0s;
@@ -85,7 +85,7 @@ body {
   }
   100% {
     border-radius: 60% 40% 30% 80%/60% 30% 70% 40%;
-  }
+  } */
 }
 
 
@@ -163,7 +163,7 @@ body {
 /* // ================================== */
 
 .project ul li:hover {
-  background-image: linear-gradient(to right, #C20A0A, #FF6B6B, #FFD93D, #FF6B6B, #C20A0A);
+  background-image: linear-gradient(to right, #581C87, #A855F7, #00D4FF, #A855F7, #581C87);
   -moz-transition: all 1s ease-in;
   -webkit-transition: all 1s ease-in;
   -o-transition: all 1s ease-in;
@@ -233,7 +233,7 @@ body {
 
 /* form */
 
-.groupI 			  { 
+/* .groupI 			  { 
   position:relative; 
   margin-bottom: 45px; 
 }
@@ -241,7 +241,6 @@ input 				{
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
-  /* width:300px; */
   border:none;
   border-bottom:1px solid #757575;
 }
@@ -251,14 +250,13 @@ textarea 				{
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
-  /* width:300px; */
   border:none;
   border-bottom:1px solid #757575;
 }
-textarea:focus 		{ outline:none; }
+textarea:focus 		{ outline:none; } */
 
 /* LABEL ======================================= */
-label 				 {
+/* label 				 {
   color:#999; 
   font-size:18px;
   font-weight:normal;
@@ -269,10 +267,10 @@ label 				 {
   transition:0.2s ease all; 
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
-}
+} */
 
 /* active state */
-input:focus ~ label, input:valid ~ label 		{
+/* input:focus ~ label, input:valid ~ label 		{
   top:-20px;
   font-size:14px;
   color:#C20A0A;
@@ -282,7 +280,7 @@ textarea:focus ~ label, input:valid ~ label 		{
   top:-20px;
   font-size:14px;
   color:#C20A0A;
-}
+} */
 
 
 /* ghost */
