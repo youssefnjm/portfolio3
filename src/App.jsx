@@ -4,7 +4,7 @@ import GradientText from './Components/GradientText.jsx';
 import LogoLoop from './Components/LogoLoop.jsx';
 import ClickSpark from './Components/ClickSpark.jsx';
 import { LuGhost } from 'react-icons/lu';
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiCss, SiJavascript, SiMongodb, SiPhp } from 'react-icons/si';
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiCss, SiJavascript, SiMongodb, SiPhp, SiUndertale } from 'react-icons/si';
 import { Bounce, ToastContainer } from 'react-toastify';
 
 import CareerSection from './page/CareerSection.jsx';
@@ -128,7 +128,7 @@ function App() {
 				<div className='my-10'></div>
 				<ContactSection />
 				<footer className="py-8 px-4 border-t border-white/10 max-w-6xl mx-auto flex flex-row items-center justify-between gap-4=1">
-					<p className="text-xs text-white/50"> Crafted with care by <span className="text-purple-400">youssef noujoum</span></p>
+					<p className="text-xs text-white/50 flex gap-1 items-center justify-between"> Crafted with care <span className="text-purple-400"><SiUndertale /></span> by <span className="text-purple-400">youssef noujoum</span></p>
 					<LuGhost size={24} className='text-purple-400'/>
 					<p className="text-xs text-white/50">© 2025 All rights reserved</p>
 				</footer>

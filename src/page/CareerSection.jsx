@@ -10,13 +10,13 @@ const TimelineItem = ({ year, title, description, progress, threshold }) => {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-4'
       }`}
     >
-      <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 text-white">
+      <h3 className="text-xl font-bold mb-2 text-white/90">
         {year}
       </h3>
-      <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mb-2 text-gray-200">
+      <p className="text-xl font-bold mb-2 text-white/90">
         {title}
       </p>
-      <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-400 leading-relaxed">
+      <p className="text-base text-white/50 leading-relaxed">
         {description}
       </p>
       <hr className="border-gray-700 mt-3 sm:mt-4" />
@@ -157,12 +157,12 @@ export default function CareerSection() {
                       />
                     ))}
 
-                    <div className={`transition-all duration-700 ${scrollProgress > 0.75 ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-4'}`}>
+                    <div className={`transition-all duration-700 text-center ${scrollProgress > 0.75 ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-4'}`}>
                       <p style={{
                           backgroundImage: 'linear-gradient(to right, #581C87, #A855F7, #00D4FF, #A855F7, #581C87)',
                           WebkitBackgroundClip: 'text',
                           backgroundClip: 'text'
-                        }} className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-transparent italic">
+                        }} className="text-xl font-bold text-transparent italic">
                         ...and the journey continues, incha'Allah.
                       </p>
                     </div>

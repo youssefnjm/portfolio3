@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 // import { Ghost } from 'react-icons/lu';
 
 const Ghost = ({ghostPos, ghostSize}) => {
-	return (<div className="ghost-loader" style={{
+	return (<div className="ghost-loader hidden md:block" style={{
 		transform: `translate(${ghostPos.x}px, ${ghostPos.y}px)`,
 		transition: 'transform 1s ease-out',
 	}}>
@@ -33,10 +33,10 @@ function LandingSection() {
 		console.log(windowsWidth);
 
 		if (sectionWidth < 640) setGhostSize(100);
-		else if (sectionWidth < 768) setGhostSize(130);
-		else if (sectionWidth < 1024) setGhostSize(170);
-		else if (sectionWidth < 1536) setGhostSize(100);
-		else setGhostSize(300);
+		else if (sectionWidth < 768) setGhostSize(100);
+		else if (sectionWidth < 1024) setGhostSize(120);
+		else if (sectionWidth < 1536) setGhostSize(150);
+		else setGhostSize(150);
 	
 		const maxOffsetX = (sectionWidth - (ghostSize + 100));
 		const maxOffsetY = (sectionHeight - (ghostSize + 100));
@@ -85,9 +85,9 @@ function LandingSection() {
 							Built for performance.<br />
 							Coded with passion.
 						</h1>
-						<span className="author">Whispers through memory</span>
-					</div>
-				{/* </div> */}
+						<span className="author">Compiled with zero errors</span>
+					{/* </div> */}
+				</div>
 			</div>
 		</div>
 	</>);

@@ -2,8 +2,8 @@
 // import GradientText from "../Components/GradientText.jsx";
 // import { LuPhone, LuGithub, LuLinkedin, LuSend, LuMail } from 'react-icons/lu';
 // import { SiLeetcode } from "react-icons/si";
-// import * as emailjs from "@emailjs/browser";
 // import { Bounce, toast } from 'react-toastify';
+// import * as emailjs from "@emailjs/browser";
 // import validator from 'validator';
 
 // const toastSuccess = () => toast.success('your form has applied successefully', {
@@ -64,8 +64,8 @@
 
 // 		if (validator.isEmpty(name) || validator.isNumeric(name)) {setError("name should not be numeric"); return ;}
 // 		else if (validator.isEmpty(email) || !validator.isEmail(email)) {setError("email should be in email format"); return ;}
-// 		else if (validator.isEmpty(subject)) {setError("subject should not be empty"); return ;}
-// 		else if (validator.isEmpty(message)) {setError("message should not be empty"); return ;}
+// 		else if (validator.isEmpty(subject)) { setError("subject should not be empty"); return ; }
+// 		else if (validator.isEmpty(message)) { setError("message should not be empty"); return ; }
 
 // 		setError('')
 
@@ -191,8 +191,10 @@
 // 	</>);
 // }
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuPhone, LuGithub, LuLinkedin, LuSend, LuMail, LuArrowUpRight } from 'react-icons/lu';
+import * as emailjs from "@emailjs/browser";
+import validator from 'validator';
 
 const socials = [
   { label: "Email", href: "#", icon: <LuMail /> },
@@ -202,11 +204,11 @@ const socials = [
 ];
 
 const fields = [
-  { id: "name",    label: "Full Name",     type: "text"  },
-  { id: "email",   label: "Email Address", type: "email" },
+  { id: "name",    label: "Full Name",     type: "text", name: "name" },
+  { id: "email",   label: "Email Address", type: "email", name: "email" },
 ];
 
-function Input({ id, label, type, value, focused, onChange, onFocus, onBlur }) {
+function Input({ id, label, type, name, value, focused, onChange, onFocus, onBlur }) {
   const up = focused === id || value;
   return (
     <div className="relative">
@@ -214,7 +216,7 @@ function Input({ id, label, type, value, focused, onChange, onFocus, onBlur }) {
         {label}
       </label>
       <input
-        id={id} type={type} value={value}
+        id={id} type={type} value={value} name={name}
         onChange={e => onChange(id, e.target.value)}
         onFocus={() => onFocus(id)} onBlur={onBlur}
         className="w-full bg-transparent border-b pt-6 pb-2 text-white text-sm outline-none transition-colors duration-200 border-white/20 focus:border-purple-400"
@@ -227,18 +229,43 @@ export default function Contact() {
   const [form, setForm]   = useState({ name: "", email: "", subject: "", message: "" });
   const [focus, setFocus] = useState(null);
   const [sent, setSent]   = useState(false);
+	const [error, setError] = useState('');
+  
+	useEffect(() => {
+		emailjs.init({
+              publicKey: "OjftJ0MJrM7vC20CT",
+		});
+	}, []);
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
-  const submit = () => {
-    if (!form.name || !form.email || !form.subject || !form.message) return;
-    setSent(true);
-    setForm({ name: "", email: "", subject: "", message: "" });
-    setTimeout(() => setSent(false), 4000);
+  const submit = (e) => {
+    e.preventDefault();
+
+    
+    if (!form.name || !form.email || !form.subject || !form.message) { setError("all field are required"); return ; }
+    else if (validator.isNumeric(form.name)) { setError("should contain only characters"); return ; }
+		else if (!validator.isEmail(form.email)) { setError("email should be in email format"); return ; }
+    
+    setError('');
+
+    const formElement = document.getElementById("contact_form");
+    
+    emailjs.sendForm('service_jvcdp3g', 'template_io9yexj', formElement)
+		.then(() => {
+      setSent(true);
+      setForm({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setSent(false), 4000);
+		}, (error) => {
+			// toasError()
+      setSent(false);
+			console.log('FAILED...', error);
+		});
+
   };
 
   return (
-    <div className="min-h-screen text-white flex items-center justify-center px-6 py-20">
+    <div id="contact" className="min-h-screen text-white flex items-center justify-center px-6 py-20">
       <div className="w-full max-w-6xl">
 
         {/* ── Top label ── */}
@@ -261,10 +288,8 @@ export default function Contact() {
         {/* ── Main Grid ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
 
-          {/* ── Right Info ── */}
           <div className="flex flex-col justify-between gap-14">
 
-            {/* Availability */}
             <div>
               <p className="text-xs font-semibold tracking-widest text-white/30 uppercase mb-3">Current Status</p>
               <div className="flex items-center gap-3">
@@ -276,7 +301,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Contact Info */}
             <div>
               <p className="text-xs font-semibold tracking-widest text-white/30 uppercase mb-6">Direct Contact</p>
               <div className="flex flex-col gap-5">
@@ -295,7 +319,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Socials */}
             <div>
               <p className="text-xs font-semibold tracking-widest text-white/30 uppercase mb-6">Socials</p>
               <div className="flex flex-col gap-3">
@@ -306,7 +329,7 @@ export default function Contact() {
                       {s.icon}
                       <span className="text-sm font-medium">{s.label}</span>
                     </div>
-					<LuArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"/>
+					          <LuArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"/>
                   </a>
                 ))}
               </div>
@@ -314,8 +337,6 @@ export default function Contact() {
 
           </div>
 		
-
-          {/* ── Form ── */}
           <div className="flex items-center lg:pl-10 lg:border-l border-white/10">
             {sent ? (
               <div className="flex flex-col gap-4 pt-10">
@@ -324,31 +345,29 @@ export default function Contact() {
                 <p className="text-white/40 text-sm">I'll reach out to you soon. Talk soon!</p>
               </div>
             ) : (
-              <div className="flex flex-col gap-8">
+              <form id="contact_form" className="flex flex-col gap-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                   {fields.map(f => (
                     <Input key={f.id} {...f} value={form[f.id]} focused={focus} onChange={set} onFocus={setFocus} onBlur={() => setFocus(null)} />
                   ))}
                 </div>
 
-                {/* Subject */}
                 <div className="relative">
                   <label htmlFor="subject" className={`absolute left-0 transition-all duration-200 pointer-events-none font-medium ${focus === "subject" || form.subject ? "top-0 text-xs text-purple-400" : "top-5 text-sm text-white/40"}`}>
                     Subject
                   </label>
-                  <input id="subject" type="text" value={form.subject}
+                  <input id="subject" type="text" value={form.subject} name="subject"
                     onChange={e => set("subject", e.target.value)}
                     onFocus={() => setFocus("subject")} onBlur={() => setFocus(null)}
                     className="w-full bg-transparent border-b pt-6 pb-2 text-white text-sm outline-none transition-colors duration-200 border-white/20 focus:border-purple-400"
                   />
                 </div>
 
-                {/* Message */}
                 <div className="relative">
                   <label htmlFor="message" className={`absolute left-0 transition-all duration-200 pointer-events-none font-medium ${focus === "message" || form.message ? "top-0 text-xs text-purple-400" : "top-5 text-sm text-white/40"}`}>
                     Message
                   </label>
-                  <textarea id="message" rows={4} value={form.message}
+                  <textarea id="message" rows={4} value={form.message} name="message"
                     onChange={e => set("message", e.target.value)}
                     onFocus={() => setFocus("message")} onBlur={() => setFocus(null)}
                     maxLength={600}
@@ -356,19 +375,20 @@ export default function Contact() {
                   />
                   <span className="text-xs text-white/20 float-right mt-1">{form.message.length}/600</span>
                 </div>
-
-                {/* Submit */}
                 <div className="pt-4">
-                  <button onClick={submit} className="group flex items-center gap-4 text-white font-bold text-lg hover:text-purple-400 transition-colors duration-300">
+                  {error && (<p className="text-xs text-center text-red-600/80 my-2">{error}</p>)}
+                  <button onClick={submit} className="group flex items-center gap-4 text-white font-bold text-lg hover:text-purple-400 transition-colors duration-300 cursor-pointer">
                     <span className="relative overflow-hidden inline-flex items-center justify-center w-14 h-14 rounded-full border border-white/20 group-hover:border-purple-400 group-hover:bg-purple-400/10 transition-all duration-300">
                       <LuSend />
                     </span>
                     Send Message
                   </button>
                 </div>
-              </div>
+              </form>
             )}
+
           </div>
+
         </div>
 
       </div>

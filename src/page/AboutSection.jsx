@@ -1,6 +1,6 @@
 import React from "react";
 import RotatingText from "../Components/RotatingText";
-import { LuDownload, LuHardDriveDownload, LuArrowRight, LuSend } from "react-icons/lu";
+import { LuHardDriveDownload, LuArrowRight, LuSend } from "react-icons/lu";
 
 // export default function AboutSection () {
 //     return (<>
@@ -79,27 +79,26 @@ export default function AboutSection() {
   return (
     <section className="relative overflow-hidden" id="about">
       {/* Background Decorative Element */}
-      <div className="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-purple-600/10 blur-[120px] rounded-full" />
+      {/* <div className="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-purple-600/10 blur-[120px] rounded-full" /> */}
 
       <div className="container m-auto py-20 px-6 md:px-12">
         {/* ── Heading Section ── */}
-			{/* ── About Me Heading ── */}
-			{/* ── Top label ── */}
-			<div className="flex items-center gap-3 mb-6">
-				<span className="block w-8 h-px bg-purple-400" />
-				<span className="text-purple-400 text-md font-semibold tracking-widest uppercase">Identity</span>
-			</div>
+        {/* ── Top label ── */}
+        <div className="flex items-center gap-3 mb-6">
+          <span className="block w-8 h-px bg-purple-400" />
+          <span className="text-purple-400 text-md font-semibold tracking-widest uppercase">Identity</span>
+        </div>
 
-			{/* ── Big heading ── */}
-			<div className="flex flex-col gap-8 mb-20">
-				<h2 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
-					Who<br />
-					<span className="text-purple-400">I Am.</span>
-				</h2>
-				<p className="text-white/50 text-base max-w-xl leading-relaxed">
-					A brief look into my journey as a developer, my philosophy on design, and the drive that keeps me building every single day.
-				</p>
-			</div>
+        {/* ── Big heading ── */}
+        <div className="flex flex-col gap-8 mb-20">
+          <h2 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
+            Who<br />
+            <span className="text-purple-400">I Am.</span>
+          </h2>
+          <p className="text-white/50 text-base max-w-xl leading-relaxed">
+            A brief look into my journey as a developer, my philosophy on design, and the drive that keeps me building every single day.
+          </p>
+        </div>
 
         {/* ── Main Content Grid ── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -126,7 +125,7 @@ export default function AboutSection() {
                 </span>
                 <div className="inline-flex">
                   <RotatingText
-                    texts={['Front-End Developer', 'Back-End Developer', 'Full-Stack Developer', 'Systems Thinker']}
+                    texts={['Front-End Developer', 'Back-End Developer', 'DevOps Enthusiast']}
                     mainClassName="px-4 bg-purple-400 text-white text-lg md:text-2xl font-bold py-1 rounded-sm"
                     staggerFrom={"last"}
                     rotationInterval={3000}
@@ -134,28 +133,30 @@ export default function AboutSection() {
                 </div>
               </h3>
 
-              <div className="space-y-6 text-white/60 text-base md:text-xl leading-relaxed font-light">
+              <div className="space-y-6 text-white/60 text-base leading-relaxed font-light">
                 <p>
                   I hold a diploma in <span className="text-white font-medium">Digital Development</span>, where I mastered the art of building scalable web architectures and solving complex logic puzzles.
                 </p>
                 <p>
-                  Now, I'm deep-diving into the world of <span className="text-purple-400 font-mono">1337 (42 Network)</span>. My current focus is stripping back the layers of abstraction—mastering <span className="text-white italic">C++, systems programming</span>, and architectural performance. 
+                  My current work at <span className="text-purple-400 font-mono">1337 (42 Network)</span> centers on tearing down abstractions. I’m actively sharpening my skills in <span className="text-white italic">C, C++ and low-level systems logic</span> to build high-performance, unmanaged code.
                 </p>
               </div>
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-6 pt-6">
-              <button className="relative overflow-hidden px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform duration-300 flex items-center gap-2">
+              <button className="relative overflow-hidden px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform duration-300 flex items-center gap-2 cursor-pointer">
                 Download CV
                 <LuHardDriveDownload className="text-xl" />
               </button>
               
-              <button className="group flex items-center gap-3 text-white font-semibold hover:text-purple-400 transition-colors">
-                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-purple-400 group-hover:bg-purple-400/10 transition-all">
-                  <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </div>
-                Let's collaborate
+              <button className="group flex items-center gap-3 text-white font-semibold hover:text-purple-400 transition-colors cursor-pointer">
+                <a href="#contact" className="group flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-purple-400 group-hover:bg-purple-400/10 transition-all">
+                    <LuArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  </div>
+                  Let's collaborate
+                </a>
               </button>
             </div>
 
