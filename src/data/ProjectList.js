@@ -5,6 +5,7 @@ import ideaPluse from "../assets/Project/ideaPulse.png"
 import tourisme from "../assets/Project/tourisme.PNG";
 import darNet from "../assets/Project/DarNet.png";
 import TicTacToe from "../assets/Project/tic-tac-toe.png"
+import WC26 from "../assets/Project/world-cup-2026.png"
 import { desc } from "motion/react-client";
 
 const ProjectList = [
@@ -24,6 +25,12 @@ const ProjectList = [
         name: "DarNet",
         img: darNet,
         desc: "A streamlined community management SaaS designed to bridge communication gaps between residents and property syndics.",
+        link: "#",
+    },
+    {
+        name: "World Cup 2026 Hub",
+        img: WC26,
+        desc: "A React-based World Cup 2026 experience powered by dynamic data sources, Context API state management, intelligent featured-match selection, and timezone-aware scheduling to keep fans connected throughout the tournament.",
         link: "#",
     },
     {
