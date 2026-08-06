@@ -1,0 +1,10 @@
+services:
+  portfolio:
+    container_name: portfolio
+    build: .
+    ports:
+      - "6000:5173"
+    volumes:
+      - ~/Desktop/portfolio:/app
+      - /app/node_modules  # preserves container node_modules, ignoring host folder
+    restart: unless-stopped
