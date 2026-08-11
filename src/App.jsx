@@ -103,6 +103,7 @@ function App() {
 					logo={<LuGhost className="logo h-8 w-8"/>}
 					logoAlt="Logo"
 					items={items}
+  					className = 'fixed'
 					baseColor="#fff"
 					menuColor="#000"
 					buttonBgColor="#7E22CE"
