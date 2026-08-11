@@ -6,32 +6,38 @@ import tourisme from "../assets/Project/tourisme.PNG";
 import darNet from "../assets/Project/DarNet.png";
 import TicTacToe from "../assets/Project/tic-tac-toe.png"
 import WC26 from "../assets/Project/world-cup-2026.png"
-import { desc } from "motion/react-client";
+// import { desc } from "motion/react-client";
 
 const ProjectList = [
     {
         name: "Clockasion E-Commerce",
         img: clockacsion,
         desc: "A premium brand management ecosystem featuring a high-conversion storefront and a robust task management backend.",
-        link: "#",
+        link: "https://github.com/youssefnjm/Clockasion",
     },
     {
         name: "IdeaPulse",
         img: ideaPluse,
         desc: "A social ecosystem for founders and investors to validate concepts through public pitching, real-time chats, and AI-powered feasibility analysis.",
-        link: "#",
+        link: "https://github.com/youssefnjm/ideaPulse",
     },
     {
         name: "DarNet",
         img: darNet,
         desc: "A streamlined community management SaaS designed to bridge communication gaps between residents and property syndics.",
-        link: "#",
+        link: "https://github.com/youssefnjm/DarNet",
     },
     {
         name: "World Cup 2026 Hub",
         img: WC26,
         desc: "A React-based World Cup 2026 experience powered by dynamic data sources, Context API state management, intelligent featured-match selection, and timezone-aware scheduling to keep fans connected throughout the tournament.",
-        link: "#",
+        link: "https://github.com/youssefnjm/world-cup-26-matches",
+    },
+    {
+        name: "Online Tic Tac Toe",
+        img: TicTacToe,
+        desc: "A real-time competitive experience featuring instant state synchronization and a sleek, minimalist interface for seamless head-to-head gameplay.",
+        link: "https://github.com/youssefnjm/Tic-Tac-Toe",
     },
     {
         name: "Enterprise PFE",
@@ -39,18 +45,12 @@ const ProjectList = [
         desc: "A comprehensive corporate solution combining a sleek public vitrine with an internal administrative task dashboard.",
         link: "#",
     },
-    {
-        name: "Portfolio v1",
-        img: portfolio1,
-        desc: "My initial exploration into digital storytelling, focusing on clean UI patterns and responsive design foundations.",
-        link: "#",
-    },
-    {
-        name: "Online Tic Tac Toe",
-        img: TicTacToe,
-        desc: "A real-time competitive experience featuring instant state synchronization and a sleek, minimalist interface for seamless head-to-head gameplay.",
-        link: "#",
-    },
+    // {
+    //     name: "Portfolio v1",
+    //     img: portfolio1,
+    //     desc: "My initial exploration into digital storytelling, focusing on clean UI patterns and responsive design foundations.",
+    //     link: "#",
+    // },
     {
         name: "Global Tourism",
         img: tourisme,
