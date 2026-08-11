@@ -64,7 +64,7 @@ export default function AboutSection() {
           <div className="flex flex-col gap-6 lg:col-span-7">
             
             {/* Bio Card */}
-            <div className="animate-fade-up [animation-delay:0.25s] rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm">
+            <div className="animate-fade-up [animation-delay:0.25s] rounded-3xl border border-white/10 bg-white/2 p-8 backdrop-blur-sm">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/10">
                   <LuCode className="text-lg text-purple-400" />
@@ -117,7 +117,7 @@ export default function AboutSection() {
                 return (
                   <div 
                     key={stat.label} 
-                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all duration-300 hover:border-purple-500/30 hover:bg-white/[0.04]"
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/2 p-6 transition-all duration-300 hover:border-purple-500/30 hover:bg-white/4"
                   >
                     <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/10 transition-colors group-hover:bg-purple-500/20">
                       <Icon className="text-lg text-purple-400" />

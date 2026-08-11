@@ -103,7 +103,7 @@ function App() {
 					logo={<LuGhost className="logo h-8 w-8"/>}
 					logoAlt="Logo"
 					items={items}
-  					className = 'fixed'
+  					className = 'fixed top-0'
 					baseColor="#fff"
 					menuColor="#000"
 					buttonBgColor="#7E22CE"
@@ -118,7 +118,7 @@ function App() {
 				<div className='my-10'></div>
 				<CertifceSection />
 				<div className='my-10'></div>
-				<div className='py-10 md:py-20'>
+				<div className='hidden md:block py-10 md:py-20'>
 					<InfiniteLoop />
 					<InfiniteLoop direction={"right"}/>
 				</div>

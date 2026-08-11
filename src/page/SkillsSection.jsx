@@ -31,12 +31,6 @@ export default function SkillsSection() {
     <section className="container m-auto py-10 md:py-20" id="skills">
       <div className="w-full">
         {/* <div className="mb-12"> */}
-            {/* <GradientText
-                animationSpeed={5}
-                showBorder={false}
-            >
-                Skills
-            </GradientText> */}
             {/* ── Top label ── */}
             <div className="flex items-center gap-3 mb-6">
               <span className="block w-8 h-px bg-purple-400" />
@@ -60,25 +54,25 @@ export default function SkillsSection() {
             title="Frontend"
             icon={LuAppWindow} 
             color="bg-purple-400"
-            skills={["HTML", "CSS", "Javascript", "React.js", "Bootstrap", "Tailwind CSS", "React Bits"]} 
+            skills={["HTML", "CSS", "Javascript", "Typescript", "React.js", "Bootstrap", "Tailwind CSS", "React Bits"]} 
           />
           <SkillCard 
             title="Backend" 
             icon={LuTerminal} 
             color="bg-cyan-400"
-            skills={["Node.js", "Express", "Socket.io", "REST APIs"]} 
+            skills={["Nodejs", "Express", "Nestjs", "REST APIs", "Socket.io"]} 
           />
           <SkillCard 
             title="Database" 
             icon={LuDatabase} 
             color="bg-purple-400"
-            skills={["MongoDB", "MySql"]} 
+            skills={["MongoDB", "MySql", "Mariadb"]} 
           />
           <SkillCard 
             title="AI & Tools" 
             icon={LuCpu} 
             color="bg-cyan-400"
-            skills={["openRouter API", "Git", "Docker", "Linux"]} 
+            skills={["openRouter API", "Git", "Docker", "Bash Scripting"]} 
           />
           <SkillCard 
             title="Design" 

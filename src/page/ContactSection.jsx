@@ -337,7 +337,7 @@ export default function Contact() {
 
           </div>
 		
-          <div className="flex items-center lg:pl-10 lg:border-l border-white/10">
+          <div className="lg:pl-10 lg:border-l border-white/10">
             {sent ? (
               <div className="flex flex-col gap-4 pt-10">
                 <div className="text-5xl font-black text-purple-400">✓</div>

@@ -16,7 +16,7 @@ const TimelineItem = ({ year, title, description, progress, threshold }) => {
       <p className="text-xl font-bold mb-2 text-white/90">
         {title}
       </p>
-      <p className="text-base text-white/50 leading-relaxed">
+      <p className="text-base text-white/50 leading-relaxed hidden md:block">
         {description}
       </p>
       <hr className="border-gray-700 mt-3 sm:mt-4" />
@@ -65,19 +65,19 @@ export default function CareerSection() {
     {
       year: "2021 - 2022",
       title: "Bachelor's Degree",
-      description: "Completed my final year of high school in physical sciences, where I developed discipline, analytical thinking, and a strong interest in technology and problem solving.",
+      description: "Completed high school in physical sciences, developing discipline and a strong interest in tech.",
       threshold: 0.15
     },
     {
       year: "2022 - 2024",
       title: "Specialized Technician in Full-Stack Development",
-      description: "Gained hands-on experience in full-stack web development, working with modern technologies to design, build, and deploy real-world digital solutions.",
+      description: "Learned full-stack development hands-on, building and deploying real-world digital solutions.",
       threshold: 0.35
     },
     {
       year: "2024 - Present",
       title: "Student at 1337 Coding School",
-      description: "Currently deepening my software engineering skills through project-based learning, low-level programming, and system development, with a strong focus on problem solving and performance.",
+      description: "Advancing software engineering through project-based learning, low-level programming & systems.",
       threshold: 0.55
     }
   ];
