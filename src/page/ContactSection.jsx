@@ -197,10 +197,10 @@ import * as emailjs from "@emailjs/browser";
 import validator from 'validator';
 
 const socials = [
-  { label: "Email", href: "#", icon: <LuMail /> },
-  { label: "GitHub", href: "#", icon: <LuGithub /> },
-  { label: "LinkedIn", href: "#", icon: <LuLinkedin /> },
-  { label: "Twitter / X", href: "#", icon: <LuMail /> },
+  { label: "Email", href: "mailto:youssefnoujoum04@gmail.com", icon: <LuMail /> },
+  { label: "GitHub", href: "https://github.com/youssefnjm", icon: <LuGithub /> },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/youssef-noujoum-079bb0289/", icon: <LuLinkedin /> },
+  // { label: "Twitter / X", href: "#", icon: <LuMail /> },
 ];
 
 const fields = [
@@ -323,7 +323,7 @@ export default function Contact() {
               <p className="text-xs font-semibold tracking-widest text-white/30 uppercase mb-6">Socials</p>
               <div className="flex flex-col gap-3">
                 {socials.map(s => (
-                  <a key={s.label} href={s.href}
+                  <a key={s.label} href={s.href} target="_blank"
                     className="group flex items-center justify-between border-b border-white/10 pb-3 hover:border-purple-400/40 transition-colors duration-200">
                     <div className="flex items-center gap-3 text-white/60 group-hover:text-purple-400 transition-colors duration-200">
                       {s.icon}

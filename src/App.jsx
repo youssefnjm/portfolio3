@@ -74,9 +74,9 @@ function App() {
 			textColor: "#fff",
 			links: [
 				{ label: "Contact", ariaLabel: "Contact us", href: "#contact" },
-				{ label: "Email", ariaLabel: "Email us", href: "" },
-				{ label: "LinkedIn", ariaLabel: "LinkedIn", href: "" },
-				{ label: "Instagrame", ariaLabel: "Instagrame", href: "" },
+				{ label: "Email", ariaLabel: "Email us", href: "mailto:youssefnoujoum04@gmail.com" },
+				{ label: "LinkedIn", ariaLabel: "LinkedIn", href: "https://www.linkedin.com/in/youssef-noujoum-079bb0289/" },
+				{ label: "Github", ariaLabel: "Github", href: "https://github.com/youssefnjm" },
 			]
 		}
 	];
