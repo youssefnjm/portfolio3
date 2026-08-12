@@ -25,7 +25,7 @@ export default function AboutSection() {
 
          {/* Big heading */}
         <div className="mb-20 flex flex-col gap-8 animate-fade-up [animation-delay:0.1s]">
-          <h2 className="text-5xl font-black leading-none tracking-tighter sm:text-6xl lg:text-8xl">
+          <h2 className="text-4xl font-black leading-none tracking-tighter sm:text-6xl lg:text-8xl">
              Who
              <br />
              <span className="text-purple-400">I Am.</span>

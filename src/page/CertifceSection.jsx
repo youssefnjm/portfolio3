@@ -36,7 +36,7 @@ export default function CertifceSection() {
 
                 {/* ── Big heading ── */}
                 <div className="flex flex-col gap-8 mb-20">
-                <h2 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
+                <h2 className="text-4xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
                     Expert<br />
                     <span className="text-purple-400">Badge.</span>
                 </h2>

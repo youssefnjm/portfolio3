@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 
 const Ghost = ({ pos, size, delay = 0 }) => (
   <div
-    className="ghost-anim pointer-events-none absolute z-10 will-change-transform"
+    className="ghost-anim pointer-events-none absolute z-10 will-change-transform hidden sm:block"
     style={{
       transform: `translate(${pos.x}px, ${pos.y}px)`,
       transition: 'transform 1.8s ease-out',
     }}
   >
     <svg
-      className="ghost-float [filter:drop-shadow(0_0_40px_rgba(255,255,255,0.9))] sm:[filter:drop-shadow(0_0_50px_rgba(255,255,255,1))]"
+      className="ghost-float filter-[drop-shadow(0_0_40px_rgba(255,255,255,0.9))] sm:filter-[drop-shadow(0_0_50px_rgba(255,255,255,1))]"
       height={size}
       width={size}
       viewBox="0 0 512 512"
@@ -99,7 +99,7 @@ function LandingSection() {
 
         <div className="relative flex h-full w-full flex-col items-center justify-center">
           <h1 
-		  	className="animate-hero-in font-['Boldonse'] text-center text-[9vw] font-normal uppercase leading-[1.3] tracking-[-0.02em] text-white [text-wrap:balance] sm:text-[7vw] md:text-[6vw] lg:text-[4.5rem]"
+		  	className="animate-hero-in font-['Boldonse'] font-normal uppercase leading-[1.3] tracking-[-0.02em] text-center text-[7vw] text-white text-balance sm:text-[7vw] md:text-[6vw] lg:text-[4.5rem]"
 		  	style={{fontFamily: 'Boldonse, system-ui'}}
 		  >
             Designed for scale.
