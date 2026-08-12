@@ -34,7 +34,7 @@ function ProjectSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${ele.name} project`}
-              className="group relative flex items-center justify-between gap-4 p-4 transition-[background-image] duration-700 ease-in-out sm:p-6 md:p-8 bg-[length:200%_100%] bg-[position:0%_0%] hover:bg-[position:100%_0%] hover:bg-[linear-gradient(to_right,#581C87,#A855F7,#00D4FF,#A855F7,#581C87)]"
+              className="group relative flex items-center justify-between gap-4 p-4 transition-[background-image] duration-700 ease-in-out sm:p-6 md:p-8 bg-size-[200%_100%] bg-position-[0%_0%] hover:bg-position-[100%_0%] hover:bg-[linear-gradient(to_right,#581C87,#A855F7,#00D4FF,#A855F7,#581C87)]"
             >
               {/* Index number */}
               <span className="hidden text-sm font-mono text-white/30 sm:block">
@@ -60,7 +60,7 @@ function ProjectSection() {
               </div>
 
               {/* Desktop floating preview on hover */}
-              <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 hidden w-[280px] -translate-x-1/2 -translate-y-1/2 rotate-[-6deg] scale-90 opacity-0 transition-all duration-500 ease-out group-hover:rotate-0 group-hover:scale-100 group-hover:opacity-100 md:block lg:w-[380px]">
+              <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 hidden w-[280px] -translate-x-1/2 -translate-y-1/2 -rotate-6 scale-90 opacity-0 transition-all duration-500 ease-out group-hover:rotate-0 group-hover:scale-100 group-hover:opacity-100 md:block lg:w-[380px]">
                 <img
                   src={ele.img}
                   alt=""
