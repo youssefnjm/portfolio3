@@ -31,12 +31,16 @@ jobs:
   deploy-vercel:
     runs-on: ubuntu-latest
     steps:
-      
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: deploy to vercel
+      - name: Clean install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+
+      - name: Deploy to Vercel (Preview on PR, Prod on Push)
         uses: amondnet/vercel-action@v42
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-args: '--prod --yes'
+          vercel-args: ${{ github.event_name == 'push' && '--prod --yes' || '--yes' }}
