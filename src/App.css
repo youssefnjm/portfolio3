@@ -1,4 +1,4 @@
-@import "tailwindcss";
+
 /* #9D00FF */
 /* C20A0A */
 body {
@@ -48,7 +48,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up {
+  .animate-fade-up-custom {
     animation: none !important;
   }
 }
@@ -271,7 +271,6 @@ p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.animate-fade-up {
+.animate-fade-up-custom {
   animation: fadeUp 0.7s ease-out both;
 }
-

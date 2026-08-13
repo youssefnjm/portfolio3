@@ -16,7 +16,7 @@ export default function AboutSection() {
       <div className="container m-auto px-6 py-20 md:px-12">
 
         {/* ─── TOP LABEL — keep unified ─── */}
-        <div className="mb-6 flex items-center gap-3 animate-fade-up">
+        <div className="mb-6 flex items-center gap-3 animate-fade-up-custom">
            <span className="block h-px w-8 bg-purple-400" />
            <span className="text-md font-semibold uppercase tracking-widest text-purple-400">
              Identity
@@ -24,7 +24,7 @@ export default function AboutSection() {
          </div>
 
          {/* Big heading */}
-        <div className="mb-20 flex flex-col gap-8 animate-fade-up [animation-delay:0.1s]">
+        <div className="mb-20 flex flex-col gap-8 animate-fade-up-custom [animation-delay:0.1s]">
           <h2 className="text-4xl font-black leading-none tracking-tighter sm:text-6xl lg:text-8xl">
              Who
              <br />
@@ -44,7 +44,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
 
           {/* ── Image Card ── */}
-          <div className="group relative lg:col-span-5 animate-fade-up [animation-delay:0.2s]">
+          <div className="group relative lg:col-span-5 animate-fade-up-custom [animation-delay:0.2s]">
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
               {/* Gradient overlay */}
               {/* <div className="absolute inset-0 bg-linear-to-t from-purple-600/20 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100 z-10" /> */}
@@ -64,7 +64,7 @@ export default function AboutSection() {
           <div className="flex flex-col gap-6 lg:col-span-7">
             
             {/* Bio Card */}
-            <div className="animate-fade-up [animation-delay:0.25s] rounded-3xl border border-white/10 bg-white/2 p-8 backdrop-blur-sm">
+            <div className="animate-fade-up-custom [animation-delay:0.25s] rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/10">
                   <LuCode className="text-lg text-purple-400" />
@@ -75,7 +75,7 @@ export default function AboutSection() {
               </div>
 
               {/* Name + Rotating Title — full width hero line */}
-              <div className="mb-6 animate-fade-up [animation-delay:0.15s]">
+              <div className="mb-6 animate-fade-up-custom [animation-delay:0.15s]">
                 <h5 className="flex flex-wrap items-center gap-x-4 gap-y-3 text-base font-bold">
                   Hi, I'm Youssef Noujoum
                   <span className="flex items-center text-base font-medium text-white/50">
@@ -111,13 +111,13 @@ export default function AboutSection() {
             </div>
 
             {/* Stats Cards Row */}
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 animate-fade-up [animation-delay:0.3s]">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 animate-fade-up-custom [animation-delay:0.3s]">
               {stats.map((stat) => {
                 const Icon = stat.icon;
                 return (
                   <div 
                     key={stat.label} 
-                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/2 p-6 transition-all duration-300 hover:border-purple-500/30 hover:bg-white/4"
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all duration-300 hover:border-purple-500/30 hover:bg-white/[0.04]"
                   >
                     <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/10 transition-colors group-hover:bg-purple-500/20">
                       <Icon className="text-lg text-purple-400" />
@@ -137,7 +137,7 @@ export default function AboutSection() {
             </div>
 
             {/* CTA Row */}
-            <div className="flex flex-wrap items-center gap-4 animate-fade-up [animation-delay:0.35s]">
+            <div className="flex flex-wrap items-center gap-4 animate-fade-up-custom [animation-delay:0.35s]">
               <button className="group/btn flex cursor-pointer items-center gap-3 rounded-full bg-white px-8 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(168,85,247,0.4)]">
                 Download CV
                 <LuHardDriveDownload className="text-xl transition-transform group-hover/btn:translate-y-0.5" />
