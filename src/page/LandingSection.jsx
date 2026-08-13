@@ -102,7 +102,7 @@ function LandingSection() {
 		  	className="animate-hero-in font-['Boldonse'] font-normal uppercase leading-[1.3] tracking-[-0.02em] text-center text-[7vw] text-white text-balance sm:text-[7vw] md:text-[6vw] lg:text-[4.5rem]"
 		  	style={{fontFamily: 'Boldonse, system-ui'}}
 		  >
-            Designed for scaleeee.
+            Designed for scale.
             <br />
             Built for performance.
             <br />
