@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --container-center: true;
+  --container-padding: 1.5rem;
+  --container-max-width-sm: 640px;
+  --container-max-width-md: 768px;
+  --container-max-width-lg: 1024px;
+  --container-max-width-xl: 1280px;
+  --container-max-width-2xl: 1536px;
+}
+
 @font-face {
     font-family: "Boldonse";
     src: url("/Fonts/Boldonse,Funnel_Display,Space_Mono/Boldonse/Boldonse-Regular.ttf")

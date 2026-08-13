@@ -26,7 +26,7 @@ export default function CertifceSection() {
 	];
 
 	return (<>
-		<div className='container m-auto w-full py-10 md:py-20' id="certifce">
+		<div className='mx-auto w-full max-w-7xl px-6 py-20 md:px-12' id="certifce">
 			<div className='pl-1.5- w-full items-start mb-10'>
                 {/* ── Top label ── */}
                 <div className="flex items-center gap-3 mb-6">

@@ -4,7 +4,7 @@ import { LuExternalLink } from "react-icons/lu";
 
 function ProjectSection() {
   return (
-    <div className="container m-auto h-full w-full py-10 md:py-20" id="project">
+    <div className="mx-auto w-full max-w-7xl px-6 py-20 md:px-12" id="project">
       {/* Top label */}
       <div className="mb-6 flex items-center gap-3">
         <span className="block h-px w-8 bg-purple-400" />

@@ -89,11 +89,7 @@ function LandingSection() {
   }, []);
 
   return (
-    <div id="landing">
-      <div
-        ref={sectionRef}
-        className="container relative m-auto h-[70vh] w-full py-24 md:h-svh md:py-0"
-      >
+      <div id="landing" ref={sectionRef} className="mx-auto w-full max-w-7xl px-6 py-20 md:px-12 h-screen">
         <Ghost pos={ghost1Pos} size={ghostSize} />
         <Ghost pos={ghost2Pos} size={ghostSize} delay={0.3} />
 
@@ -115,7 +111,6 @@ function LandingSection() {
           </span>
         </div>
       </div>
-    </div>
   );
 }
 

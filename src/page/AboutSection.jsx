@@ -11,9 +11,8 @@ const stats = [
 
 export default function AboutSection() {
   return (
-    <section className="relative overflow-hidden" id="about">
 
-      <div className="container m-auto px-6 py-20 md:px-12">
+      <div className="mx-auto w-full max-w-7xl px-6 py-20 md:px-12"  id="about">
 
         {/* ─── TOP LABEL — keep unified ─── */}
         <div className="mb-6 flex items-center gap-3 animate-fade-up-custom">
@@ -156,6 +155,5 @@ export default function AboutSection() {
 
         </div>
       </div>
-    </section>
   );
 }

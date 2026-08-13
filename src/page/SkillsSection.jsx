@@ -28,7 +28,7 @@ const SkillCard = ({ title, icon: Icon, skills, color }) => (
 
 export default function SkillsSection() {
   return (
-    <section className="container m-auto py-10 md:py-20" id="skills">
+    <section className="mx-auto w-full max-w-7xl px-6 py-20 md:px-12" id="skills">
       <div className="w-full">
         {/* <div className="mb-12"> */}
             {/* ── Top label ── */}

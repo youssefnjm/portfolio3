@@ -99,12 +99,6 @@ export default function CareerSection() {
             <div className="w-full flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-16">
               
               <div className="w-full flex flex-col justify-center items-left lg:w-2/5 lg:sticky lg:top-0">
-                {/* <GradientText animationSpeed={5} showBorder={false}>
-                  My Education
-                </GradientText>
-                <p className="w-full text-xs sm:text-base md:text-lg text-gray-400 leading-relaxed max-w-2xl text-center">
-                  A timeline of my learning journey, from academic foundations to hands-on technical training, reflecting my continuous growth as a developer.
-                </p> */}
                 {/* ── Top label ── */}
                 <div className="flex items-center gap-3 mb-6">
                   <span className="block w-8 h-px bg-purple-400" />
