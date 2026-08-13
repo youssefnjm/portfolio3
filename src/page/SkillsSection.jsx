@@ -39,7 +39,7 @@ export default function SkillsSection() {
 
             {/* ── Big heading ── */}
             <div className="flex flex-col gap-8 mb-20">
-              <h2 className="text-4xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tighter">
                 Tool<br />
                 <span className="text-purple-400">Box.</span>
               </h2>

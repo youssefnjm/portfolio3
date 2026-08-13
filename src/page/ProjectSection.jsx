@@ -15,7 +15,7 @@ function ProjectSection() {
 
       {/* Big heading */}
       <div className="mb-20 flex flex-col gap-8">
-        <h2 className="text-4xl font-black leading-none tracking-tighter sm:text-7xl lg:text-8xl">
+        <h2 className="text-4xl font-black leading-none tracking-tighter sm:text-5xl lg:text-6xl">
           Selected
           <br />
           <span className="text-purple-400">Works.</span>
