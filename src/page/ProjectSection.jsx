@@ -60,7 +60,7 @@ function ProjectSection() {
               </div>
 
               {/* Desktop floating preview on hover */}
-              <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 hidden w-[280px] -translate-x-1/2 -translate-y-1/2 -rotate-6 scale-90 opacity-0 transition-all duration-500 ease-out group-hover:rotate-0 group-hover:scale-100 group-hover:opacity-100 md:block lg:w-[380px]">
+              <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 hidden w-70 -translate-x-1/2 -translate-y-1/2 -rotate-6 scale-90 opacity-0 transition-all duration-500 ease-out group-hover:rotate-0 group-hover:scale-100 group-hover:opacity-100 md:block lg:w-95">
                 <img
                   src={ele.img}
                   alt=""

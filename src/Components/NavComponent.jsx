@@ -167,7 +167,7 @@ const CardNav = ({
 
           <button
             type="button"
-            className="card-nav-cta-button hidden rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-pointer md:flex md:items-center md:w-fit md:flex-ro"
+            className="card-nav-cta-button hidden rounded-[0.55rem] px-4 h-full font-medium cursor-pointer md:flex md:items-center md:w-fit md:flex-ro"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
             >
             <a
@@ -189,7 +189,7 @@ const CardNav = ({
           {(items || []).slice(0, 3).map((item, idx) => (
             <div
               key={`${item.label}-${idx}`}
-              className="nav-card select-none relative flex flex-col gap-2 p-[12px_16px] rounded-[calc(0.75rem-0.2rem)] min-w-0 flex-[1_1_auto] h-auto min-h-15 md:h-full md:min-h-0 md:flex-[1_1_0%]"
+              className="nav-card select-none relative flex flex-col gap-2 p-[12px_16px] rounded-[0.55rem] min-w-0 flex-[1_1_auto] h-auto min-h-15 md:h-full md:min-h-0 md:flex-[1_1_0%]"
               ref={setCardRef(idx)}
               style={{ backgroundColor: item.bgColor, color: item.textColor }}
             >  
