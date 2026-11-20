@@ -1,5 +1,5 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import * as Motion from 'motion/react';
 
 function cn(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -139,15 +139,15 @@ const RotatingText = forwardRef((props, ref) => {
   }, [next, rotationInterval, auto]);
 
   return (
-    <motion.span
+    <Motion.motion.span
       className={cn('flex flex-wrap whitespace-pre-wrap relative', mainClassName)}
       {...rest}
       layout
       transition={transition}
     >
       <span className="sr-only">{texts[currentTextIndex]}</span>
-      <AnimatePresence mode={animatePresenceMode} initial={animatePresenceInitial}>
-        <motion.span
+      <Motion.AnimatePresence mode={animatePresenceMode} initial={animatePresenceInitial}>
+        <Motion.motion.span
           key={currentTextIndex}
           className={cn(splitBy === 'lines' ? 'flex flex-col w-full' : 'flex flex-wrap whitespace-pre-wrap relative')}
           layout
@@ -158,7 +158,7 @@ const RotatingText = forwardRef((props, ref) => {
             return (
               <span key={wordIndex} className={cn('inline-flex', splitLevelClassName)}>
                 {wordObj.characters.map((char, charIndex) => (
-                  <motion.span
+                  <Motion.motion.span
                     key={charIndex}
                     initial={initial}
                     animate={animate}
@@ -173,15 +173,15 @@ const RotatingText = forwardRef((props, ref) => {
                     className={cn('inline-block', elementLevelClassName)}
                   >
                     {char}
-                  </motion.span>
+                  </Motion.motion.span>
                 ))}
                 {wordObj.needsSpace && <span className="whitespace-pre"> </span>}
               </span>
             );
           })}
-        </motion.span>
-      </AnimatePresence>
-    </motion.span>
+        </Motion.motion.span>
+      </Motion.AnimatePresence>
+    </Motion.motion.span>
   );
 });
 

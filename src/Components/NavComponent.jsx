@@ -1,144 +1,137 @@
-import { useLayoutEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { LuSend, LuCornerUpRight } from 'react-icons/lu';
+import { useLayoutEffect, useRef, useState, useCallback } from 'react'
+import { gsap } from 'gsap'
+import { LuSend, LuCornerUpRight } from 'react-icons/lu'
 
 const CardNav = ({
   logo,
-  logoAlt = 'Logo',
   items,
   className = '',
   ease = 'power3.out',
-  baseColor = '#fff',
-  menuColor,
-  buttonBgColor,
-  buttonTextColor
 }) => {
-  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const navRef = useRef(null);
-  const cardsRef = useRef([]);
-  const tlRef = useRef(null);
+  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const navRef = useRef(null)
+  const cardsRef = useRef([])
+  const tlRef = useRef(null)
 
-  const calculateHeight = () => {
-    const navEl = navRef.current;
-    if (!navEl) return 260;
+  const calculateHeight = useCallback(() => {
+    const navEl = navRef.current
+    if (!navEl) return 260
 
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
     if (isMobile) {
-      const contentEl = navEl.querySelector('.card-nav-content');
+      const contentEl = navEl.querySelector('.card-nav-content')
       if (contentEl) {
-        const wasVisible = contentEl.style.visibility;
-        const wasPointerEvents = contentEl.style.pointerEvents;
-        const wasPosition = contentEl.style.position;
-        const wasHeight = contentEl.style.height;
+        const wasVisible = contentEl.style.visibility
+        const wasPointerEvents = contentEl.style.pointerEvents
+        const wasPosition = contentEl.style.position
+        const wasHeight = contentEl.style.height
 
-        contentEl.style.visibility = 'visible';
-        contentEl.style.pointerEvents = 'auto';
-        contentEl.style.position = 'static';
-        contentEl.style.height = 'auto';
+        contentEl.style.visibility = 'visible'
+        contentEl.style.pointerEvents = 'auto'
+        contentEl.style.position = 'static'
+        contentEl.style.height = 'auto'
 
-        contentEl.offsetHeight;
+        contentEl.offsetHeight
 
-        const topBar = 60;
-        const padding = 16;
-        const contentHeight = contentEl.scrollHeight;
+        const topBar = 60
+        const padding = 16
+        const contentHeight = contentEl.scrollHeight
 
-        contentEl.style.visibility = wasVisible;
-        contentEl.style.pointerEvents = wasPointerEvents;
-        contentEl.style.position = wasPosition;
-        contentEl.style.height = wasHeight;
+        contentEl.style.visibility = wasVisible
+        contentEl.style.pointerEvents = wasPointerEvents
+        contentEl.style.position = wasPosition
+        contentEl.style.height = wasHeight
 
-        return topBar + contentHeight + padding;
+        return topBar + contentHeight + padding
       }
     }
-    return 260;
-  };
+    return 260
+  }, [])
 
-  const createTimeline = () => {
-    const navEl = navRef.current;
-    if (!navEl) return null;
+  const createTimeline = useCallback(() => {
+    const navEl = navRef.current
+    if (!navEl) return null
 
-    gsap.set(navEl, { height: 60, overflow: 'hidden' });
-    gsap.set(cardsRef.current, { y: 50, opacity: 0 });
+    gsap.set(navEl, { height: 60, overflow: 'hidden' })
+    gsap.set(cardsRef.current, { y: 50, opacity: 0 })
 
-    const tl = gsap.timeline({ paused: true });
+    const tl = gsap.timeline({ paused: true })
 
     tl.to(navEl, {
-      height: calculateHeight,
+      height: calculateHeight(),
       duration: 0.4,
       ease
-    });
+    })
 
-    tl.to(cardsRef.current, { y: 0, opacity: 1, duration: 0.4, ease, stagger: 0.08 }, '-=0.1');
+    tl.to(cardsRef.current, { y: 0, opacity: 1, duration: 0.4, ease, stagger: 0.08 }, '-=0.1')
 
-    return tl;
-  };
+    return tl
+  }, [calculateHeight, ease])
 
   useLayoutEffect(() => {
-    const tl = createTimeline();
-    tlRef.current = tl;
+    const tl = createTimeline()
+    tlRef.current = tl
 
     return () => {
-      tl?.kill();
-      tlRef.current = null;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ease, items]);
+      tl?.kill()
+      tlRef.current = null
+    }
+  }, [createTimeline])
 
   useLayoutEffect(() => {
     const handleResize = () => {
-      if (!tlRef.current) return;
+      if (!tlRef.current) return
 
       if (isExpanded) {
-        const newHeight = calculateHeight();
-        gsap.set(navRef.current, { height: newHeight });
+        const newHeight = calculateHeight()
+        gsap.set(navRef.current, { height: newHeight })
 
-        tlRef.current.kill();
-        const newTl = createTimeline();
+        tlRef.current.kill()
+        const newTl = createTimeline()
         if (newTl) {
-          newTl.progress(1);
-          tlRef.current = newTl;
+          newTl.progress(1)
+          tlRef.current = newTl
         }
       } else {
-        tlRef.current.kill();
-        const newTl = createTimeline();
+        tlRef.current.kill()
+        const newTl = createTimeline()
         if (newTl) {
-          tlRef.current = newTl;
+          tlRef.current = newTl
         }
       }
-    };
+    }
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isExpanded]);
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [isExpanded, createTimeline, calculateHeight])
 
   const toggleMenu = () => {
-    const tl = tlRef.current;
-    if (!tl) return;
+    const tl = tlRef.current
+    if (!tl) return
     if (!isExpanded) {
-      setIsHamburgerOpen(true);
-      setIsExpanded(true);
-      tl.play(0);
+      setIsHamburgerOpen(true)
+      setIsExpanded(true)
+      tl.play(0)
     } else {
-      setIsHamburgerOpen(false);
-      tl.eventCallback('onReverseComplete', () => setIsExpanded(false));
-      tl.reverse();
+      setIsHamburgerOpen(false)
+      tl.eventCallback('onReverseComplete', () => setIsExpanded(false))
+      tl.reverse()
     }
-  };
+  }
 
   const setCardRef = i => el => {
-    if (el) cardsRef.current[i] = el;
-  };
+    if (el) cardsRef.current[i] = el
+  }
 
   return (
     <div
-      className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-200 z-99 top-[1.2em] ${className} text-black text-xl`}
+      className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-200 z-99 top-[1.2em] ${className} text-[var(--fg)] text-xl`}
     >
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} block h-15 p-0 rounded-xl shadow-md relative overflow-hidden will-change-[height]`}
-        style={{ backgroundColor: baseColor }}
+        className={`card-nav ${isExpanded ? 'open' : ''} block h-15 p-0 rounded-xl shadow-md relative overflow-hidden will-change-[height] sketch-border`}
+        style={{ backgroundColor: 'var(--card-bg)' }}
       >
         <div className="card-nav-top absolute inset-x-0 top-0 h-15 flex items-center justify-between p-2 pl-[1.1rem] z-2">
           <div
@@ -147,7 +140,6 @@ const CardNav = ({
             role="button"
             aria-label={isExpanded ? 'Close menu' : 'Open menu'}
             tabIndex={0}
-            style={{ color: menuColor || '#000' }}
           >
             <div
               className={`hamburger-line w-7.5 h-0.5 bg-current transition-[transform,opacity,margin] duration-300 ease-linear origin-[50%_50%] ${
@@ -167,17 +159,13 @@ const CardNav = ({
 
           <button
             type="button"
-            className="card-nav-cta-button hidden rounded-[0.55rem] px-4 h-full font-medium cursor-pointer md:flex md:items-center md:w-fit md:flex-ro"
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-            >
-            <a
-                href="#contact"
-                className="flex items-center gap-2"
-            >
-                say hay <LuSend size={18} />
+            className="card-nav-cta-button hidden rounded-[0.55rem] px-4 h-full font-medium cursor-pointer md:flex md:items-center md:w-fit md:flex-ro btn-sketch text-sm"
+            style={{ backgroundColor: 'var(--border)', color: 'var(--bg)' }}
+          >
+            <a href="#contact" className="flex items-center gap-2">
+              Say Hi <LuSend size={16} />
             </a>
-        </button>
-
+          </button>
         </div>
 
         <div
@@ -189,18 +177,18 @@ const CardNav = ({
           {(items || []).slice(0, 3).map((item, idx) => (
             <div
               key={`${item.label}-${idx}`}
-              className="nav-card select-none relative flex flex-col gap-2 p-[12px_16px] rounded-[0.55rem] min-w-0 flex-[1_1_auto] h-auto min-h-15 md:h-full md:min-h-0 md:flex-[1_1_0%]"
+              className="nav-card select-none relative flex flex-col gap-2 p-[12px_16px] rounded-[0.55rem] min-w-0 flex-[1_1_auto] h-auto min-h-15 md:h-full md:min-h-0 md:flex-[1_1_0%] sketch-border"
               ref={setCardRef(idx)}
-              style={{ backgroundColor: item.bgColor, color: item.textColor }}
-            >  
-              <div className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]">
+              style={{ backgroundColor: 'var(--card-bg)', color: 'var(--fg)' }}
+            >
+              <div className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px] hand-drawn-text text-[var(--fg)]">
                 {item.label}
               </div>
-              <div className="nav-card-links mt-auto flex flex-col gap-0.5">
+              <div className="nav-card-links mt-auto flex flex-col gap-0.5 stagger-list">
                 {item.links?.map((lnk, i) => (
                   <a target='_blank'
                     key={`${lnk.label}-${i}`}
-                    className="nav-card-link inline-flex items-center gap-1.5 no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
+                    className="nav-card-link inline-flex items-center gap-1.5 no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px] hand-drawn-text text-[var(--fg-muted)] hover:text-[var(--fg)]"
                     href={lnk.href}
                     aria-label={lnk.ariaLabel}
                   >
@@ -214,7 +202,7 @@ const CardNav = ({
         </div>
       </nav>
     </div>
-  );
-};
+  )
+}
 
-export default CardNav;
+export default CardNav

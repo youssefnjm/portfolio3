@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
-  base: process.env.VITE_BASE_PATH || "/",
+  base: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_BASE_PATH) || "/",
   // server: {
   //   host: true,      // binds to 0.0.0.0 (required for Docker)
   //   port: 5173,      // match the EXPOSE in Dockerfile

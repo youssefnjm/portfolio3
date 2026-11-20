@@ -1,175 +1,91 @@
-import React, { useState, useEffect, useRef } from 'react';
-import GradientText from '../Components/GradientText';
+// No hooks needed for static timeline
 
-const TimelineItem = ({ year, title, description, progress, threshold }) => {
-  const isVisible = progress > threshold;
-  
-  return (
-    <div 
-      className={`transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-4'
-      }`}
-    >
-      <h3 className="text-xl font-bold mb-2 text-white/90">
-        {year}
-      </h3>
-      <p className="text-xl font-bold mb-2 text-white/90">
-        {title}
-      </p>
-      <p className="text-base text-white/50 leading-relaxed hidden md:block">
-        {description}
-      </p>
-      <hr className="border-gray-700 mt-3 sm:mt-4" />
+const TimelineItem = ({ year, title, description, index }) => (
+  <div className="animate-fade-up stagger-list" style={{ animationDelay: `${index * 0.15}s` }}>
+    <div className="relative pl-8 pb-12 last:pb-0">
+      {/* Timeline dot and line */}
+      <div className="absolute left-0 top-1 w-4 h-4 rounded-full z-10 sketch-circle" style={{
+        backgroundColor: 'var(--paper)',
+        borderColor: 'var(--border)',
+        borderWidth: '2px',
+        borderRadius: '50% 45% 55% 50% / 45% 55% 50% 45%'
+      }} />
+      <div className="absolute left-1.5 top-5 bottom-0 w-0.5 last:hidden" style={{ backgroundColor: 'var(--border-soft)' }} />
+
+      <div className="sketch-border p-6 relative" style={{ borderRadius: '12px 8px 16px 4px / 8px 16px 4px 12px' }}>
+        <div className="tape" />
+        <div className="mb-3 flex items-center gap-2">
+          <span className="text-xs font-semibold uppercase tracking-widest hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>{year}</span>
+        </div>
+        <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--fg)' }}>{title}</h3>
+        <p className="text-base leading-relaxed" style={{ color: 'var(--fg-muted)' }}>{description}</p>
+      </div>
     </div>
-  );
-};
+  </div>
+)
 
 export default function CareerSection() {
-  const sectionRef = useRef(null);
-  const TextBoxRef = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isFixed, setIsFixed] = useState(false);
-  const [heightBar, setHeightBar] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-
-      const section = sectionRef.current;
-      const rect = section.getBoundingClientRect();
-      const sectionHeight = section.offsetHeight;
-      setHeightBar(TextBoxRef.current.offsetHeight);
-      const viewportHeight = window.innerHeight;
-      const scrollDistance = sectionHeight - viewportHeight;
-
-      if (rect.top <= 0 && rect.bottom > viewportHeight) {
-        setIsFixed(true);
-        const scrolledPast = -rect.top;
-        const progress = Math.min(Math.max(scrolledPast / scrollDistance, 0), 1);
-        setScrollProgress(progress);
-      } else if (rect.top > 0) {
-        setIsFixed(false);
-        setScrollProgress(0);
-      } else if (rect.bottom <= viewportHeight) {
-        setIsFixed(false);
-        setScrollProgress(1);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const timelineData = [
     {
       year: "2021 - 2022",
-      title: "Bachelor's Degree",
-      description: "Completed high school in physical sciences, developing discipline and a strong interest in tech.",
-      threshold: 0.15
+      title: "Baccalauréat - Physical Sciences & Chemistry",
+      description: "Completed high school in physical sciences and chemistry at Lycée Abderrahmane Belkorchi, developing discipline and a strong interest in technology and problem-solving."
     },
     {
       year: "2022 - 2024",
-      title: "Specialized Technician in Full-Stack Development",
-      description: "Learned full-stack development hands-on, building and deploying real-world digital solutions.",
-      threshold: 0.35
+      title: "Technicien Spécialisé - Full-Stack Development",
+      description: "Learned full-stack development hands-on at Centre de Formation Professionnelle Hassania, building and deploying real-world digital solutions with modern web technologies."
     },
     {
       year: "2024 - Present",
-      title: "Student at 1337 Coding School",
-      description: "Advancing software engineering through project-based learning, low-level programming & systems.",
-      threshold: 0.55
+      title: "Student at 1337 Coding School (42 Network)",
+      description: "Advancing software engineering through project-based peer learning. Focused on low-level programming, systems logic, C/C++, algorithms, and building high-performance unmanaged code."
     }
-  ];
+  ]
 
   return (
-    <div className="m-auto w-full" id="career">
-      <div ref={sectionRef} className="relative" style={{ height: '3250px' }}>
-        <div className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
-          style={{ 
-            position: isFixed ? 'fixed' : 'absolute',
-            top: isFixed ? 0 : `${scrollProgress * 2000}px`,
-            left: 0,
-            right: 0,
-            zIndex: 10,
-            transition: isFixed ? 'none' : 'top 0.1s ease-out'
-          }}
-        >
-          <div className="w-full max-w-7xl mx-auto">
-            <div className="w-full flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-16">
-              
-              <div className="w-full flex flex-col justify-center items-left lg:w-2/5 lg:sticky lg:top-0">
-                {/* ── Top label ── */}
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="block w-8 h-px bg-purple-400" />
-                  <span className="text-purple-400 text-xs font-semibold tracking-widest uppercase">History</span>
-                </div>
+    <section id="career" className="relative py-20 px-6">
+      {/* Background paper texture - full width */}
+      <div className="absolute inset-0 paper-lines opacity-10" aria-hidden="true" />
 
-                {/* ── Big heading ── */}
-                <div className="flex flex-col gap-8 mb-20">
-                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tighter">
-                    My<br />
-                    <span className="text-purple-400">Path.</span>
-                  </h2>
-                  <p className="text-white/50 text-base max-w-xl leading-relaxed">
-                    Tracing my professional timeline from academic foundations to real-world experience and industry milestones.
-                  </p>
-                </div>
-              </div>
+      {/* Decorative elements - full width positioning */}
+      <div className="absolute top-20 left-4 w-2 h-2 rounded-full opacity-30 animate-float" style={{ backgroundColor: 'var(--fg-subtle)' }} />
+      <div className="absolute bottom-20 right-4 w-3 h-3 border-2 rounded-full opacity-20 animate-float" style={{ borderColor: 'var(--fg-subtle)', animationDelay: '1s' }} />
 
-              {/* Timeline Section */}
-              <div className="w-full lg:flex-1 flex gap-6 sm:gap-8 lg:gap-12">
-                
-                <div className="shrink-0 my-auto">
-                  <div className="relative w-1 rounded-full overflow-hidden shadow-lg"style={{ height: `${heightBar}px`, minHeight: '300px' }}>
+      {/* Centered content container */}
+      <div className="relative max-w-7xl mx-auto">
+        {/* Section header */}
+        <div className="mb-12 animate-fade-up stagger-1">
+          <div className="section-label mb-6">
+            <span>Journey</span>
+          </div>
+          <h2 className="heading-lg text-center" style={{ color: 'var(--fg)' }}>
+            My <br />
+            <span className="hand-drawn-text text-2xl sm:text-3xl font-normal">Path.</span>
+          </h2>
+          <p className="text-base max-w-xl leading-relaxed mt-4 mx-auto text-center" style={{ color: 'var(--fg-muted)' }}>
+            Tracing my professional timeline from academic foundations to real-world experience and industry milestones.
+          </p>
+        </div>
 
-                    <div className="absolute top-0 w-full transition-all duration-100 ease-out" style={{height: `${scrollProgress * 100}%`, background: 'linear-gradient(to top, #581C87, #A855F7, #00D4FF, #A855F7, #581C87)', boxShadow: scrollProgress > 0 ? '0 0 20px rgba(220, 38, 38, 0.5), 0 0 40px rgba(220, 38, 38, 0.3)' : 'none' }}/>
-                  
-                    {scrollProgress > 0 && scrollProgress < 1 && (
-                      <div 
-                        className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg animate-pulse"
-                        style={{ 
-                          top: `calc(${scrollProgress * 100}% - 8px)`,
-                          boxShadow: '0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 215, 0, 0.4)',
-                          transition: 'top 0.1s ease-out'
-                        }}
-                      />
-                    )}
-                  </div>
-                </div>
+        {/* Timeline */}
+        <div className="max-w-3xl mx-auto">
+          <div className="space-y-6 stagger-list">
+            {timelineData.map((item, index) => (
+              <TimelineItem key={index} {...item} index={index} />
+            ))}
 
-                <div className="flex-1 min-w-0" ref={TextBoxRef}>
-                  <div className="space-y-6 sm:space-y-12 md:space-y-16 lg:space-y-18 2lg:space-y-22">
-                    {timelineData.map((item, index) => (
-                      <TimelineItem
-                        key={index}
-                        year={item.year}
-                        title={item.title}
-                        description={item.description}
-                        progress={scrollProgress}
-                        threshold={item.threshold}
-                      />
-                    ))}
-
-                    <div className={`transition-all duration-700 text-center ${scrollProgress > 0.75 ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-4'}`}>
-                      <p style={{
-                          backgroundImage: 'linear-gradient(to right, #581C87, #A855F7, #00D4FF, #A855F7, #581C87)',
-                          WebkitBackgroundClip: 'text',
-                          backgroundClip: 'text'
-                        }} className="text-xl font-bold text-transparent italic">
-                        ...and the journey continues, incha'Allah.
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-
-              </div>
-
+            <div className="text-center animate-fade-up stagger-list" style={{ animationDelay: `${timelineData.length * 0.15}s` }}>
+              <p className="text-xl font-bold italic hand-drawn-text" style={{ color: 'var(--fg-muted)' }}>
+                ...and the journey continues, incha'Allah.
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+
+      {/* Divider - full width */}
+      <div className="absolute bottom-0 left-0 right-0 mx-auto w-1/2 divider-sketch" />
+    </section>
+  )
 }

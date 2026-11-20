@@ -1,117 +1,129 @@
-import { useEffect, useRef, useState } from 'react';
+import { LuArrowRight } from 'react-icons/lu'
+import characterImg from '../assets/Humation_1.png'
 
-const Ghost = ({ pos, size, delay = 0 }) => (
+const FloatingDoodle = ({ children, delay = 0, ...props }) => (
   <div
-    className="ghost-anim pointer-events-none absolute z-10 will-change-transform hidden sm:block"
-    style={{
-      transform: `translate(${pos.x}px, ${pos.y}px)`,
-      transition: 'transform 1.8s ease-out',
-    }}
+    className="animate-float pointer-events-none"
+    style={{ animationDelay: `${delay}s`, ...props }}
   >
-    <svg
-      className="ghost-float filter-[drop-shadow(0_0_40px_rgba(255,255,255,0.9))] sm:filter-[drop-shadow(0_0_50px_rgba(255,255,255,1))]"
-      height={size}
-      width={size}
-      viewBox="0 0 512 512"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="m508.374 432.802s-46.6-39.038-79.495-275.781c-8.833-87.68-82.856-156.139-172.879-156.139-90.015 0-164.046 68.458-172.879 156.138-32.895 236.743-79.495 275.782-79.495 275.782-15.107 25.181 20.733 28.178 38.699 27.94 35.254-.478 35.254 40.294 70.516 40.294 35.254 0 35.254-35.261 70.508-35.261s37.396 45.343 72.65 45.343 37.389-45.343 72.651-45.343c35.254 0 35.254 35.261 70.508 35.261s35.27-40.772 70.524-40.294c17.959.238 53.798-2.76 38.692-27.94z"
-        className="fill-white opacity-90"
-      />
-      <circle
-        cx="210" cy="225" r="22"
-        className="eye-anim origin-center fill-black"
-      />
-      <circle
-        cx="297" cy="225" r="22"
-        className="eye-anim origin-center fill-black"
-        style={{ animationDelay: `${0.1 + delay}s` }}
-      />
-    </svg>
+    {children}
   </div>
-);
+)
 
-function getGhostSize(width) {
-  if (width < 640) return 90;
-  if (width < 768) return 110;
-  if (width < 1024) return 130;
-  if (width < 1536) return 150;
-  return 170;
-}
-
-function LandingSection() {
-  const sectionRef = useRef(null);
-  const [ghostSize, setGhostSize] = useState(150);
-  const [ghost1Pos, setGhost1Pos] = useState({ x: 0, y: 0 });
-  const [ghost2Pos, setGhost2Pos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    let currentSize = getGhostSize(window.innerWidth);
-    setGhostSize(currentSize);
-
-    const randomOffset = () => {
-      const { offsetWidth: w, offsetHeight: h } = section;
-      const maxX = Math.max(0, w - currentSize - 40);
-      const maxY = Math.max(0, h - currentSize - 40);
-      return { x: Math.random() * maxX, y: Math.random() * maxY };
-    };
-
-    const place = () => {
-      setGhost1Pos(randomOffset());
-      setGhost2Pos(randomOffset());
-    };
-    place();
-
-    const interval1 = setInterval(() => setGhost1Pos(randomOffset()), 2200);
-    const interval2 = setInterval(() => setGhost2Pos(randomOffset()), 3000);
-
-    let resizeTimeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        currentSize = getGhostSize(window.innerWidth);
-        setGhostSize(currentSize);
-        place();
-      }, 200);
-    };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      clearInterval(interval1);
-      clearInterval(interval2);
-      clearTimeout(resizeTimeout);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
+const LandingSection = () => {
   return (
-      <div id="landing" ref={sectionRef} className="mx-auto w-full max-w-7xl px-6 py-20 md:px-12 h-screen">
-        <Ghost pos={ghost1Pos} size={ghostSize} />
-        <Ghost pos={ghost2Pos} size={ghostSize} delay={0.3} />
+    <section id="landing" className="relative min-h-screen px-6 py-6 overflow-hidden">
+      {/* Background paper texture */}
+      <div className="absolute inset-0 paper-lines opacity-20" aria-hidden="true" />
 
-        <div className="relative flex h-full w-full flex-col items-center justify-center">
-          <h1 
-		  	className="animate-hero-in font-['Boldonse'] font-normal uppercase leading-[1.3] tracking-[-0.02em] text-center text-[7vw] text-white text-balance sm:text-[7vw] md:text-[6vw] lg:text-[4.5rem]"
-		  	style={{fontFamily: 'Boldonse, system-ui'}}
-		  >
-            Designed for scale.
-            <br />
-            Built for performance.
-            <br />
-            Coded with passion.
-          </h1>
-          <span 
-		  	className="animate-hero-in mt-6 text-xs uppercase tracking-[0.2em] text-white/50 sm:text-sm [animation-delay:0.15s]"
-		  >
-            Compiled with zero errors
-          </span>
+      {/* Decorative floating elements */}
+      <FloatingDoodle delay={0} className="absolute top-20 left-10 text-4xl hand-drawn-text opacity-30">✦</FloatingDoodle>
+      <FloatingDoodle delay={1} className="absolute top-1/4 right-16 text-3xl hand-drawn-text opacity-20">▲</FloatingDoodle>
+      <FloatingDoodle delay={2} className="absolute bottom-1/3 left-20 text-2xl hand-drawn-text opacity-25">■</FloatingDoodle>
+      <FloatingDoodle delay={1.5} className="absolute bottom-20 right-24 text-xl hand-drawn-text opacity-30">◆</FloatingDoodle>
+      <FloatingDoodle delay={0.5} className="absolute top-1/2 left-4 text-lg hand-drawn-text opacity-20">♡</FloatingDoodle>
+      <FloatingDoodle delay={2.5} className="absolute top-1/3 right-4 text-lg hand-drawn-text opacity-15">◇</FloatingDoodle>
+
+      {/* Centered content wrapper - single flex container that centers the entire block */}
+      <div className="relative w-full max-w-7xl mx-auto min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center px-4">
+        {/* All content as one grouped unit - no internal justify-center */}
+        <div className="flex flex-col items-center gap-10 w-full">
+          {/* Character illustration - centered */}
+          <div className="relative animate-fade-up stagger-1 character-float" style={{ animationDuration: '8s' }}>
+            <div className="relative flex justify-center">
+              {/* Sketchy frame behind character */}
+              <div className="absolute -inset-4 border-2 rounded-full opacity-20 animate-float" style={{ borderColor: 'var(--fg-subtle)', animationDelay: '1s', animationDuration: '6s' }} />
+              <div className="absolute -inset-8 border border-dashed rounded-full opacity-15 animate-float" style={{ borderColor: 'var(--fg-subtle)', animationDelay: '2s', animationDuration: '7s' }} />
+
+              <div className="rough-image relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96" style={{ borderRadius: '20px 10px 24px 10px / 10px 24px 10px 20px' }}>
+                <img
+                  src={characterImg}
+                  alt="Youssef's hand-drawn character - a friendly developer mascot"
+                  className="w-full h-full object-cover"
+                  style={{ borderRadius: '18px 8px 22px 8px / 8px 22px 8px 18px' }}
+                />
+              </div>
+
+              {/* Floating code brackets around character */}
+              <div className="absolute -top-6 -left-6 text-3xl hand-drawn-text opacity-40 animate-wiggle">&#123;</div>
+              <div className="absolute -top-6 -right-6 text-3xl hand-drawn-text opacity-40 animate-wiggle" style={{ animationDelay: '0.5s' }}>&#125;</div>
+              <div className="absolute bottom-6 -left-6 text-3xl hand-drawn-text opacity-40 animate-wiggle" style={{ animationDelay: '1s' }}>&#59;</div>
+              <div className="absolute bottom-6 -right-6 text-3xl hand-drawn-text opacity-40 animate-wiggle" style={{ animationDelay: '1.5s' }}>&#123;</div>
+            </div>
+          </div>
+
+          {/* Main headline - centered */}
+          <div className="text-center animate-fade-up stagger-2 w-full px-4">
+            <div className="section-label justify-center mb-6 stagger-3">
+              <span>Handcrafted with code</span>
+            </div>
+
+            <h1 className="heading-xl mb-6 stagger-4 leading-tight" style={{ color: 'var(--fg)' }}>
+              <span className="block">Designed for scale.</span>
+              <span className="block">Built for performance.</span>
+              <span className="block hand-drawn-text text-2xl sm:text-3xl md:text-4xl font-normal mt-2" style={{ letterSpacing: '0.05em' }}>
+                Coded with passion.
+              </span>
+            </h1>
+
+            <p className="text-lg sm:text-xl max-w-2xl mx-auto stagger-5 leading-relaxed" style={{ color: 'var(--fg-muted)' }}>
+              Full-stack developer crafting digital experiences at the intersection of
+              <span className="font-semibold">clean architecture</span> and
+              <span className="font-semibold">creative problem solving</span>.
+            </p>
+
+            {/* Status badges */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mt-8 stagger-6">
+              <span className="tag-sketch hand-drawn-text">Available for work</span>
+              <span className="tag-sketch hand-drawn-text">Open to freelance</span>
+              <span className="tag-sketch hand-drawn-text">1337 Student</span>
+            </div>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-4 animate-fade-up stagger-7">
+            <a
+              href="#contact"
+              className="btn-sketch group hand-drawn-text"
+              style={{ borderRadius: '12px 8px 16px 4px / 8px 16px 4px 12px' }}
+            >
+              <span className="relative z-10">Let's collaborate</span>
+              <span className="absolute inset-0 bg-current transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" style={{ zIndex: -1, borderRadius: '10px 6px 14px 2px / 6px 14px 2px 10px' }} />
+              <LuArrowRight className="relative z-10 transition-transform group-hover:translate-x-1" size={18} />
+            </a>
+
+            <a
+              href="/src/assets/Pdfs/Youssef_Noujoum_cv.en.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-sketch-secondary hand-drawn-text"
+              style={{ borderRadius: '12px 8px 16px 4px / 8px 16px 4px 12px' }}
+            >
+              <span className="relative z-10">Download CV</span>
+              <span className="absolute inset-0 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" style={{ zIndex: -1, borderRadius: '10px 6px 14px 2px / 6px 14px 2px 10px', backgroundColor: 'var(--paper-alt)' }} />
+            </a>
+          </div>
+        </div>
+
+        {/* Scroll indicator - positioned relative to the centered wrapper */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce animate-float mt-10" style={{ animationDuration: '2s' }}>
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            style={{ color: 'var(--fg-subtle)' }}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </div>
       </div>
-  );
+
+      {/* Bottom decorative line */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 divider-sketch" />
+    </section>
+  )
 }
 
-export default LandingSection;
+export default LandingSection

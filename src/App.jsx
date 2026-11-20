@@ -1,142 +1,93 @@
-import './App.css'
-import CardNav from './Components/NavComponent.jsx';
-import GradientText from './Components/GradientText.jsx';
-import LogoLoop from './Components/LogoLoop.jsx';
-import ClickSpark from './Components/ClickSpark.jsx';
-import { LuGhost } from 'react-icons/lu';
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiHtml5, SiCss, SiJavascript, SiMongodb, SiPhp, SiUndertale } from 'react-icons/si';
-import { Bounce, ToastContainer } from 'react-toastify';
-
-import CareerSection from './page/CareerSection.jsx';
-import LandingSection from './page/LandingSection.jsx';
-import ContactSection from './page/ContactSection.jsx';
-import AboutSection from './page/AboutSection.jsx';
-import SkillsSection from './page/SkillsSection.jsx';
-import ProjectSection from './page/ProjectSection.jsx';
-import CertifceSection from './page/CertifceSection.jsx';
-
-const InfiniteLoop = ({direction = "left" }) => {
-	const techLogos = [
-		{ node: <SiReact />, title: "React", href: "#" },
-		{ node: <SiNextdotjs />, title: "Next.js", href: "#" },
-		{ node: <SiMongodb />, title: "Mongodb", href: "#" },
-		{ node: <SiTypescript />, title: "TypeScript", href: "#" },
-		{ node: <SiJavascript />, title: "Javascript", href: "#" },
-		{ node: <SiTailwindcss />, title: "Tailwind CSS", href: "#" },
-		{ node: <SiHtml5 />, title: "HTML", href: "#" },
-		{ node: <SiCss />, title: "CSS", href: "#" },
-		{ node: <SiPhp />, title: "PHP", href: "#" },
-	];
-
-	return (<>
-		<div style={{ position: 'relative', overflow: 'hidden' }}>
-			<LogoLoop
-				logos={techLogos}
-				speed={120}
-				direction={direction}
-				logoHeight={48}
-				gap={40}
-				pauseOnHover
-				scaleOnHover
-				fadeOut
-				fadeOutColor="#0D0D0D"
-				ariaLabel="Technology partners"
-			/>
-		</div>
-	</>);
-}
+import './index.css'
+import { useState, useEffect } from 'react'
+import NavComponent from './Components/NavComponent'
+import LandingSection from './page/LandingSection'
+import AboutSection from './page/AboutSection'
+import CareerSection from './page/CareerSection'
+import SkillsSection from './page/SkillsSection'
+import ProjectSection from './page/ProjectSection'
+import CertificationsSection from './page/CertificationsSection'
+import ContactSection from './page/ContactSection'
+import ThemeToggle from './Components/ThemeToggle'
 
 function App() {
+  const [theme, setTheme] = useState('light')
 
-	const items = [
-		{
-			label: "About",
-			bgColor: "#220933",
-			textColor: "#fff",
-			links: [
-				{ label: "About Me", ariaLabel: "About Me", href: "#about" },
-				{ label: "Education", ariaLabel: "About Education", href: "#career" },
-				{ label: "Certifce", ariaLabel: "About Certifce", href: "#certifce" }
-			]
-		},
-		{
-			label: "Projects", 
-			bgColor: "#310E4A",
-			textColor: "#fff",
-			links: [
-				{ label: "Skills", ariaLabel: "Skills i learn", href: "#skills" },
-				{ label: "Projects", ariaLabel: "Projects i have done", href: "#project" },
-			]
-		},
-		{
-			label: "Contact",
-			bgColor: "#431466", 
-			textColor: "#fff",
-			links: [
-				{ label: "Contact", ariaLabel: "Contact us", href: "#contact" },
-				{ label: "Email", ariaLabel: "Email us", href: "mailto:youssefnoujoum04@gmail.com" },
-				{ label: "LinkedIn", ariaLabel: "LinkedIn", href: "https://www.linkedin.com/in/youssef-noujoum-079bb0289/" },
-				{ label: "Github", ariaLabel: "Github", href: "https://github.com/youssefnjm" },
-			]
-		}
-	];
+  useEffect(() => {
+    const saved = localStorage.getItem('theme')
+    if (saved) {
+      setTheme(saved)
+      document.documentElement.setAttribute('data-theme', saved)
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+    }
+  }, [])
 
-	
-	return (
-		<>
-		<ToastContainer
-			position="top-right"
-			autoClose={5000}
-			hideProgressBar={false}
-			newestOnTop={false}
-			closeOnClick={false}
-			rtl={false}
-			pauseOnFocusLoss
-			draggable
-			pauseOnHover
-			theme="light"
-			transition={Bounce}
-		/>
-		<ClickSpark>
-			<main className='m-auto relative overflow-hidden'>
-				<CardNav
-					logo={<LuGhost className="logo h-8 w-8"/>}
-					logoAlt="Logo"
-					items={items}
-  					className = 'fixed top-0'
-					baseColor="#fff"
-					menuColor="#000"
-					buttonBgColor="#7E22CE"
-					buttonTextColor="#fff"
-					ease="power3.out"
-				/>
-				<LandingSection />
-				<div className='my-10'></div>
-				<AboutSection />
-				<div className='my-10'></div>
-				<CareerSection />
-				<div className='my-10'></div>
-				<CertifceSection />
-				<div className='my-10'></div>
-				<div className='hidden md:block py-10 md:py-20'>
-					<InfiniteLoop />
-					<InfiniteLoop direction={"right"}/>
-				</div>
-				<div className='my-10'></div>
-				<SkillsSection />
-				<div className='my-10'></div>
-				<ProjectSection />
-				<div className='my-10'></div>
-				<ContactSection />
-				<footer className="py-8 px-4 border-t border-white/10 max-w-6xl mx-auto flex flex-row items-center justify-between gap-4=1">
-					<p className="text-xs text-white/50 flex gap-1 items-center justify-between"> Crafted with care <span className="text-purple-400"><SiUndertale /></span> by <span className="text-purple-400">youssef noujoum</span></p>
-					<LuGhost size={24} className='text-purple-400'/>
-					<p className="text-xs text-white/50">© 2025 All rights reserved</p>
-				</footer>
-			</main>
-		</ClickSpark>
-		</>
-	)
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
+    document.documentElement.setAttribute('data-theme', newTheme)
+  }
+
+  const navItems = [
+    {
+      label: "About",
+      links: [
+        { label: "About Me", ariaLabel: "About Me", href: "#about" },
+        { label: "Journey", ariaLabel: "My Journey", href: "#career" },
+        { label: "Certifications", ariaLabel: "Certifications", href: "#certifications" }
+      ]
+    },
+    {
+      label: "Work",
+      links: [
+        { label: "Skills", ariaLabel: "Skills", href: "#skills" },
+        { label: "Projects", ariaLabel: "Projects", href: "#projects" }
+      ]
+    },
+    {
+      label: "Contact",
+      links: [
+        { label: "Get in Touch", ariaLabel: "Contact", href: "#contact" },
+        { label: "Email", ariaLabel: "Email", href: "mailto:youssefnoujoum04@gmail.com" },
+        { label: "LinkedIn", ariaLabel: "LinkedIn", href: "https://www.linkedin.com/in/youssef-noujoum-079bb0289/" },
+        { label: "GitHub", ariaLabel: "GitHub", href: "https://github.com/youssefnjm" }
+      ]
+    }
+  ]
+
+  return (
+    <>
+      <ThemeToggle onToggle={toggleTheme} theme={theme} />
+      <main className="relative min-h-screen overflow-x-hidden">
+        <NavComponent
+          logo={<span className="hand-drawn-text text-xl">YN</span>}
+          logoAlt="Youssef Noujoum"
+          items={navItems}
+          className='fixed top-4 left-1/2 -translate-x-1/2 z-50'
+          ease="power3.out"
+        />
+        <div>
+          <LandingSection />
+          <AboutSection />
+          <CareerSection />
+          <SkillsSection />
+          <ProjectSection />
+          <CertificationsSection />
+          <ContactSection />
+        </div>
+        <footer className="py-12 px-6 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTopColor: 'var(--fg-subtle)', borderTopWidth: '1px', borderTopStyle: 'solid' }}>
+          <p className="text-xs flex gap-1 items-center justify-center" style={{ color: 'var(--fg-subtle)' }}>
+            Crafted with care ⚡ by <span className="font-bold">Youssef Noujoum</span>
+          </p>
+          <span className="hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>◉</span>
+          <p className="text-xs" style={{ color: 'var(--fg-subtle)' }}>© 2026 All rights reserved</p>
+        </footer>
+      </main>
+    </>
+  )
 }
 
-export default App;
+export default App

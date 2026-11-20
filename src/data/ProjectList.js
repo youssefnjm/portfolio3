@@ -1,62 +1,94 @@
-import portfolio1 from "../assets/Project/prf-v1.PNG";
-import pfe from "../assets/Project/brg.PNG";
-import clockacsion from "../assets/Project/Clockasion.PNG"
-import ideaPluse from "../assets/Project/ideaPulse.png"
-import tourisme from "../assets/Project/tourisme.PNG";
-import darNet from "../assets/Project/DarNet.png";
-import TicTacToe from "../assets/Project/tic-tac-toe.png"
-import WC26 from "../assets/Project/world-cup-2026.png"
-// import { desc } from "motion/react-client";
-
 const ProjectList = [
-    {
-        name: "Clockasion E-Commerce",
-        img: clockacsion,
-        desc: "A premium brand management ecosystem featuring a high-conversion storefront and a robust task management backend.",
-        link: "https://github.com/youssefnjm/Clockasion",
-    },
-    {
-        name: "IdeaPulse",
-        img: ideaPluse,
-        desc: "A social ecosystem for founders and investors to validate concepts through public pitching, real-time chats, and AI-powered feasibility analysis.",
-        link: "https://github.com/youssefnjm/ideaPulse",
-    },
-    {
-        name: "DarNet",
-        img: darNet,
-        desc: "A streamlined community management SaaS designed to bridge communication gaps between residents and property syndics.",
-        link: "https://github.com/youssefnjm/DarNet",
-    },
-    {
-        name: "World Cup 2026 Hub",
-        img: WC26,
-        desc: "A React-based World Cup 2026 experience powered by dynamic data sources, Context API state management, intelligent featured-match selection, and timezone-aware scheduling to keep fans connected throughout the tournament.",
-        link: "https://github.com/youssefnjm/world-cup-26-matches",
-    },
-    {
-        name: "Online Tic Tac Toe",
-        img: TicTacToe,
-        desc: "A real-time competitive experience featuring instant state synchronization and a sleek, minimalist interface for seamless head-to-head gameplay.",
-        link: "https://github.com/youssefnjm/Tic-Tac-Toe",
-    },
-    {
-        name: "Enterprise PFE",
-        img: pfe,
-        desc: "A comprehensive corporate solution combining a sleek public vitrine with an internal administrative task dashboard.",
-        link: "#",
-    },
-    // {
-    //     name: "Portfolio v1",
-    //     img: portfolio1,
-    //     desc: "My initial exploration into digital storytelling, focusing on clean UI patterns and responsive design foundations.",
-    //     link: "#",
-    // },
-    {
-        name: "Global Tourism",
-        img: tourisme,
-        desc: "An immersive front-end travel experience optimized for performance, exploration, and high-fidelity visual layout.",
-        link: "#",
-    },
+  {
+    name: "Clockasion E-Commerce",
+    img: null,
+    imgPlaceholder: true,
+    desc: "A premium brand management ecosystem featuring a high-conversion storefront and a robust task management backend.",
+    link: "https://github.com/youssefnjm/Clockasion",
+    github: "https://github.com/youssefnjm/Clockasion",
+    tech: ["React", "Node.js", "MongoDB", "Tailwind", "Express"],
+    type: "Full-Stack Web App"
+  },
+  {
+    name: "IdeaPulse",
+    img: null,
+    imgPlaceholder: true,
+    desc: "A social ecosystem for founders and investors to validate concepts through public pitching, real-time chats, and AI-powered feasibility analysis.",
+    link: "https://github.com/youssefnjm/ideaPulse",
+    github: "https://github.com/youssefnjm/ideaPulse",
+    tech: ["React", "Node.js", "MongoDB", "Socket.io", "OpenAI API"],
+    type: "Real-Time Platform"
+  },
+  {
+    name: "DarNet",
+    img: null,
+    imgPlaceholder: true,
+    desc: "A streamlined community management SaaS designed to bridge communication gaps between residents and property syndics.",
+    link: "https://github.com/youssefnjm/DarNet",
+    github: "https://github.com/youssefnjm/DarNet",
+    tech: ["React", "NestJS", "PostgreSQL", "Docker", "TypeScript"],
+    type: "SaaS Platform"
+  },
+  {
+    name: "World Cup 2026 Hub",
+    img: null,
+    imgPlaceholder: true,
+    desc: "A React-based World Cup 2026 experience powered by dynamic data sources, Context API state management, intelligent featured-match selection, and timezone-aware scheduling.",
+    link: "https://github.com/youssefnjm/world-cup-26-matches",
+    github: "https://github.com/youssefnjm/world-cup-26-matches",
+    tech: ["React", "Context API", "CSS Modules", "Vite"],
+    type: "Sports Dashboard"
+  },
+  {
+    name: "Online Tic Tac Toe",
+    img: null,
+    imgPlaceholder: true,
+    desc: "A real-time competitive experience featuring instant state synchronization and a sleek, minimalist interface for seamless head-to-head gameplay.",
+    link: "https://github.com/youssefnjm/Tic-Tac-Toe",
+    github: "https://github.com/youssefnjm/Tic-Tac-Toe",
+    tech: ["React", "Socket.io", "Node.js", "Express"],
+    type: "Real-Time Game"
+  },
+  {
+    name: "Inception",
+    img: null,
+    imgPlaceholder: true,
+    desc: "Multi-container infrastructure with Docker Compose: Nginx (TLS v1.2/1.3), WordPress with PHP-FPM, MariaDB with persistent volumes, automated with Bash scripts.",
+    link: "https://github.com/youssefnjm/Inception",
+    github: "https://github.com/youssefnjm/Inception",
+    tech: ["Docker", "Docker Compose", "Nginx", "WordPress", "MariaDB", "Bash", "TLS/SSL"],
+    type: "DevOps / Infrastructure"
+  },
+  {
+    name: "Born2beroot",
+    img: null,
+    imgPlaceholder: true,
+    desc: "Hardened Linux server in VM with LVM encrypted partitions, SSH on custom port, UFW firewall, AppArmor, strict sudo rules, and cron monitoring script.",
+    link: "https://github.com/youssefnjm/Born2beroot",
+    github: "https://github.com/youssefnjm/Born2beroot",
+    tech: ["Linux", "SSH", "UFW", "AppArmor", "LVM", "Bash", "Cron"],
+    type: "System Administration"
+  },
+  {
+    name: "Minishell",
+    img: null,
+    imgPlaceholder: true,
+    desc: "Unix shell in C: command parsing, process management, pipes, redirections, signal handling, built-in commands (cd, echo, pwd, export, unset, env, exit).",
+    link: "https://github.com/youssefnjm/Minishell",
+    github: "https://github.com/youssefnjm/Minishell",
+    tech: ["C", "Unix Signals", "Pipes", "Redirections", "Process Management"],
+    type: "Systems Programming"
+  },
+  {
+    name: "Portfolio v3",
+    img: null,
+    imgPlaceholder: true,
+    desc: "This hand-drawn portfolio website built with React, Tailwind CSS v4, GSAP animations, and a custom character mascot that follows your scroll journey.",
+    link: "https://github.com/youssefnjm/portfolio3",
+    github: "https://github.com/youssefnjm/portfolio3",
+    tech: ["React", "Tailwind CSS", "GSAP", "Framer Motion", "Vite"],
+    type: "Creative Portfolio"
+  },
 ];
 
 export default ProjectList;

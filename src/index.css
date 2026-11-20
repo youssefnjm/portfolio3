@@ -36,3 +36,545 @@
     font-style: normal;
     font-display: swap;
 }
+
+/* Hand-drawn font - using a cursive/handwriting font as fallback */
+@font-face {
+    font-family: "HandDrawn";
+    src: local("Comic Sans MS"), local("Chalkboard SE"), local("Patrick Hand");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* CSS Custom Properties for Hand-drawn Theme */
+:root {
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --fg-muted: #404040;
+  --fg-subtle: #737373;
+  --border: #0a0a0a;
+  --border-soft: #a3a3a3;
+  --accent: #0a0a0a;
+  --paper: #fafafa;
+  --paper-alt: #f5f5f5;
+  --shadow: rgba(10, 10, 10, 0.1);
+  --shadow-strong: rgba(10, 10, 10, 0.15);
+  --card-bg: #fafafa;
+  --card-border: #d4d4d4;
+  --input-border: #a3a3a3;
+  --input-focus: #0a0a0a;
+  --tag-bg: #f5f5f5;
+  --tag-border: #d4d4d4;
+  --tag-text: #404040;
+}
+
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --fg: #fafafa;
+  --fg-muted: #a3a3a3;
+  --fg-subtle: #737373;
+  --border: #fafafa;
+  --border-soft: #404040;
+  --accent: #fafafa;
+  --paper: #171717;
+  --paper-alt: #1f1f1f;
+  --shadow: rgba(250, 250, 250, 0.05);
+  --shadow-strong: rgba(250, 250, 250, 0.1);
+  --card-bg: #171717;
+  --card-border: #404040;
+  --input-border: #404040;
+  --input-focus: #fafafa;
+  --tag-bg: #1f1f1f;
+  --tag-border: #404040;
+  --tag-text: #a3a3a3;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--fg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Regular SpaceMono", monospace;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Hand-drawn line styles */
+.sketch-border {
+  border: 2px solid var(--border);
+  border-radius: 12px 8px 16px 4px / 8px 16px 4px 12px;
+  background: var(--paper);
+  position: relative;
+}
+
+.sketch-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px 4px 12px 8px / 4px 12px 8px 16px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.sketch-border-sharp {
+  border: 2px solid var(--border);
+  border-radius: 4px 16px 4px 16px / 16px 4px 16px 4px;
+  background: var(--paper);
+}
+
+.sketch-underline {
+  position: relative;
+}
+
+.sketch-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  transform: rotate(-0.5deg);
+}
+
+.sketch-circle {
+  border: 2px solid var(--border);
+  border-radius: 50% 45% 55% 50% / 45% 55% 50% 45%;
+}
+
+.hand-drawn-text {
+  font-family: "HandDrawn", cursive;
+  letter-spacing: 0.02em;
+}
+
+.rough-text {
+  filter: url(#roughen);
+}
+
+/* Hand-drawn decorative elements */
+.doodle-line {
+  position: relative;
+}
+
+.doodle-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 12px;
+  height: 2px;
+  background: var(--border);
+  transform: translateY(-50%) rotate(-3deg);
+}
+
+.doodle-line::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  width: 12px;
+  height: 2px;
+  background: var(--border);
+  transform: translateY(-50%) rotate(3deg);
+}
+
+/* Sketchy card hover */
+.sketch-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sketch-card:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  box-shadow:
+    8px 8px 0 var(--shadow),
+    16px 16px 0 var(--shadow-strong);
+}
+
+/* Staggered animation */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px) rotate(-1deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.7s ease-out both;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(0.5deg); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+.animate-wiggle {
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+/* Hand-drawn arrow */
+.hand-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hand-arrow svg {
+  stroke: var(--border);
+  stroke-width: 2;
+  transition: transform 0.2s ease;
+}
+
+.hand-arrow:hover svg {
+  transform: translateX(4px) rotate(5deg);
+}
+
+/* Rough edges for images */
+.rough-image {
+  border-radius: 12px 8px 16px 4px / 8px 16px 4px 12px;
+  border: 2px solid var(--border);
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.rough-image:hover {
+  box-shadow: 8px 8px 0 var(--shadow), 12px 12px 0 var(--shadow-strong);
+}
+
+/* Notebook paper lines */
+.paper-lines {
+  background-image:
+    linear-gradient(var(--border-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+  background-size: 100% 28px, 28px 100%;
+  background-position: 0 0, 0 0;
+}
+
+/* Tape effect */
+.tape {
+  position: relative;
+}
+
+.tape::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 60px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-soft);
+  border-radius: 2px 4px 2px 4px / 4px 2px 4px 2px;
+  box-shadow: 0 2px 4px var(--shadow);
+  z-index: 10;
+}
+
+[data-theme="dark"] .tape::before {
+  background: rgba(30, 30, 30, 0.9);
+}
+
+/* Pinned note effect */
+.pinned {
+  position: relative;
+}
+
+.pinned::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  background: var(--fg);
+  border-radius: 50% 40% 60% 50% / 40% 60% 50% 40%;
+  box-shadow: 1px 1px 2px var(--shadow-strong);
+  z-index: 10;
+}
+
+/* Section label */
+.section-label {
+  font-family: "HandDrawn", cursive;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--border-soft);
+  transform: rotate(-1deg);
+}
+
+/* Big heading */
+.heading-xl {
+  font-family: "Boldonse", sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.heading-lg {
+  font-family: "Boldonse", sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+}
+
+/* Nav styles */
+.nav-link {
+  position: relative;
+  padding: 4px 8px;
+  color: var(--fg-muted);
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--border);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--fg);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+}
+
+/* Button styles */
+.btn-sketch {
+  position: relative;
+  padding: 12px 24px;
+  border: 2px solid var(--border);
+  border-radius: 8px 16px 8px 16px / 16px 8px 16px 8px;
+  background: transparent;
+  color: var(--fg);
+  font-family: "HandDrawn", cursive;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.btn-sketch::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.btn-sketch:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-sketch:hover {
+  color: var(--bg);
+  border-radius: 16px 8px 16px 8px / 8px 16px 8px 16px;
+}
+
+.btn-sketch-secondary {
+  border-style: dashed;
+}
+
+.btn-sketch-secondary::before {
+  background: var(--border-soft);
+}
+
+.btn-sketch-secondary:hover {
+  color: var(--fg);
+}
+
+/* Focus states */
+*:focus-visible {
+  outline: 2px solid var(--border);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-float,
+  .animate-wiggle,
+  .sketch-card,
+  .btn-sketch,
+  .nav-link {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-soft);
+  border-radius: 4px 8px 4px 8px / 8px 4px 8px 4px;
+  border: 2px solid var(--paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border);
+}
+
+/* Selection */
+::selection {
+  background: var(--border);
+  color: var(--bg);
+}
+
+/* Character floating animation */
+@keyframes character-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(1deg); }
+  75% { transform: translateY(4px) rotate(-1deg); }
+}
+
+.character-float {
+  animation: character-float 6s ease-in-out infinite;
+}
+
+/* Staggered list */
+.stagger-list > * {
+  opacity: 0;
+  animation: fadeUp 0.5s ease-out forwards;
+}
+
+.stagger-list > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-list > *:nth-child(2) { animation-delay: 0.15s; }
+.stagger-list > *:nth-child(3) { animation-delay: 0.2s; }
+.stagger-list > *:nth-child(4) { animation-delay: 0.25s; }
+.stagger-list > *:nth-child(5) { animation-delay: 0.3s; }
+.stagger-list > *:nth-child(6) { animation-delay: 0.35s; }
+.stagger-list > *:nth-child(7) { animation-delay: 0.4s; }
+.stagger-list > *:nth-child(8) { animation-delay: 0.45s; }
+
+/* Tag styles */
+.tag-sketch {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 20px 10px 20px 10px / 10px 20px 10px 20px;
+  background: var(--paper);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  transition: all 0.2s ease;
+}
+
+.tag-sketch:hover {
+  border-color: var(--border);
+  color: var(--fg);
+  transform: rotate(-1deg);
+}
+
+/* Divider */
+.divider-sketch {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-soft), transparent);
+  position: relative;
+}
+
+.divider-sketch::before {
+  content: '◇';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  color: var(--fg-subtle);
+  font-size: 0.75rem;
+}
+
+/* Tooltip */
+.tooltip-sketch {
+  position: relative;
+}
+
+.tooltip-sketch::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px 4px 8px 4px / 4px 8px 4px 8px;
+  background: var(--paper);
+  color: var(--fg);
+  font-size: 0.7rem;
+  font-family: "HandDrawn", cursive;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 100;
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.tooltip-sketch:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-4px);
+}
