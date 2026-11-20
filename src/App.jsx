@@ -11,7 +11,7 @@ import ContactSection from './page/ContactSection'
 import ThemeToggle from './Components/ThemeToggle'
 
 function App() {
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState('dark')
 
   useEffect(() => {
     const saved = localStorage.getItem('theme')
