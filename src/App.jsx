@@ -73,8 +73,8 @@ function App() {
           <LandingSection />
           <AboutSection />
           <CareerSection />
-          <SkillsSection />
           <ProjectSection />
+          <SkillsSection />
           <CertificationsSection />
           <ContactSection />
         </div>
