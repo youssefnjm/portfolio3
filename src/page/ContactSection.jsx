@@ -1,262 +1,548 @@
-import { useState, useEffect } from 'react'
-import { LuPhone, LuGithub, LuLinkedin, LuSend, LuMail, LuArrowUpRight, LuMapPin, LuClock } from 'react-icons/lu'
-import * as emailjs from "@emailjs/browser"
-import validator from 'validator'
+import { useState } from 'react'
+import { StandardHeader } from '../components/SectionTitle'
 
-const socials = [
-  { label: "Email", href: "mailto:youssefnoujoum04@gmail.com", icon: <LuMail /> },
-  { label: "GitHub", href: "https://github.com/youssefnjm", icon: <LuGithub /> },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/youssef-noujoum-079bb0289/", icon: <LuLinkedin /> },
-]
-
-const fields = [
-  { id: "name", label: "Full Name", type: "text", name: "name" },
-  { id: "email", label: "Email Address", type: "email", name: "email" },
-]
-
-function Input({ id, label, type, name, value, focused, onChange, onFocus, onBlur }) {
-  const up = focused === id || value
-  return (
-    <div className="relative">
-      <label
-        htmlFor={id}
-        className={`absolute left-0 transition-all duration-200 pointer-events-none font-medium hand-drawn-text text-xs ${up ? "top-0" : "top-4 text-sm"}`}
-        style={{ color: up ? 'var(--fg-muted)' : 'var(--fg-subtle)' }}
-      >
-        {label}
-      </label>
-      <input
-        id={id}
-        type={type}
-        value={value}
-        name={name}
-        onChange={e => onChange(id, e.target.value)}
-        onFocus={() => onFocus(id)}
-        onBlur={onBlur}
-        className="w-full bg-transparent border-b pt-8 pb-3 text-sm outline-none transition-colors duration-200"
-        style={{
-          borderColor: 'var(--fg-subtle)',
-          color: 'var(--fg)',
-          borderRadius: '2px 4px 2px 4px / 4px 2px 4px 2px'
-        }}
-      />
-    </div>
-  )
-}
+// Scribble underline for "together"
+const ScribbleUnderline = ({ color = 'var(--color-note)' }) => (
+  <svg
+    viewBox="0 0 300 18"
+    preserveAspectRatio="none"
+    className="absolute left-0 bottom-[-12px] w-full h-4 pointer-events-none"
+    style={{ width: '104%', transform: 'translateX(-2%)', color }}
+  >
+    <path
+      d="M3 12 C40 3,70 17,110 8 S190 4,220 11 S280 14,297 5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="5"
+      strokeLinecap="round"
+    />
+  </svg>
+)
 
 export default function ContactSection() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" })
-  const [focus, setFocus] = useState(null)
-  const [sent, setSent] = useState(false)
-  const [error, setError] = useState('')
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [status, setStatus] = useState('')
+  const [focusedField, setFocusedField] = useState(null)
 
-  useEffect(() => {
-    emailjs.init({
-      publicKey: "OjftJ0MJrM7vC20CT",
-    })
-  }, [])
-
-  const setField = (k, v) => setForm(f => ({ ...f, [k]: v }))
-
-  const submit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
+    const { name, email, message } = formData
 
-    if (!form.name || !form.email || !form.subject || !form.message) {
-      setError("All fields are required")
+    if (!name || !email || !message) {
+      setStatus('fill in all three lines ✎')
       return
-    } else if (validator.isNumeric(form.name)) {
-      setError("Name should contain only characters")
-      return
-    } else if (!validator.isEmail(form.email)) {
-      setError("Email should be in valid format")
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setStatus('fill in all three lines ✎')
       return
     }
 
-    setError('')
+    const body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')')
+    const subject = encodeURIComponent('Hello from ' + name)
+    window.location.href = `mailto:youssefnoujoum04@gmail.com?subject=${subject}&body=${body}`
 
-    const formElement = document.getElementById("contact_form")
+    setStatus('opening your mail app…')
+  }
 
-    emailjs.sendForm('service_jvcdp3g', 'template_io9yexj', formElement)
-      .then(() => {
-        setSent(true)
-        setForm({ name: "", email: "", subject: "", message: "" })
-        setTimeout(() => setSent(false), 4000)
-      }, (error) => {
-        setSent(false)
-        console.log('FAILED...', error)
-        setError("Failed to send message. Please try again.")
-      })
+  const handleChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
   }
 
   return (
-    <section id="contact" className="relative py-20 px-6">
-      {/* Background paper texture - full width */}
-      <div className="absolute inset-0 paper-lines opacity-10" aria-hidden="true" />
+    <section id="contact" className="relative py-20 px-6 bg-journal overflow-hidden" style={{ paddingBottom: '56px' }}>
+      {/* Background paper texture - ruled paper (47px line spacing) */}
+      <div className="absolute inset-0" aria-hidden="true" style={{
+        backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 47px, var(--color-line) 47px 48px)'
+      }} />
 
-      {/* Decorative elements - full width positioning */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-2 rounded-tl-full opacity-10" style={{ borderColor: 'var(--fg-subtle)' }} />
-      <div className="absolute bottom-0 right-0 w-40 h-40 border-2 rounded-br-full opacity-10" style={{ borderColor: 'var(--fg-subtle)' }} />
+      {/* Paper grain texture overlay */}
+      <div className="absolute inset-0 opacity-5" style={{
+        backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 400 400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%220.03%22/%3E%3C/svg%22")'
+      }} />
 
-      {/* Centered content container */}
-      <div className="relative max-w-7xl mx-auto">
-        {/* Section header */}
-        <div className="mb-12 animate-fade-up stagger-1">
-          <div className="section-label mb-6">
-            <span>Contact</span>
-          </div>
-          <h2 className="heading-lg" style={{ color: 'var(--fg)' }}>
-            Let's <br />
-            <span className="hand-drawn-text text-2xl sm:text-3xl font-normal">Talk.</span>
-          </h2>
-          <p className="text-base max-w-xl leading-relaxed mt-4" style={{ color: 'var(--fg-muted)' }}>
-            Got a project, an idea, or just want to connect? Drop me a message and I'll get back to you within 24 hours.
-          </p>
-        </div>
+      {/* Hand-drawn corner accents */}
+      <div className="absolute top-4 left-4 w-16 h-16 border-2 border-ink/10 rounded-tr-[30px] rotate-[-3deg]" />
+      <div className="absolute bottom-4 right-4 w-12 h-12 border-2 border-ink/10 rounded-bl-[30px] rotate-[-3deg]" />
+      <div className="absolute top-1/2 left-2 w-4 h-4 border border-dashed border-ink/10 rounded-full rotate-[15deg]" />
+      <div className="absolute top-1/3 right-2 w-3 h-3 border border-ink/10 rotate-[45deg]" />
 
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-
-          {/* Left side - Info */}
-          <div className="flex flex-col justify-between gap-10 animate-fade-up stagger-2">
-            {/* Status */}
-            <div className="sketch-border p-6" style={{ borderRadius: '12px 8px 16px 4px / 8px 16px 4px 12px' }}>
-              <p className="text-xs font-semibold tracking-widest uppercase mb-3 hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>Current Status</p>
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style={{ backgroundColor: 'var(--fg-muted)' }} />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full" style={{ backgroundColor: 'var(--fg-muted)' }} />
-                </span>
-                <span className="font-semibold hand-drawn-text" style={{ color: 'var(--fg)' }}>Available for new projects</span>
-              </div>
-            </div>
-
-            {/* Direct Contact */}
-            <div className="sketch-border p-6" style={{ borderRadius: '12px 8px 16px 4px / 8px 16px 4px 12px' }}>
-              <p className="text-xs font-semibold tracking-widest uppercase mb-6 hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>Direct Contact</p>
-              <div className="space-y-5">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center sketch-border">
-                    <LuMail className="text-lg" style={{ color: 'var(--fg-muted)' }} />
-                  </div>
-                  <div>
-                    <p className="text-xs hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>Email</p>
-                    <a href="mailto:youssefnoujoum04@gmail.com" className="font-medium hover:opacity-75 transition-opacity hand-drawn-text" style={{ color: 'var(--fg)' }}>youssefnoujoum04@gmail.com</a>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center sketch-border">
-                    <LuMapPin className="text-lg" style={{ color: 'var(--fg-muted)' }} />
-                  </div>
-                  <div>
-                    <p className="text-xs hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>Location</p>
-                    <p className="font-medium hand-drawn-text" style={{ color: 'var(--fg)' }}>Casablanca, Morocco</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center sketch-border">
-                    <LuClock className="text-lg" style={{ color: 'var(--fg-muted)' }} />
-                  </div>
-                  <div>
-                    <p className="text-xs hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>Response Time</p>
-                    <p className="font-medium hand-drawn-text" style={{ color: 'var(--fg)' }}>Within 24 hours</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Socials */}
-            <div className="sketch-border p-6" style={{ borderRadius: '12px 8px 16px 4px / 8px 16px 4px 12px' }}>
-              <p className="text-xs font-semibold tracking-widest uppercase mb-6 hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>Socials</p>
-              <div className="space-y-3">
-                {socials.map(s => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                    className="group flex items-center justify-between border-b pb-3 hover:opacity-75 transition-opacity duration-200"
-                    style={{ borderColor: 'var(--fg-subtle)' }}
-                  >
-                    <div className="flex items-center gap-3 text-sm font-medium hand-drawn-text group-hover:opacity-100 transition-opacity duration-200" style={{ color: 'var(--fg-muted)' }}>
-                      {s.icon}
-                      <span>{s.label}</span>
-                    </div>
-                    <LuArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" style={{ color: 'var(--fg-subtle)' }} />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right side - Form */}
-          <div className="lg:pl-8 lg:border-l animate-fade-up stagger-3" style={{ borderLeftColor: 'var(--fg-subtle)', borderLeftWidth: '1px', borderLeftStyle: 'solid' }}>
-            {sent ? (
-              <div className="flex flex-col items-center gap-4 pt-10 text-center sketch-border p-10" style={{ borderRadius: '16px 8px 20px 8px / 8px 20px 8px 16px' }}>
-                <div className="text-6xl font-bold hand-drawn-text animate-wiggle" style={{ color: 'var(--fg-muted)' }}>✓</div>
-                <p className="text-2xl font-bold hand-drawn-text" style={{ color: 'var(--fg)' }}>Message received.</p>
-                <p className="text-sm hand-drawn-text" style={{ color: 'var(--fg-muted)' }}>I'll reach out to you soon. Talk soon!</p>
-              </div>
-            ) : (
-              <form id="contact_form" className="flex flex-col gap-8 sketch-border p-8" style={{ borderRadius: '16px 8px 20px 8px / 8px 20px 8px 16px' }} onSubmit={submit}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {fields.map(f => (
-                    <Input key={f.id} {...f} value={form[f.id]} focused={focus} onChange={setField} onFocus={setFocus} onBlur={() => setFocus(null)} />
-                  ))}
-                </div>
-
-                <div className="relative">
-                  <label htmlFor="subject" className={`absolute left-0 transition-all duration-200 pointer-events-none font-medium hand-drawn-text text-xs ${focus === "subject" || form.subject ? "top-0" : "top-4 text-sm"}`} style={{ color: focus === "subject" || form.subject ? 'var(--fg-muted)' : 'var(--fg-subtle)' }}>
-                    Subject
-                  </label>
-                  <input id="subject" type="text" value={form.subject} name="subject"
-                    onChange={e => setField("subject", e.target.value)}
-                    onFocus={() => setFocus("subject")} onBlur={() => setFocus(null)}
-                    className="w-full bg-transparent border-b pt-8 pb-3 text-sm outline-none transition-colors duration-200"
-                    style={{
-                      borderColor: 'var(--fg-subtle)',
-                      color: 'var(--fg)',
-                      borderRadius: '2px 4px 2px 4px / 4px 2px 4px 2px'
-                    }}
-                  />
-                </div>
-
-                <div className="relative">
-                  <label htmlFor="message" className={`absolute left-0 transition-all duration-200 pointer-events-none font-medium hand-drawn-text text-xs ${focus === "message" || form.message ? "top-0" : "top-4 text-sm"}`} style={{ color: focus === "message" || form.message ? 'var(--fg-muted)' : 'var(--fg-subtle)' }}>
-                    Message
-                  </label>
-                  <textarea id="message" rows={4} value={form.message} name="message"
-                    onChange={e => setField("message", e.target.value)}
-                    onFocus={() => setFocus("message")} onBlur={() => setFocus(null)}
-                    maxLength={600}
-                    className="w-full bg-transparent border-b pt-8 pb-3 text-sm outline-none resize-none transition-colors duration-200"
-                    style={{
-                      borderColor: 'var(--fg-subtle)',
-                      color: 'var(--fg)',
-                      borderRadius: '2px 4px 2px 4px / 4px 2px 4px 2px'
-                    }}
-                  />
-                  <span className="text-xs float-right mt-1 hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>{form.message.length}/600</span>
-                </div>
-
-                {error && (
-                  <p className="text-xs text-center my-2 hand-drawn-text" style={{ color: 'var(--accent)' }}>{error}</p>
-                )}
-
-                <div className="pt-4">
-                  <button type="submit" className="btn-sketch group hand-drawn-text w-full sm:w-auto" style={{ borderRadius: '12px 8px 16px 4px / 8px 16px 4px 12px' }}>
-                    <span className="relative z-10 flex items-center gap-3">
-                      <span className="relative inline-flex items-center justify-center w-10 h-10 sketch-border group-hover:opacity-80 transition-opacity">
-                        <LuSend />
-                      </span>
-                      Send Message
-                    </span>
-                    <span className="absolute inset-0 bg-current transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" style={{ zIndex: -1, borderRadius: '10px 6px 14px 2px / 6px 14px 2px 10px' }} />
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
+      {/* Page indicator - top right */}
+      <div className="absolute right-6 top-10 font-mono text-xs uppercase tracking-widest" style={{
+        letterSpacing: '0.2em',
+        color: 'var(--color-fg-muted)'
+      }}>
+        PAGE 06 / 06
       </div>
 
-      {/* Divider - full width */}
-      <div className="absolute bottom-0 left-0 right-0 mx-auto w-1/2 divider-sketch" />
+      {/* Decorative doodles - { at left, ; at right */}
+      <span className="absolute left-2 top-40 text-4xl font-mono opacity-40 pointer-events-none" style={{ color: 'var(--color-fg-muted)' }}>&#123;</span>
+      <span className="absolute right-4 top-1/2 text-3xl font-mono opacity-30 pointer-events-none" style={{ color: 'var(--color-fg-muted)' }}>&#59;</span>
+
+      {/* Standard container - max-width 1120px */}
+      <div className="relative max-w-[1120px] mx-auto">
+        {/* Header */}
+        <div className="animate-fade-up stagger-1" style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          gap: '24px',
+          flexWrap: 'wrap'
+        }}>
+          <div>
+            {/* Eyebrow - Chapter label with 32px line before */}
+            <div className="flex items-center gap-4 mb-3" style={{ marginBottom: '18px' }}>
+              <span className="w-8 h-px" style={{ background: 'var(--color-fg-muted)', flexShrink: 0 }} />
+              <span className="font-mono text-xs uppercase tracking-widest" style={{
+                letterSpacing: '0.25em',
+                color: 'var(--color-fg-muted)'
+              }}>
+                Last chapter · Contact
+              </span>
+            </div>
+
+            {/* Main Heading with scribble underline on "together" */}
+            <h2 className="relative inline-block" style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 800,
+              fontSize: 'clamp(48px, 9vw, 110px)',
+              lineHeight: 0.92,
+              letterSpacing: '-0.035em',
+              color: 'var(--color-ink)',
+              margin: '18px 0 0'
+            }}>
+              Let&apos;s make<br />
+              something{' '}
+              <span className="sc relative inline-block">
+                together
+                <ScribbleUnderline />
+              </span>.
+            </h2>
+          </div>
+        </div>
+
+        {/* Grid - 5fr / 6fr, gap 72px, margin-top 64px */}
+        <div className="animate-fade-up stagger-2" style={{
+          display: 'grid',
+          gridTemplateColumns: '5fr 6fr',
+          gap: '72px',
+          marginTop: '64px',
+          alignItems: 'start'
+        }}>
+          {/* Left Column */}
+          <div>
+            {/* Lead paragraph */}
+            <p className="lead" style={{
+              fontSize: 'clamp(22px, 2.6vw, 30px)',
+              lineHeight: 1.3,
+              margin: '0 0 28px',
+              color: 'var(--color-ink)'
+            }}>
+              Got a project, an internship, or just an idea scribbled on a napkin? Drop me a line. I read everything and reply fast.
+            </p>
+
+            {/* Badges with green dots */}
+            <div className="badges" style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '10px',
+              marginBottom: '36px'
+            }}>
+              <span style={{
+                fontSize: '13px',
+                padding: '6px 14px',
+                border: '1.5px solid var(--color-fg-muted)',
+                borderRadius: '20px 8px 20px 8px',
+                color: 'var(--color-fg-muted)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <span style={{ color: '#6fcf7a', fontSize: '10px' }}>●</span>
+                Available for work
+              </span>
+              <span style={{
+                fontSize: '13px',
+                padding: '6px 14px',
+                border: '1.5px solid var(--color-fg-muted)',
+                borderRadius: '20px 8px 20px 8px',
+                color: 'var(--color-fg-muted)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}>
+                <span style={{ color: '#6fcf7a', fontSize: '10px' }}>●</span>
+                Open to freelance
+              </span>
+            </div>
+
+            {/* Links list */}
+            <ul className="links" style={{
+              listStyle: 'none',
+              margin: 0,
+              padding: 0,
+              borderTop: '2px dashed var(--color-fg-muted)'
+            }}>
+              <li>
+                <a href="mailto:youssefnoujoum04@gmail.com" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '16px',
+                  padding: '18px 4px',
+                  borderBottom: '1px solid var(--color-line)',
+                  color: 'var(--color-ink)',
+                  textDecoration: 'none',
+                  transition: 'padding 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '16px'}
+                onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '4px'}
+                >
+                  <small style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 400,
+                    fontSize: '11px',
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-fg-muted)',
+                    width: '90px',
+                    flexShrink: 0
+                  }}>Email</small>
+                  <b style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 800,
+                    fontSize: 'clamp(18px, 2.2vw, 24px)',
+                    letterSpacing: '-0.01em',
+                    overflowWrap: 'anywhere'
+                  }}>youssefnoujoum04@gmail.com</b>
+                  <i style={{ marginLeft: 'auto', fontStyle: 'normal', fontSize: '22px' }}>↗</i>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/youssefnjm" target="_blank" rel="noopener noreferrer" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '16px',
+                  padding: '18px 4px',
+                  borderBottom: '1px solid var(--color-line)',
+                  color: 'var(--color-ink)',
+                  textDecoration: 'none',
+                  transition: 'padding 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '16px'}
+                onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '4px'}
+                >
+                  <small style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 400,
+                    fontSize: '11px',
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-fg-muted)',
+                    width: '90px',
+                    flexShrink: 0
+                  }}>GitHub</small>
+                  <b style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 800,
+                    fontSize: 'clamp(18px, 2.2vw, 24px)',
+                    letterSpacing: '-0.01em',
+                    overflowWrap: 'anywhere'
+                  }}>@youssefnjm</b>
+                  <i style={{ marginLeft: 'auto', fontStyle: 'normal', fontSize: '22px' }}>↗</i>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/youssef-noujoum-079bb0289" target="_blank" rel="noopener noreferrer" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '16px',
+                  padding: '18px 4px',
+                  color: 'var(--color-ink)',
+                  textDecoration: 'none',
+                  transition: 'padding 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '16px'}
+                onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '4px'}
+                >
+                  <small style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 400,
+                    fontSize: '11px',
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-fg-muted)',
+                    width: '90px',
+                    flexShrink: 0
+                  }}>LinkedIn</small>
+                  <b style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 800,
+                    fontSize: 'clamp(18px, 2.2vw, 24px)',
+                    letterSpacing: '-0.01em',
+                    overflowWrap: 'anywhere'
+                  }}>youssef-noujoum</b>
+                  <i style={{ marginLeft: 'auto', fontStyle: 'normal', fontSize: '22px' }}>↗</i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Right Column - Letter Form - inverted like Stack cards: white in dark, black in light */}
+          <div className="letter relative" style={{
+            background: 'var(--color-stack-bg)',
+            color: 'var(--color-stack-ink)',
+            border: '3px solid var(--color-stack-border)',
+            borderRadius: '14px 22px 12px 20px / 20px 12px 22px 14px',
+            padding: '40px 34px 34px',
+            boxShadow: '8px 10px 0 var(--color-stack-shadow)',
+            transform: 'rotate(1deg)',
+            backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 39px, var(--color-stack-line) 39px 40px)',
+            position: 'relative'
+          }}>
+            {/* Inner dashed border */}
+            <div className="absolute" style={{
+              inset: '8px',
+              border: '2px dashed var(--color-stack-line)',
+              borderRadius: '10px',
+              pointerEvents: 'none'
+            }} />
+
+            {/* Tape - top:-14px, left:40px, rotated -5deg */}
+            <div className="absolute" style={{
+              top: '-14px',
+              left: '40px',
+              width: '96px',
+              height: '28px',
+              background: 'rgba(233, 217, 138, 0.85)',
+              transform: 'rotate(-5deg)',
+              borderLeft: '2px dashed rgba(0,0,0,0.2)',
+              borderRight: '2px dashed rgba(0,0,0,0.2)'
+            }} />
+
+            {/* Stamp - top:18px, right:20px, 64x76px, dashed border, rotated 4deg */}
+            <div className="absolute" style={{
+              top: '18px',
+              right: '20px',
+              width: '64px',
+              height: '76px',
+              border: '2.5px dashed var(--color-stack-muted)',
+              borderRadius: '4px',
+              display: 'grid',
+              placeItems: 'center',
+              transform: 'rotate(4deg)',
+              color: 'var(--color-red)',
+              fontFamily: 'var(--font-hand)',
+              fontWeight: 600,
+              fontSize: '22px',
+              textAlign: 'center',
+              lineHeight: 1
+            }}>
+              hi!
+            </div>
+
+            {/* Dear line */}
+            <p className="dear" style={{
+              fontFamily: 'var(--font-hand)',
+              fontWeight: 600,
+              fontSize: '34px',
+              lineHeight: '40px',
+              margin: '0 90px 0 0',
+              color: 'var(--color-stack-ink)'
+            }}>
+              Dear Youssef,
+            </p>
+
+            {/* Form fields - using inverted stack colors */}
+            <form onSubmit={handleSubmit}>
+              {/* Name field */}
+              <label htmlFor="n" style={{
+                display: 'block',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 400,
+                fontSize: '10.5px',
+                lineHeight: '40px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: 'var(--color-stack-muted)',
+                marginBottom: '4px'
+              }}>
+                My name is
+              </label>
+              <input
+                id="n"
+                type="text"
+                autoComplete="name"
+                value={formData.name}
+                onChange={(e) => handleChange('name', e.target.value)}
+                onFocus={(e) => setFocusedField('name')}
+                onBlur={() => setFocusedField(null)}
+                style={{
+                  width: '100%',
+                  background: 'none',
+                  border: 0,
+                  borderBottom: '2px solid var(--color-stack-ink)',
+                  color: 'var(--color-stack-ink)',
+                  fontFamily: '"Times New Roman", Georgia, serif',
+                  fontWeight: 400,
+                  fontSize: '20px',
+                  lineHeight: '38px',
+                  padding: '0 2px',
+                  outline: 'none',
+                  borderRadius: 0,
+                  marginBottom: '24px'
+                }}
+              />
+
+              {/* Email field */}
+              <label htmlFor="e" style={{
+                display: 'block',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 400,
+                fontSize: '10.5px',
+                lineHeight: '40px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: 'var(--color-stack-muted)',
+                marginBottom: '4px'
+              }}>
+                You can reach me at
+              </label>
+              <input
+                id="e"
+                type="email"
+                autoComplete="email"
+                value={formData.email}
+                onChange={(e) => handleChange('email', e.target.value)}
+                onFocus={(e) => setFocusedField('email')}
+                onBlur={() => setFocusedField(null)}
+                style={{
+                  width: '100%',
+                  background: 'none',
+                  border: 0,
+                  borderBottom: '2px solid var(--color-stack-ink)',
+                  color: 'var(--color-stack-ink)',
+                  fontFamily: '"Times New Roman", Georgia, serif',
+                  fontWeight: 400,
+                  fontSize: '20px',
+                  lineHeight: '38px',
+                  padding: '0 2px',
+                  outline: 'none',
+                  borderRadius: 0,
+                  marginBottom: '24px'
+                }}
+              />
+
+              {/* Message field */}
+              <label htmlFor="m" style={{
+                display: 'block',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 400,
+                fontSize: '10.5px',
+                lineHeight: '40px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: 'var(--color-stack-muted)',
+                marginBottom: '4px'
+              }}>
+                I&apos;d love to talk about
+              </label>
+              <textarea
+                id="m"
+                value={formData.message}
+                onChange={(e) => handleChange('message', e.target.value)}
+                onFocus={(e) => setFocusedField('message')}
+                onBlur={() => setFocusedField(null)}
+                style={{
+                  width: '100%',
+                  height: '120px',
+                  resize: 'none',
+                  lineHeight: '40px',
+                  background: 'none',
+                  border: 0,
+                  borderBottom: '2px solid var(--color-stack-ink)',
+                  color: 'var(--color-stack-ink)',
+                  fontFamily: '"Times New Roman", Georgia, serif',
+                  fontWeight: 400,
+                  fontSize: '20px',
+                  padding: '0 2px',
+                  outline: 'none',
+                  display: 'block',
+                  marginBottom: '26px'
+                }}
+              />
+
+              {/* Send button & status - inverted */}
+              <div className="send" style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '18px',
+                flexWrap: 'wrap'
+              }}>
+                <button
+                  type="submit"
+                  className="btn"
+                  style={{
+                    fontFamily: '"Times New Roman", Georgia, serif',
+                    fontWeight: 700,
+                    fontSize: '13px',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-stack-bg)',
+                    background: 'var(--color-stack-ink)',
+                    border: '2px solid var(--color-stack-ink)',
+                    padding: '14px 24px',
+                    borderRadius: '12px 5px 12px 5px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = 'none'
+                    e.target.style.color = 'var(--color-stack-ink)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = 'var(--color-stack-ink)'
+                    e.target.style.color = 'var(--color-stack-bg)'
+                  }}
+                >
+                  Send it ✉
+                </button>
+                <span className="status" style={{
+                  fontFamily: 'var(--font-hand)',
+                  fontWeight: 600,
+                  fontSize: '22px',
+                  color: 'var(--color-red)'
+                }}>
+                  {status}
+                </span>
+              </div>
+            </form>
+
+            {/* Sign-off sticky note - right:-18px, bottom:-34px, rotated -5deg */}
+            <div className="sign absolute" style={{
+              right: '-18px',
+              bottom: '-34px',
+              background: 'var(--color-note)',
+              color: '#222',
+              fontFamily: 'var(--font-hand)',
+              fontWeight: 600,
+              fontSize: '24px',
+              lineHeight: '1.05',
+              padding: '12px 16px',
+              transform: 'rotate(-5deg)',
+              boxShadow: '4px 6px 0 var(--color-shadow-strong)',
+              borderRadius: '2px 2px 16px 2px',
+              whiteSpace: 'pre-line'
+            }}>
+              talk soon,<br />— you
+            </div>
+          </div>
+        </div>
+
+
+      </div>
     </section>
   )
 }

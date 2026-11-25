@@ -1,6 +1,6 @@
 import './index.css'
 import { useState, useEffect } from 'react'
-import NavComponent from './Components/NavComponent'
+import NavComponent from './components/NavComponent'
 import LandingSection from './page/LandingSection'
 import AboutSection from './page/AboutSection'
 import CareerSection from './page/CareerSection'
@@ -8,7 +8,7 @@ import SkillsSection from './page/SkillsSection'
 import ProjectSection from './page/ProjectSection'
 import CertificationsSection from './page/CertificationsSection'
 import ContactSection from './page/ContactSection'
-import ThemeToggle from './Components/ThemeToggle'
+import ThemeToggle from './components/ThemeToggle'
 
 function App() {
   const [theme, setTheme] = useState('dark')
@@ -72,18 +72,37 @@ function App() {
         <div>
           <LandingSection />
           <AboutSection />
-          <CareerSection />
+          {/* <CareerSection /> */}
           <ProjectSection />
           <SkillsSection />
           <CertificationsSection />
           <ContactSection />
         </div>
-        <footer className="py-12 px-6 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4" style={{ borderTopColor: 'var(--fg-subtle)', borderTopWidth: '1px', borderTopStyle: 'solid' }}>
-          <p className="text-xs flex gap-1 items-center justify-center" style={{ color: 'var(--fg-subtle)' }}>
-            Crafted with care ⚡ by <span className="font-bold">Youssef Noujoum</span>
-          </p>
-          <span className="hand-drawn-text" style={{ color: 'var(--fg-subtle)' }}>◉</span>
-          <p className="text-xs" style={{ color: 'var(--fg-subtle)' }}>© 2026 All rights reserved</p>
+
+        {/* Footer */}
+        <footer style={{
+          marginTop: '110px',
+          paddingTop: '20px',
+          borderTop: '2px dashed var(--color-fg-muted)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: '16px',
+          flexWrap: 'wrap',
+          fontFamily: 'var(--font-mono)',
+          fontWeight: 400,
+          fontSize: '12px',
+          letterSpacing: '0.14em',
+          textTransform: 'uppercase',
+          color: 'var(--color-fg-muted)'
+        }}>
+          <span>© 2026 · Designed & handcrafted with code</span>
+          <a href="#top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} style={{
+            color: 'var(--color-ink)',
+            textDecoration: 'none',
+            borderBottom: '1.5px solid var(--color-ink)'
+          }}>
+            Back to page one ↑
+          </a>
         </footer>
       </main>
     </>

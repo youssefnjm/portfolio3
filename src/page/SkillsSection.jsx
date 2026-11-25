@@ -1,117 +1,335 @@
-import { LuPencil, LuDatabase, LuAppWindow, LuTerminal, LuCpu, LuGlobe } from 'react-icons/lu'
+import { DualTitle } from '../components/SectionTitle'
 
-const SkillBadge = ({ name }) => (
-  <span className="tag-sketch hand-drawn-text text-xs px-3 py-1.5">
-    {name}
-  </span>
+// Stack data matching the HTML design
+const STACK_PAGES = [
+  {
+    category: 'Frontend',
+    subtitle: 'The visible part',
+    number: '01',
+    items: ['React', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Framer Motion', 'Vite']
+  },
+  {
+    category: 'Backend',
+    subtitle: 'Where logic lives',
+    number: '02',
+    items: ['Node.js', 'Express', 'NestJS', 'Socket.io', 'REST APIs', 'OpenAI API']
+  },
+  {
+    category: 'Databases',
+    subtitle: 'Keeping data safe',
+    number: '03',
+    items: ['PostgreSQL', 'MongoDB', 'Mongoose', 'SQL']
+  },
+  {
+    category: 'DevOps',
+    subtitle: 'Shipping & running',
+    number: '04',
+    items: ['Docker', 'Docker Compose', 'Nginx', 'TLS / SSL', 'CI basics']
+  },
+  {
+    category: 'Systems',
+    subtitle: 'Close to the metal',
+    number: '05',
+    items: ['Linux', 'Bash', 'SSH', 'UFW', 'AppArmor', 'LVM']
+  },
+  {
+    category: 'Languages',
+    subtitle: 'How I speak to machines',
+    number: '06',
+    items: ['JavaScript', 'TypeScript', 'C', 'C++', 'SQL', 'Bash']
+  }
+]
+
+const DAILY_BELT = ['VS Code', 'Git & GitHub', 'Docker', 'Postman', 'Figma', 'Linux terminal', 'Vim']
+
+const LEARNING = ['→ Kubernetes', '→ Next.js', '→ Rust (for fun)']
+
+// Sticky note arrow SVG
+const ArrowSvg = () => (
+  <svg
+    viewBox="0 0 80 60"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: '70px', height: '60px' }}
+  >
+    <path d="M8 50C25 10 50 8 68 22M56 12l12 10-14 6" />
+  </svg>
 )
 
-const SkillCard = ({ title, icon, skills, index }) => {
-  const Icon = icon
+// Individual stack page card
+function StackPage({ page, index }) {
+  const isFirst = index % 3 === 0      // 3n+1: rotate(-1.2deg)
+  const isSecond = index % 3 === 1     // 3n+2: rotate(0.9deg), margin-top: 24px
+  const isThird = index % 3 === 2      // 3n: rotate(-0.5deg)
+
+  const baseTransform = isFirst ? 'rotate(-1.2deg)'
+    : isSecond ? 'rotate(0.9deg)'
+    : 'rotate(-0.5deg)'
+
+  const hoverTransform = 'rotate(0) translateY(-6px)'
+
   return (
-    <div className="sketch-card sketch-border p-6 relative group animate-fade-up stagger-list" style={{ borderRadius: '12px 8px 16px 4px / 8px 16px 4px 12px', animationDelay: `${index * 0.1}s` }}>
-      <div className="absolute -top-2 -right-2 w-2 h-2 border-2 rounded-full opacity-30" style={{ borderColor: 'var(--fg-subtle)' }} />
-      <div className="absolute -bottom-2 -left-2 w-3 h-3 border-2 border-dashed rounded-full opacity-20" style={{ borderColor: 'var(--fg-subtle)' }} />
+    <article
+      className="animate-fade-up"
+      style={{
+        animationDelay: `${index * 0.08}s`,
+        transform: baseTransform,
+        marginTop: isSecond ? '24px' : 0,
+        transition: 'transform 0.25s ease'
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = hoverTransform }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = baseTransform }}
+    >
+      {/* Masking tape - top:-14px, left:50%, rotate(-3deg) */}
+      <div className="absolute" style={{
+        top: '-14px',
+        left: '50%',
+        width: '84px',
+        height: '26px',
+        background: 'rgba(233, 217, 138, 0.85)',
+        transform: 'translateX(-50%) rotate(-3deg)',
+        borderLeft: '2px dashed rgba(0,0,0,0.2)',
+        borderRight: '2px dashed rgba(0,0,0,0.2)'
+      }} />
 
-      <div className="flex items-center gap-4 mb-4">
-        <div className="flex h-12 w-12 items-center justify-center sketch-border">
-          <Icon size={24} style={{ color: 'var(--fg-muted)' }} />
-        </div>
-        <h3 className="text-base md:text-lg font-bold hand-drawn-text" style={{ color: 'var(--fg)' }}>{title}</h3>
+      {/* Ruled paper background + red accent line */}
+      <div className="relative" style={{
+        background: 'var(--color-stack-bg)',
+        color: 'var(--color-stack-ink)',
+        border: '3px solid var(--color-stack-border)',
+        borderRadius: '14px 22px 12px 20px / 20px 12px 22px 14px',
+        padding: '34px 26px 26px 46px',
+        boxShadow: '7px 9px 0 var(--color-stack-shadow)',
+        backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 33px, var(--color-stack-line) 33px 34px)',
+        minHeight: '280px'
+      }}>
+        {/* Red accent line - left:30px */}
+        <div className="absolute" style={{
+          left: '30px',
+          top: 0,
+          bottom: 0,
+          width: '2px',
+          background: 'rgba(220, 80, 70, 0.5)'
+        }} />
+
+        {/* Small label - subtitle + number */}
+        <small style={{
+          fontFamily: 'var(--font-mono)',
+          fontWeight: 400,
+          fontSize: '10.5px',
+          letterSpacing: '0.18em',
+          color: 'var(--color-stack-muted)',
+          textTransform: 'uppercase',
+          display: 'block',
+          marginBottom: '8px'
+        }}>
+          {page.subtitle} · {page.number}
+        </small>
+
+        {/* Category title */}
+        <h3 style={{
+          fontFamily: 'var(--font-display)',
+          fontWeight: 800,
+          fontSize: '28px',
+          lineHeight: '34px',
+          letterSpacing: '-0.02em',
+          color: 'var(--color-stack-ink)',
+          margin: '0 0 14px'
+        }}>
+          {page.category}
+        </h3>
+
+        {/* Items list */}
+        <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+          {page.items.map((item, i) => (
+            <li
+              key={item}
+              style={{
+                fontFamily: '"Times New Roman", Georgia, serif',
+                fontWeight: 400,
+                fontSize: '18px',
+                lineHeight: '34px',
+                color: 'var(--color-cardink)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px'
+              }}
+            >
+              {/* Checkbox bullet */}
+              <span
+                className="flex-none"
+                style={{
+                  width: '13px',
+                  height: '13px',
+                  border: '2px solid currentColor',
+                  borderRadius: '3px 6px 3px 5px',
+                  transition: 'all 0.2s ease',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'var(--color-note)'
+                  e.target.style.borderColor = 'var(--color-note)'
+                  e.target.style.transform = 'rotate(12deg) scale(1.15)'
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'transparent'
+                  e.target.style.borderColor = 'currentColor'
+                  e.target.style.transform = 'rotate(0) scale(1)'
+                }}
+              />
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
+    </article>
+  )
+}
 
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill) => (
-          <SkillBadge key={skill} name={skill} />
-        ))}
-      </div>
+// Daily tool belt chips
+function BeltChip({ children, index }) {
+  const isOdd = index % 2 === 0
+  const isEven = index % 2 === 1
+  const baseTransform = isOdd ? 'rotate(-2deg)' : 'rotate(1.5deg)'
 
-      {/* Hover glow effect */}
-      <div className="pointer-events-none absolute -right-4 -top-4 h-20 w-20 rounded-full blur-2xl opacity-0 transition-opacity group-hover:opacity-100" style={{ backgroundColor: 'var(--fg)', opacity: 0.08 }} />
-    </div>
+  return (
+    <span
+      className="animate-fade-up"
+      style={{
+        animationDelay: `${index * 0.05}s`,
+        fontSize: '17px',
+        padding: '9px 18px',
+        border: '2px solid var(--color-stroke)',
+        borderRadius: '16px 6px 16px 6px / 6px 16px 6px 16px',
+        color: 'var(--color-ink)',
+        background: 'transparent',
+        transform: baseTransform,
+        transition: 'all 0.2s ease',
+        cursor: 'default',
+        display: 'inline-block'
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.background = 'var(--color-ink)'
+        e.target.style.color = 'var(--color-bg)'
+        e.target.style.transform = 'rotate(0) scale(1.06)'
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.background = 'transparent'
+        e.target.style.color = 'var(--color-ink)'
+        e.target.style.transform = baseTransform
+      }}
+    >
+      {children}
+    </span>
   )
 }
 
 export default function SkillsSection() {
-  const skillCategories = [
-    {
-      title: "Frontend",
-      icon: LuAppWindow,
-      skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React.js", "Bootstrap", "Tailwind CSS", "React Bits"],
-      index: 0
-    },
-    {
-      title: "Backend",
-      icon: LuTerminal,
-      skills: ["Node.js", "Express", "NestJS", "REST APIs", "Socket.io"],
-      index: 1
-    },
-    {
-      title: "Database",
-      icon: LuDatabase,
-      skills: ["MongoDB", "MySQL", "MariaDB", "PostgreSQL"],
-      index: 2
-    },
-    {
-      title: "DevOps & Tools",
-      icon: LuCpu,
-      skills: ["Linux", "Docker", "Docker Compose", "Nginx", "Git", "GitHub", "Bash Scripting"],
-      index: 3
-    },
-    {
-      title: "Systems & AI",
-      icon: LuGlobe,
-      skills: ["C", "C++", "OpenRouter API", "System Programming", "Algorithms"],
-      index: 4
-    },
-    {
-      title: "Design",
-      icon: LuPencil,
-      skills: ["Figma", "UI/UX", "Wireframing", "Prototyping"],
-      index: 5
-    }
-  ]
-
   return (
-    <section id="skills" className="relative py-20 px-6">
-      {/* Background paper texture - full width */}
-      <div className="absolute inset-0 paper-lines opacity-10" aria-hidden="true" />
+    <section id="stack" className="relative py-20 px-6 bg-journal overflow-hidden">
+      {/* Background paper texture - ruled paper (47px line spacing) */}
+      <div className="absolute inset-0" aria-hidden="true" style={{
+        backgroundImage: 'repeating-linear-gradient(to bottom, transparent 0 47px, var(--color-line) 47px 48px)'
+      }} />
 
-      {/* Decorative elements - full width positioning */}
-      <div className="absolute top-0 right-0 w-40 h-40 border-2 rounded-tr-full opacity-10" style={{ borderColor: 'var(--fg-subtle)' }} />
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-2 rounded-bl-full opacity-10" style={{ borderColor: 'var(--fg-subtle)' }} />
+      {/* Paper grain texture overlay */}
+      <div className="absolute inset-0 opacity-5" style={{
+        backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 400 400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%220.03%22/%3E%3C/svg%22")'
+      }} />
 
-      {/* Centered content container */}
-      <div className="relative max-w-7xl mx-auto">
-        {/* Section header */}
-        <div className="mb-12 animate-fade-up stagger-1">
-          <div className="section-label mb-6">
-            <span>Stack</span>
+      {/* Hand-drawn corner accents */}
+      <div className="absolute top-4 left-4 w-16 h-16 border-2 border-ink/10 rounded-tr-[30px] rotate-[-3deg]" />
+      <div className="absolute bottom-4 right-4 w-12 h-12 border-2 border-ink/10 rounded-bl-[30px] rotate-[-3deg]" />
+      <div className="absolute top-1/2 left-2 w-4 h-4 border border-dashed border-ink/10 rounded-full rotate-[15deg]" />
+      <div className="absolute top-1/3 right-2 w-3 h-3 border border-ink/10 rotate-[45deg]" />
+
+      {/* Page indicator - top right */}
+      <div className="absolute right-6 top-10 font-mono text-xs uppercase tracking-widest" style={{
+        letterSpacing: '0.2em',
+        color: 'var(--color-fg-muted)'
+      }}>
+        PAGE 04 / 05
+      </div>
+
+      {/* Decorative doodle - </> at left */}
+      <span className="absolute left-2 top-40 text-3xl font-mono opacity-40 pointer-events-none" style={{ color: 'var(--color-fg-muted)' }} dangerouslySetInnerHTML={{ __html: '</>' }} />
+
+      {/* Standard container - max-width 1120px */}
+      <div className="relative max-w-[1120px] mx-auto">
+        {/* Header */}
+        <div className="mb-12 animate-fade-up stagger-1" style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          gap: '24px',
+          flexWrap: 'wrap'
+        }}>
+          <div>
+            {/* Eyebrow - Chapter label with 32px line before */}
+            <div className="flex items-center gap-4 mb-3" style={{ marginBottom: '18px' }}>
+              <span className="w-8 h-px" style={{ background: 'var(--color-fg-muted)', flexShrink: 0 }} />
+              <span className="font-mono text-xs uppercase tracking-widest" style={{
+                letterSpacing: '0.25em',
+                color: 'var(--color-fg-muted)'
+              }}>
+                Chapter 03 · Toolbox
+              </span>
+            </div>
+
+            {/* Main Heading with styled ampersand */}
+            <h2 className="relative inline-block" style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 800,
+              fontSize: 'clamp(44px, 8vw, 92px)',
+              lineHeight: 0.95,
+              letterSpacing: '-0.03em',
+              color: 'var(--color-ink)',
+              margin: '18px 0 0'
+            }}>
+              Stack{' '}
+              <span className="amp" style={{
+                fontFamily: 'var(--font-hand)',
+                fontWeight: 600,
+                letterSpacing: 0,
+                display: 'inline-block',
+                transform: 'rotate(-8deg)',
+                color: 'var(--color-note)'
+              }}>
+                &
+              </span>
+              <br />
+              Tools
+            </h2>
           </div>
-          <h2 className="heading-lg" style={{ color: 'var(--fg)' }}>
-            Tool <br />
-            <span className="hand-drawn-text text-2xl sm:text-3xl font-normal">Box.</span>
-          </h2>
-          <p className="text-base max-w-xl leading-relaxed mt-4" style={{ color: 'var(--fg-muted)' }}>
-            The modern technologies and creative frameworks I use to bring complex ideas to life across the web.
+
+          {/* Intro paragraph */}
+          <p className="font-mono" style={{
+            maxWidth: '340px',
+            fontSize: '13.5px',
+            lineHeight: 1.8,
+            color: 'var(--color-fg-muted)',
+            margin: 0
+          }}>
+            The notebook pages I flip through most. Picked for speed, clarity and because I actually enjoy using them.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-list">
-          {skillCategories.map((category) => (
-            <SkillCard
-              key={category.title}
-              title={category.title}
-              icon={category.icon}
-              skills={category.skills}
-              index={category.index}
-            />
+        {/* Grid - 3 columns, gap 48px 36px, margin-top 72px */}
+        <div className="animate-fade-up stagger-2" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '48px 36px',
+          marginTop: '72px'
+        }}>
+          {STACK_PAGES.map((page, index) => (
+            <StackPage key={page.category} page={page} index={index} />
           ))}
         </div>
-      </div>
 
-      {/* Divider - full width */}
-      <div className="absolute bottom-0 left-0 right-0 mx-auto w-1/2 divider-sketch" />
+      </div>
     </section>
   )
 }
